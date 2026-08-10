@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juan David Polo Herrera — E-Portafolio</title>
+<style>
+  :root{
+    --bg:#0B0F14;
+    --panel:#11161D;
+    --line:#1F2A35;
+    --text:#E8EDF2;
+    --dim:#8A97A3;
+    --accent:#3DDC97;
+    --accent2:#5B8DEF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', system-ui, sans-serif;
+    line-height:1.6;
+  }
+  .mono{ font-family:'Courier New', monospace; }
+  header{
+    border-bottom:1px solid var(--line);
+    padding:24px 6vw;
+    display:flex; justify-content:space-between; align-items:center;
+    position:sticky; top:0; background:rgba(11,15,20,0.9); backdrop-filter:blur(8px);
+    z-index:10;
+  }
+  header .logo{ font-weight:700; letter-spacing:0.5px; }
+  header .logo span{ color:var(--accent); }
+  nav a{
+    color:var(--dim); text-decoration:none; margin-left:28px; font-size:14px;
+    transition:color .2s;
+  }
+  nav a:hover{ color:var(--accent); }
+
+  .hero{
+    padding:100px 6vw 80px;
+    max-width:1000px;
+  }
+  .hero .eyebrow{
+    color:var(--accent); font-family:'Courier New', monospace; font-size:13px;
+    letter-spacing:1px; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(36px,6vw,64px);
+    font-weight:800; line-height:1.05; margin-bottom:20px;
+  }
+  .hero p.lead{
+    color:var(--dim); font-size:19px; max-width:620px;
+  }
+
+  section{ padding:70px 6vw; border-top:1px solid var(--line); }
+  .section-tag{
+    font-family:'Courier New', monospace; color:var(--accent2); font-size:13px;
+    margin-bottom:8px; letter-spacing:1px;
+  }
+  h2{ font-size:32px; margin-bottom:32px; }
+
+  .presentacion{ display:grid; grid-template-columns:220px 1fr; gap:50px; align-items:start; }
+  .avatar{
+    width:220px; height:220px; border-radius:12px;
+    background:linear-gradient(135deg, var(--accent2), var(--accent));
+    display:flex; align-items:center; justify-content:center;
+    font-size:64px; font-weight:800; color:var(--bg);
+  }
+  .presentacion .video-wrap{
+    aspect-ratio:16/9; background:var(--panel); border:1px solid var(--line);
+    border-radius:10px; display:flex; align-items:center; justify-content:center;
+    color:var(--dim); font-family:'Courier New', monospace; font-size:14px;
+    margin-bottom:20px;
+  }
+  .presentacion .bio p{ color:var(--dim); margin-bottom:10px; }
+  .presentacion .bio strong{ color:var(--text); }
+
+  .evidencias-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px;
+  }
+  .ev-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:24px; transition:border-color .2s, transform .2s;
+  }
+  .ev-card:hover{ border-color:var(--accent); transform:translateY(-3px); }
+  .ev-card .idx{ font-family:'Courier New', monospace; color:var(--accent); font-size:13px; margin-bottom:10px; }
+  .ev-card h3{ font-size:18px; margin-bottom:8px; }
+  .ev-card p{ color:var(--dim); font-size:14px; }
+  .status{
+    display:inline-block; margin-top:14px; font-size:12px; font-family:'Courier New', monospace;
+    color:#E0A85B; border:1px solid #E0A85B; padding:3px 8px; border-radius:20px;
+  }
+
+  footer{
+    padding:40px 6vw; border-top:1px solid var(--line); color:var(--dim);
+    font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:700px){
+    .presentacion{ grid-template-columns:1fr; }
+    .avatar{ width:140px; height:140px; font-size:44px; }
+    nav a{ margin-left:14px; font-size:13px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo mono">JD<span>_</span>POLO</div>
+  <nav>
+    <a href="#presentacion">Presentación</a>
+    <a href="#evidencias">Evidencias</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow mono">// ingeniería de sistemas — universidad el bosque</div>
+  <h1>Juan David<br>Polo Herrera</h1>
+  <p class="lead">Construyo sistemas, negocios digitales y software con enfoque en impacto real. Este portafolio documenta el proceso — no la teoría.</p>
+</section>
+
+<section id="presentacion">
+  <div class="section-tag mono">01 / SOBRE MÍ</div>
+  <h2>Presentación</h2>
+  <div class="presentacion">
+    <div class="avatar">JD</div>
+    <div>
+      <div class="video-wrap">
+        ▶ Video de presentación (90–120s) — pendiente de embeber
+      </div>
+      <div class="bio">
+        <p><strong>Cómo me llaman:</strong> Juan David.</p>
+        <p><strong>Sobre mí:</strong> me gusta entrenar, acabo de empezar en el gimnasio — la disciplina que estoy construyendo ahí la aplico también a construir negocios y sistemas. Actualmente manejo <strong>Colocompras</strong>, mi tienda de e-commerce, junto con varios proyectos de desarrollo de software.</p>
+        <p><strong>Por qué Bases de Datos 1:</strong> todo lo que construyo — Colocompras, sistemas de gestión, proyectos académicos — depende de datos bien modelados. Sin una base de datos sólida, cualquier sistema que diseñe se cae al escalar. Esta materia es la base técnica real detrás de lo que ya estoy construyendo.</p>
+        <p><strong>Este semestre quiero demostrar que</strong> puedo aplicar lo aprendido en clase directamente a proyectos reales que ya tengo en marcha, no solo en ejercicios de tablero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="evidencias">
+  <div class="section-tag mono">02 / TRACK RECORD</div>
+  <h2>Evidencias</h2>
+  <div class="evidencias-grid">
+    <div class="ev-card">
+      <div class="idx">/modelado</div>
+      <h3>Modelado</h3>
+      <p>Diagramas E-R y modelado conceptual de bases de datos del curso.</p>
+      <span class="status">por publicar</span>
+    </div>
+    <div class="ev-card">
+      <div class="idx">/normalizacion</div>
+      <h3>Normalización</h3>
+      <p>Ejercicios de formas normales (1FN–3FN) aplicados a casos reales.</p>
+      <span class="status">por publicar</span>
+    </div>
+    <div class="ev-card">
+      <div class="idx">/sql</div>
+      <h3>SQL</h3>
+      <p>Consultas, joins y scripts desarrollados durante el semestre.</p>
+      <span class="status">por publicar</span>
+    </div>
+    <div class="ev-card">
+      <div class="idx">/proyecto</div>
+      <h3>Proyecto</h3>
+      <p>Proyecto final del curso — diseño e implementación de base de datos.</p>
+      <span class="status">por publicar</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Juan David Polo Herrera</span>
+  <span class="mono">Bases de Datos 1 — Universidad El Bosque</span>
+</footer>
+
+</body>
+</html>
