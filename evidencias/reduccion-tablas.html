@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- Created: 23:26 12-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reducción a tablas en clase</title>
+  <meta name="description" content="Reducción de modelos E-R a modelo relacional en Bases de Datos 1: librería con los 11 pasos y zoológico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <script src="../js/modelos.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
+    <h1>Juan David<br>Polo<br>Herrera</h1>
+    <nav class="rail-nav">
+      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
+      <a href="#pasos"><span>A</span>Los 11 pasos</a>
+      <a href="#libreria"><span>1</span>Librería</a>
+      <a href="#zoo"><span>2</span>Primer intento y zoológico</a>
+      <a href="#desafios"><span>C</span>Desafíos</a>
+    </nav>
+    <div class="rail-foot"><strong>Ejercicios de clase</strong>Modelo relacional · draw.io</div>
+  </aside>
+
+  <main>
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Reducción a tablas</div>
+      <h1>Reducción a tablas en clase</h1>
+      <div class="meta"><span class="tag solid">Modelo relacional</span><span class="tag">PK / FK</span><span class="tag">draw.io</span></div>
+    </section>
+
+    <section id="pasos" class="pad prose">
+      <div class="sec-head"><span class="num">A</span><h2>Contexto: los 11 pasos</h2></div>
+      <p>Después de modelar, tocaba pasar el diagrama E-R a tablas. En clase trabajamos el procedimiento en 11 pasos, que se aplica en orden y deja claro qué genera tabla nueva y qué no:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Paso</th><th>Qué se revisa</th><th>Qué se hace</th></tr>
+        <tr><td>1-2</td><td>Multivaluados y compuestos</td><td>El multivaluado sale a su propia tabla; el compuesto se reemplaza por sus partes.</td></tr>
+        <tr><td>3</td><td>Entidades</td><td>Cada entidad es una tabla con sus atributos simples.</td></tr>
+        <tr><td>4-5</td><td>Relaciones 1:1</td><td>La clave de un lado pasa como FK al otro.</td></tr>
+        <tr><td>6-7</td><td>Relaciones 1:N</td><td>La FK baja al lado N, sin tabla nueva.</td></tr>
+        <tr><td>8</td><td>Relaciones N:M</td><td>Tabla propia con PK compuesta por las dos claves y los atributos de la relación.</td></tr>
+        <tr><td>9</td><td>Relaciones n-arias</td><td>Tabla propia con las claves de todos los participantes.</td></tr>
+        <tr><td>10</td><td>Roles (recursivas)</td><td>La misma clave entra dos veces con nombres de rol distintos.</td></tr>
+        <tr><td>11</td><td>Generalización / especialización</td><td>Se escoge la estrategia según si es total o parcial y exclusiva o solapada.</td></tr>
+      </table></div>
+    </section>
+
+    <section id="libreria" class="pad prose">
+      <div class="sec-head"><span class="num">1</span><h2>Librería: los 11 pasos aplicados</h2></div>
+      <p><strong>Enunciado:</strong> reducir a tablas el <a href="modelado-er.html#libreria">MER corregido de la Librería</a>. <strong>Supuestos:</strong> los del modelo corregido (id_autor, id_editor, email como claves; una cesta es de un solo cliente; un libro tiene una sola editorial).</p>
+      <ul>
+        <li>Pasos 1, 2, 4-5, 9, 10 y 11: no aplican (no hay multivaluados, compuestos, 1:1, n-arias, recursivas ni especializaciones).</li>
+        <li>Paso 3: 6 entidades → 6 tablas.</li>
+        <li>Pasos 6-7: EDITADO_POR baja id_editor a LIBRO y TIENE baja email a CESTA_DE_COMPRA, las dos NOT NULL.</li>
+        <li>Paso 8: ESCRITO_POR, ALMACENA y CONTIENE se vuelven tablas con PK compuesta y su cantidad.</li>
+      </ul>
+      <p><strong>Resultado: 9 tablas</strong> (6 de entidades + 3 de relaciones N:M).</p>
+      <div class="modelo"><div class="modelo-head"><strong>MR · Librería (11 pasos)</strong><span class="links"><a href="../modelos/clase/MR_libreria_11pasos.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/clase/MR_libreria_11pasos.drawio"><p class="loading">Cargando modelo…</p></div></div>
+      <p class="cap">Azul = entidad · Verde = tabla de relación N:M · Rojo = FK propagada.</p>
+    </section>
+
+    <section id="zoo" class="pad prose">
+      <div class="sec-head"><span class="num">2</span><h2>Primer intento y Zoológico</h2></div>
+      <p>Este archivo tiene dos páginas (se cambian con la barra del visor). La primera es mi <strong>primer intento</strong> de reducir la Librería, antes de corregir el MER: ahí todavía se usa direccion como clave de autor y nombre como clave de editor, y EDITADO_POR y CESTA_DE quedaron como tablas porque venían como M:N. Comparado con la versión de arriba se nota cómo corregir el modelo conceptual primero cambia todo el relacional: pasamos de 11 a 9 tablas.</p>
+      <p>La segunda página es el <strong>Zoológico</strong>: especies que viven en hábitats, hábitats presentes en continentes, cuidadores que cuidan especies, y guías que llevan itinerarios que recorren zonas. Todas las relaciones son N:M menos una (especie N:1 zona), que es la única que no genera tabla: su FK baja a ESPECIE.</p>
+      <div class="modelo"><div class="modelo-head"><strong>MR · Librería (v1) y Zoológico</strong><span class="links"><a href="../modelos/clase/MR_reduccion_tablas.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/clase/MR_reduccion_tablas.drawio"><p class="loading">Cargando modelo…</p></div></div>
+    </section>
+
+    <section id="desafios" class="pad prose">
+      <div class="sec-head"><span class="num">C</span><h2>Desafíos</h2></div>
+      <div class="challenge"><span class="n">01</span><div><h4>Un error en el MER se arrastra al relacional</h4><p>En el primer intento reduje bien un modelo que estaba mal. Las tablas cumplían las reglas, pero las claves no identificaban nada. Aprendí a revisar el conceptual antes de pasar a tablas.</p></div></div>
+      <div class="challenge"><span class="n">02</span><div><h4>No toda relación es tabla</h4><p>Al principio quería crear una tabla por cada rombo. La regla es simple: 1:N baja la FK; solo N:M, n-arias y las que tienen atributos propios generan tabla.</p></div></div>
+    </section>
+
+    <nav class="pager pad"><a href="quiz-veterinaria.html">← Quiz: Veterinaria</a><a href="taller1-transformacion.html">Taller 1 →</a></nav>
+  </main>
+</div>
+</body>
+</html>

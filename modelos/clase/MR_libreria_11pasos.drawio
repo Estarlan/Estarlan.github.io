@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net" version="24.0.0">
+  <diagram id="mr1" name="MR Libreria (11 pasos)">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1250" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="t_autor" value="&lt;b&gt;AUTOR&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id_autor&lt;/u&gt; (PK)&lt;br&gt;nombre&lt;br&gt;direccion&lt;br&gt;URL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_escrito" value="&lt;b&gt;ESCRITO_POR&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id_autor&lt;/u&gt; (PK, FK-&amp;gt;AUTOR)&lt;br&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;LIBRO)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="270" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_libro" value="&lt;b&gt;LIBRO&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK)&lt;br&gt;titulo&lt;br&gt;anio_publicacion&lt;br&gt;precio&lt;br&gt;id_editor (FK-&amp;gt;EDITOR) NOT NULL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="790" y="80" width="270" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_editor" value="&lt;b&gt;EDITOR&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id_editor&lt;/u&gt; (PK)&lt;br&gt;nombre&lt;br&gt;direccion&lt;br&gt;telefono&lt;br&gt;URL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="80" width="220" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_almacena" value="&lt;b&gt;ALMACENA&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;LIBRO)&lt;br&gt;&lt;u&gt;codigo&lt;/u&gt; (PK, FK-&amp;gt;ALMACEN)&lt;br&gt;cantidad" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="790" y="380" width="270" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_almacen" value="&lt;b&gt;ALMACEN&lt;/b&gt;&lt;hr&gt;&lt;u&gt;codigo&lt;/u&gt; (PK)&lt;br&gt;direccion&lt;br&gt;telefono" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="790" y="620" width="220" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_contiene" value="&lt;b&gt;CONTIENE&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;LIBRO)&lt;br&gt;&lt;u&gt;IDcesta&lt;/u&gt; (PK, FK-&amp;gt;CESTA_DE_COMPRA)&lt;br&gt;cantidad" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="380" width="300" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_cesta" value="&lt;b&gt;CESTA_DE_COMPRA&lt;/b&gt;&lt;hr&gt;&lt;u&gt;IDcesta&lt;/u&gt; (PK)&lt;br&gt;fecha&lt;br&gt;email (FK-&amp;gt;CLIENTE) NOT NULL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="620" width="300" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t_cliente" value="&lt;b&gt;CLIENTE&lt;/b&gt;&lt;hr&gt;&lt;u&gt;email&lt;/u&gt; (PK)&lt;br&gt;nombre&lt;br&gt;direccion&lt;br&gt;telefono" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="860" width="300" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="t_escrito" target="t_autor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="t_escrito" target="t_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x3" value="N:1 (paso 6)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="t_libro" target="t_editor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="t_almacena" target="t_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="t_almacena" target="t_almacen"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="t_contiene" target="t_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="t_contiene" target="t_cesta"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x8" value="N:1 (paso 7)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="t_cesta" target="t_cliente"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="nota" value="&lt;b&gt;Aplicacion de los 11 pasos&lt;/b&gt;&lt;br&gt;1. Multivaluados: no aplica (ninguna elipse doble).&lt;br&gt;2. Compuestos: no aplica.&lt;br&gt;3. 6 entidades -&amp;gt; 6 tablas con sus atributos.&lt;br&gt;4-5. Cardinalidad 1:1: no aplica.&lt;br&gt;6-7. Cardinalidad 1:M -&amp;gt; FK al lado N, sin tabla nueva:&lt;br&gt;&#160;&#160;&#160;&#160;EDITADO_POR: id_editor baja a LIBRO.&lt;br&gt;&#160;&#160;&#160;&#160;TIENE: email baja a CESTA_DE_COMPRA.&lt;br&gt;8. Cardinalidad N:M -&amp;gt; tabla propia con PK compuesta:&lt;br&gt;&#160;&#160;&#160;&#160;ESCRITO_POR, ALMACENA, CONTIENE (con sus atributos).&lt;br&gt;9. Relaciones n-arias: no aplica, todas son binarias.&lt;br&gt;10. Roles: no aplica, no hay relaciones recursivas.&lt;br&gt;11. Generalizacion/Especializacion: no aplica.&lt;br&gt;&lt;br&gt;Total: 9 tablas (6 entidades + 3 relaciones N:M).&lt;br&gt;Azul = entidad&#160;&#160;|&#160;&#160;Verde = tabla de relacion N:M&#160;&#160;|&#160;&#160;Rojo = FK propagada" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="620" width="560" height="330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

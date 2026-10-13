@@ -1,0 +1,171 @@
+<mxfile host="app.diagrams.net" version="24.0.0">
+  <diagram id="mer1" name="MER Libreria (corregido)">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== AUTOR ===== -->
+        <mxCell id="e_autor" value="AUTOR" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="140" y="360" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a_au1" value="&lt;u&gt;id_autor&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_au2" value="nombre" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_au3" value="direccion" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="240" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_au4" value="URL" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="240" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_au1" style="html=1;endArrow=none;" edge="1" parent="1" source="a_au1" target="e_autor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_au2" style="html=1;endArrow=none;" edge="1" parent="1" source="a_au2" target="e_autor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_au3" style="html=1;endArrow=none;" edge="1" parent="1" source="a_au3" target="e_autor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_au4" style="html=1;endArrow=none;" edge="1" parent="1" source="a_au4" target="e_autor"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== ESCRITO_POR ===== -->
+        <mxCell id="r_escrito" value="ESCRITO_POR" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="350" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="le1" value="1,N" style="html=1;endArrow=none;" edge="1" parent="1" source="e_autor" target="r_escrito"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le2" value="1,N" style="html=1;endArrow=none;" edge="1" parent="1" source="r_escrito" target="e_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== LIBRO ===== -->
+        <mxCell id="e_libro" value="LIBRO" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="790" y="360" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a_li1" value="&lt;u&gt;ISBN&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_li2" value="titulo" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_li3" value="anio_publicacion" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="240" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_li4" value="precio" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="240" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_li1" style="html=1;endArrow=none;" edge="1" parent="1" source="a_li1" target="e_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_li2" style="html=1;endArrow=none;" edge="1" parent="1" source="a_li2" target="e_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_li3" style="html=1;endArrow=none;" edge="1" parent="1" source="a_li3" target="e_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_li4" style="html=1;endArrow=none;" edge="1" parent="1" source="a_li4" target="e_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== EDITOR / EDITADO_POR ===== -->
+        <mxCell id="e_editor" value="EDITOR" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="140" y="680" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ed1" value="&lt;u&gt;id_editor&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="820" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ed2" value="nombre" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="820" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ed3" value="direccion" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="900" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ed4" value="telefono" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="900" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ed5" value="URL" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="820" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_ed1" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ed1" target="e_editor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_ed2" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ed2" target="e_editor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_ed3" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ed3" target="e_editor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_ed4" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ed4" target="e_editor"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_ed5" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ed5" target="e_editor"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="r_editado" value="EDITADO_POR" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="530" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="le3" value="1,N" style="html=1;endArrow=none;" edge="1" parent="1" source="e_editor" target="r_editado"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le4" value="1,1" style="html=1;endArrow=none;" edge="1" parent="1" source="r_editado" target="e_libro"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== ALMACEN / ALMACENA ===== -->
+        <mxCell id="r_almacena" value="ALMACENA" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="640" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a_al0" value="cantidad" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="655" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_al0" style="html=1;endArrow=none;" edge="1" parent="1" source="a_al0" target="r_almacena"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_almacen" value="ALMACEN" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="790" y="900" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a_am1" value="&lt;u&gt;codigo&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="1030" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_am2" value="direccion" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="1050" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_am3" value="telefono" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1030" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_am1" style="html=1;endArrow=none;" edge="1" parent="1" source="a_am1" target="e_almacen"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_am2" style="html=1;endArrow=none;" edge="1" parent="1" source="a_am2" target="e_almacen"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_am3" style="html=1;endArrow=none;" edge="1" parent="1" source="a_am3" target="e_almacen"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le5" value="0,N" style="html=1;endArrow=none;" edge="1" parent="1" source="e_libro" target="r_almacena"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le6" value="0,N" style="html=1;endArrow=none;" edge="1" parent="1" source="r_almacena" target="e_almacen"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== CONTIENE / CESTA ===== -->
+        <mxCell id="r_contiene" value="CONTIENE" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="640" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a_co0" value="cantidad" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="790" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_co0" style="html=1;endArrow=none;" edge="1" parent="1" source="a_co0" target="r_contiene"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e_cesta" value="CESTA_DE_COMPRA" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1560" y="640" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ce1" value="&lt;u&gt;IDcesta&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="790" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_ce2" value="fecha" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1680" y="790" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_ce1" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ce1" target="e_cesta"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_ce2" style="html=1;endArrow=none;" edge="1" parent="1" source="a_ce2" target="e_cesta"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le7" value="0,N" style="html=1;endArrow=none;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="e_libro" target="r_contiene"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le8" value="1,N" style="html=1;endArrow=none;" edge="1" parent="1" source="r_contiene" target="e_cesta"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== CLIENTE / TIENE ===== -->
+        <mxCell id="e_cliente" value="CLIENTE" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1560" y="360" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cl1" value="&lt;u&gt;email&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cl2" value="nombre" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cl3" value="direccion" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="240" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cl4" value="telefono" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="240" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l_cl1" style="html=1;endArrow=none;" edge="1" parent="1" source="a_cl1" target="e_cliente"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_cl2" style="html=1;endArrow=none;" edge="1" parent="1" source="a_cl2" target="e_cliente"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_cl3" style="html=1;endArrow=none;" edge="1" parent="1" source="a_cl3" target="e_cliente"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l_cl4" style="html=1;endArrow=none;" edge="1" parent="1" source="a_cl4" target="e_cliente"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="r_tiene" value="TIENE" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1565" y="490" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="le9" value="0,N" style="html=1;endArrow=none;" edge="1" parent="1" source="e_cliente" target="r_tiene"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="le10" value="1,1" style="html=1;endArrow=none;" edge="1" parent="1" source="r_tiene" target="e_cesta"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== NOTA ===== -->
+        <mxCell id="nota" value="&lt;b&gt;Correcciones aplicadas&lt;/b&gt;&lt;br&gt;1. AUTOR: la PK era &#39;direccion&#39; (no identifica). Se usa id_autor.&lt;br&gt;2. EDITOR: nombre no garantiza unicidad. Se usa id_editor.&lt;br&gt;3. CLIENTE: PK renombrada a email (era &#39;direccion-correo-electronico&#39;).&lt;br&gt;4. CESTA-DE era M:N. Una cesta pertenece a un solo cliente -&amp;gt; TIENE 1,1.&lt;br&gt;5. EDITADO_POR era M:N. Un libro tiene una sola editorial -&amp;gt; 1,1.&lt;br&gt;6. &#39;numero&#39; en CONTIENE y ALMACENA renombrado a &#39;cantidad&#39; (era ambiguo).&lt;br&gt;7. Nombres normalizados: sin tildes, sin guiones, snake_case.&lt;br&gt;8. Cardinalidades expresadas en min,max (notacion del diagrama de referencia).&lt;br&gt;SUPUESTO: se agrego &#39;fecha&#39; a CESTA_DE_COMPRA; quitalo si el enunciado no lo pide." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1020" width="560" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

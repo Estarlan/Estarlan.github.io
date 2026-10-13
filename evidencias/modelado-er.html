@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- Created: 23:26 12-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelos E-R de clase</title>
+  <meta name="description" content="Modelos entidad-relación desarrollados en Bases de Datos 1: torneo de fútbol, librería y CineAndes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <script src="../js/modelos.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
+    <h1>Juan David<br>Polo<br>Herrera</h1>
+    <nav class="rail-nav">
+      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
+      <a href="#torneo"><span>1</span>Torneo de fútbol</a>
+      <a href="#libreria"><span>2</span>Librería</a>
+      <a href="#cineandes"><span>3</span>CineAndes</a>
+      <a href="#desafios"><span>C</span>Desafíos</a>
+    </nav>
+    <div class="rail-foot"><strong>Ejercicios de clase</strong>Modelado entidad–relación · draw.io</div>
+  </aside>
+
+  <main>
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Modelado E-R</div>
+      <h1>Modelos entidad–relación de clase</h1>
+      <div class="meta"><span class="tag solid">Modelo conceptual</span><span class="tag">Notación Chen</span><span class="tag">draw.io</span></div>
+    </section>
+
+    <section id="torneo" class="pad prose">
+      <div class="sec-head"><span class="num">1</span><h2>Torneo de fútbol universitario</h2></div>
+      <p><strong>Contexto:</strong> primer modelo del semestre. Un torneo interno donde los equipos están formados por estudiantes, juegan partidos entre sí y ocupan una posición en la tabla.</p>
+      <p><strong>Supuestos:</strong> un jugador pertenece a un solo equipo (1:N); un equipo juega muchos partidos y cada partido lo juegan varios equipos (M:N); cada equipo tiene una fila en la tabla con PG, PE, PP, puntaje y posición.</p>
+      <div class="modelo"><div class="modelo-head"><strong>MER · Torneo</strong><span class="links"><a href="../img/MER_torneo.png" target="_blank" rel="noopener">Ver imagen completa</a></span></div>
+        <div class="modelo-body"><img src="../img/MER_torneo.png" alt="Modelo E-R del torneo: TABLA, EQUIPO, JUGADOR y PARTIDO con las relaciones Posicionar, Pertenecer y Jugar" loading="lazy"></div></div>
+      <div class="box accent"><div class="box-title">Lo que corregiría hoy</div>
+        <p>Mirándolo con lo que sé ahora: a EQUIPO, TABLA y JUGADOR les falta subrayar su clave; semestre quedó suelto sin línea hacia JUGADOR; y puntaje y las tarjetas no son del partido solo, son de cada equipo en ese partido, así que irían en la relación JUGAR. Lo dejo como estaba para que se vea el progreso.</p></div>
+    </section>
+
+    <section id="libreria" class="pad prose">
+      <div class="sec-head"><span class="num">2</span><h2>Librería en línea (modelo corregido)</h2></div>
+      <p><strong>Contexto:</strong> una librería que vende libros escritos por autores y publicados por editoriales; los libros se guardan en almacenes y los clientes arman cestas de compra. Partimos de un diagrama de referencia con errores y lo corregimos.</p>
+      <h4>Correcciones aplicadas</h4>
+      <ol>
+        <li>AUTOR tenía como clave la dirección, que no identifica a nadie: se usa id_autor.</li>
+        <li>El nombre del EDITOR no garantiza unicidad: se usa id_editor.</li>
+        <li>CLIENTE se identifica por email.</li>
+        <li>Una cesta pertenece a un solo cliente: TIENE pasa de M:N a 1,1.</li>
+        <li>Un libro tiene una sola editorial: EDITADO_POR pasa a 1,1.</li>
+        <li>"numero" en CONTIENE y ALMACENA era ambiguo: se renombra a cantidad.</li>
+      </ol>
+      <p><strong>Supuesto:</strong> agregamos fecha a CESTA_DE_COMPRA porque una cesta sin fecha no deja saber cuándo se compró.</p>
+      <div class="modelo"><div class="modelo-head"><strong>MER · Librería corregido</strong><span class="links"><a href="../modelos/clase/MER_libreria_corregido.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/clase/MER_libreria_corregido.drawio"><p class="loading">Cargando modelo…</p></div></div>
+      <p class="cap">La reducción a tablas de este mismo modelo está en <a href="reduccion-tablas.html">Reducción a tablas en clase</a>.</p>
+    </section>
+
+    <section id="cineandes" class="pad prose">
+      <div class="sec-head"><span class="num">3</span><h2>CineAndes</h2></div>
+      <p><strong>Contexto:</strong> una cadena de cines con varias sedes. Cada sede tiene salas, cada sala tiene sillas, y en las salas se programan funciones de películas. Los clientes compran boletas y pagan con distintos medios; hay empleados (proyeccionistas y taquilleros) y proveedores que entregan productos.</p>
+      <p><strong>Lo que tiene este modelo:</strong></p>
+      <ul>
+        <li><strong>Entidades débiles en cadena:</strong> SALA depende de SEDE y SILLA depende de SALA (fila + número solo identifican dentro de la sala).</li>
+        <li><strong>Compuesto:</strong> direccion de SEDE (ciudad, calle). <strong>Derivados:</strong> antiguedad de PELICULA y edad de CLIENTE.</li>
+        <li><strong>Recursivas:</strong> ES_SECUELA_DE entre películas (roles secuela / precuela) y SUPERVISAR entre empleados con fecha_desde.</li>
+        <li><strong>Especialización:</strong> EMPLEADO → PROYECCIONISTA (certificacion_tecnica) y TAQUILLERO (caja_asignada).</li>
+        <li><strong>N:M con atributos:</strong> COMPRAR (cantidad_boletas, canal) y ENTREGAR (cantidad, fecha_entrega).</li>
+      </ul>
+      <div class="modelo"><div class="modelo-head"><strong>MER · CineAndes</strong><span class="links"><a href="../modelos/clase/modelo_ER_CineAndes.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/clase/modelo_ER_CineAndes.drawio"><p class="loading">Cargando modelo…</p></div></div>
+    </section>
+
+    <section id="desafios" class="pad prose">
+      <div class="sec-head"><span class="num">C</span><h2>Desafíos</h2></div>
+      <div class="challenge"><span class="n">01</span><div><h4>Elegir bien la clave</h4><p>En la Librería la dirección era la clave del autor. Parece un detalle, pero si dos autores comparten oficina el modelo se rompe. Ahora siempre me pregunto si el atributo de verdad identifica a uno solo.</p></div></div>
+      <div class="challenge"><span class="n">02</span><div><h4>Cardinalidades del negocio, no del dibujo</h4><p>TIENE y EDITADO_POR estaban como M:N. Tocó volver al negocio: una cesta es de un solo cliente, un libro sale de una sola editorial.</p></div></div>
+      <div class="challenge"><span class="n">03</span><div><h4>Débiles que dependen de débiles</h4><p>En CineAndes, SILLA no se identifica sola ni con la sala sola: necesita sede + sala + fila + número. Es la misma debilidad encadenada que después vimos con RECALADA en el Taller 1.</p></div></div>
+    </section>
+
+    <nav class="pager pad"><a href="../index.html#evidencias">← Índice</a><a href="quiz-veterinaria.html">Quiz: Veterinaria →</a></nav>
+  </main>
+</div>
+</body>
+</html>

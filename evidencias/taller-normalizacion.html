@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- Created: 23:26 12-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taller de Normalización</title>
+  <meta name="description" content="Taller de normalización de Bases de Datos 1: dependencias funcionales, anomalías, 1FN a 3FN y BCNF en tres casos empresariales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
+    <h1>Juan David<br>Polo<br>Herrera</h1>
+    <nav class="rail-nav">
+      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
+      <a href="#enunciado"><span>A</span>Enunciado</a>
+      <a href="#supuestos"><span>B</span>Supuestos</a>
+      <a href="#p1"><span>1</span>Análisis</a>
+      <a href="#p2"><span>2</span>Paso a paso</a>
+      <a href="#p3"><span>3</span>¿3FN o BCNF?</a>
+      <a href="#p4"><span>4</span>Empleados</a>
+      <a href="#desafios"><span>C</span>Desafíos</a>
+    </nav>
+    <div class="rail-foot"><strong>Taller en grupo · 27/09/2026</strong>Juan David Polo Herrera · Sebastián Castellanos Parra · Juan Miguel Ramos</div>
+  </aside>
+
+  <main>
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Normalización</div>
+      <h1>Taller de normalización</h1>
+      <div class="meta"><span class="tag solid">1FN → BCNF</span><span class="tag">Dependencias funcionales</span><span class="tag">Anomalías</span><span class="tag">50 puntos</span></div>
+    </section>
+
+    <section id="enunciado" class="pad prose">
+      <div class="sec-head"><span class="num">A</span><h2>Enunciado y contexto</h2></div>
+      <p>Tres contextos empresariales sin datos de ejemplo, en grupos de 3 y con sustentación de 15-20 minutos: (1) un <strong>hospital</strong> con pacientes, médicos, especialidades y camas; (2) una empresa que vende <strong>productos a clientes a través de vendedores</strong>; (3) <strong>empleados</strong> con varias competencias e idiomas. Por cada esquema había que encontrar las dependencias funcionales, decir en qué forma normal está, describir anomalías, normalizar paso a paso y defender con números si vale la pena BCNF o desnormalizar.</p>
+      <pre class="schema">HOSPITALIZACION (ID_Paciente, Nombre_Paciente, Especialidad_Tratamiento, Cama_Asignada,
+  Ala_Hospital, Médico_Tratante, Teléfono_Médico, Email_Médico, Fecha_Ingreso, Fecha_Alta)
+
+PEDIDO_CLIENTE_PRODUCTO (ID_Pedido, Fecha_Pedido, ID_Cliente, Nombre_Cliente, Sector_Cliente,
+  ID_Producto, Nombre_Producto, Precio_Producto, Cantidad_Solicitada,
+  ID_Vendedor, Nombre_Vendedor, Comisión_Vendedor)
+
+EMPLEADO (ID_Empleado, Nombre_Empleado, Competencias_Técnicas, Idiomas)</pre>
+      <p><a href="../docs/Taller_Normalizacion_Enunciado.pdf" target="_blank" rel="noopener">Ver enunciado (PDF)</a> · <a href="../docs/NORMALIZACION.xlsx" download>Descargar el paso a paso (Excel)</a></p>
+    </section>
+
+    <section id="supuestos" class="pad prose">
+      <div class="sec-head"><span class="num">B</span><h2>Supuestos</h2></div>
+      <ul>
+        <li><strong>Hospital:</strong> una hospitalización vigente por paciente, así que la clave es ID_Paciente. Si guardáramos historial, la clave sería (ID_Paciente, Fecha_Ingreso) y aparecería un problema de 2FN.</li>
+        <li>Cada cama está en una sola ala, el email del médico es único y un médico puede atender casos de distintas especialidades.</li>
+        <li><strong>Pedidos:</strong> cada fila es una línea de pedido, clave (ID_Pedido, ID_Producto). Cada pedido tiene un cliente, una fecha y un vendedor; el precio es el vigente del producto.</li>
+        <li>Para los números: 1.000 operaciones al día = 900 búsquedas + 100 cambios; 50 inserciones × 24 h = 1.200 al día; cada JOIN extra ≈ 1 ms con índices.</li>
+      </ul>
+      <div class="box accent"><div class="box-title">La trampa del enunciado</div>
+        <p>¿Especialidad_Tratamiento → Ala_Hospital? <strong>No.</strong> Cardiología puede tener pacientes en el ala norte y en cuidados intensivos del ala sur según las camas disponibles. El ala depende de la cama, no de la especialidad.</p></div>
+    </section>
+
+    <section id="p1" class="pad prose">
+      <div class="sec-head"><span class="num">1</span><h2>Análisis de los esquemas</h2></div>
+      <h3>Hospital: está en 2FN, no llega a 3FN</h3>
+      <p>Es atómico y la clave es de un solo atributo, entonces no hay parciales. Pero hay dos transitivas: <code>ID_Paciente → Cama_Asignada → Ala_Hospital</code> y <code>ID_Paciente → Médico_Tratante → Teléfono_Médico, Email_Médico</code>.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>Inserción</th><th>Actualización</th><th>Eliminación</th></tr>
+        <tr><td><strong>Situación</strong></td><td>Contratan a la Dra. Ruiz y todavía no tiene pacientes.</td><td>El Dr. Pérez cambia de teléfono y tiene 12 pacientes.</td><td>Sale el último paciente del Dr. Gómez (cama 210, ala este).</td></tr>
+        <tr><td><strong>Qué pasa</strong></td><td>No se puede guardar: sin ID_Paciente no hay fila. Toca inventar un paciente falso.</td><td>Hay que cambiar 12 filas. Si un filtro "Perez" sin tilde deja una por fuera, el médico queda con dos teléfonos.</td><td>Se borra 1 fila pero se van 2 hechos ajenos: el contacto del médico y que la cama 210 es del ala este.</td></tr>
+      </table></div>
+      <h3>Pedidos: solo está en 1FN</h3>
+      <p>Falla 2FN por las parciales (<code>ID_Pedido → fecha, cliente, vendedor</code> e <code>ID_Producto → nombre, precio</code>) y 3FN por las transitivas (<code>ID_Cliente → Nombre, Sector</code> e <code>ID_Vendedor → Nombre, Comisión</code>). Cambiar el sector de un cliente con 40 pedidos de 5 productos toca 200 filas; en el esquema normalizado, 1. Y no es un detalle técnico: si el cliente queda con dos sectores, el reporte de ventas por sector sale mal.</p>
+    </section>
+
+    <section id="p2" class="pad prose">
+      <div class="sec-head"><span class="num">2</span><h2>Normalización paso a paso</h2></div>
+      <div class="tbl-wrap"><table>
+        <tr><th>Paso</th><th>Problema que corrijo</th><th>Si no lo corrijo…</th><th>Tabla nueva</th></tr>
+        <tr><td>H1</td><td>Transitiva Médico → Teléfono, Email</td><td>Cambiar el teléfono de un médico con 12 pacientes = 12 filas.</td><td>MEDICO (ID_Medico PK, …)</td></tr>
+        <tr><td>H2</td><td>Transitiva Cama → Ala</td><td>Si remodelan las camas 301 a 310, hay que tocar la fila de cada paciente.</td><td>CAMA (Codigo_Cama PK, Ala_Hospital)</td></tr>
+        <tr><td>P1</td><td>Parcial ID_Producto → Nombre, Precio</td><td>El nombre y el precio se repiten en cada línea donde sale el producto.</td><td>PRODUCTO</td></tr>
+        <tr><td>P2</td><td>Parcial ID_Pedido → fecha, cliente, vendedor</td><td>Los datos del pedido se repiten en todas sus líneas.</td><td>PEDIDO + DETALLE_PEDIDO</td></tr>
+        <tr><td>P3</td><td>Transitiva ID_Cliente → Nombre, Sector</td><td>El sector se repite en los 40 pedidos del cliente.</td><td>CLIENTE</td></tr>
+        <tr><td>P4</td><td>Transitiva ID_Vendedor → Nombre, Comisión</td><td>Cambiar la comisión de un vendedor con 200 pedidos = 200 filas.</td><td>VENDEDOR</td></tr>
+      </table></div>
+      <pre class="schema">HOSPITAL (3FN)
+HOSPITALIZACION (ID_Paciente PK, Nombre_Paciente, Especialidad_Tratamiento, Fecha_Ingreso,
+                 Fecha_Alta, ID_Medico FK→MEDICO, Codigo_Cama FK→CAMA)
+MEDICO (ID_Medico PK, Nombre_Medico, Telefono_Medico, Email_Medico)
+CAMA   (Codigo_Cama PK, Ala_Hospital)
+
+PEDIDOS (3FN)
+CLIENTE  (ID_Cliente PK, Nombre_Cliente, Sector_Cliente)
+VENDEDOR (ID_Vendedor PK, Nombre_Vendedor, Comision_Vendedor)
+PRODUCTO (ID_Producto PK, Nombre_Producto, Precio_Producto)
+PEDIDO   (ID_Pedido PK, Fecha_Pedido, ID_Cliente FK, ID_Vendedor FK)
+DETALLE_PEDIDO (ID_Pedido PK/FK, ID_Producto PK/FK, Cantidad_Solicitada)</pre>
+      <p>Operación típica: una búsqueda completa pasa de 1 a 3 tablas en el hospital (2 JOIN) y de 1 a 5 en pedidos (4 JOIN). A cambio, cualquier cambio de un dato maestro pasa de N filas a 1.</p>
+    </section>
+
+    <section id="p3" class="pad prose">
+      <div class="sec-head"><span class="num">3</span><h2>¿3FN o BCNF?</h2></div>
+      <p>En los dos esquemas finales todo determinante es clave candidata (en MEDICO, Email_Medico también lo es), así que <strong>ya cumplen BCNF sin hacer nada más</strong>. 3FN y BCNF solo se separan cuando hay claves candidatas traslapadas, y aquí no hay.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Concepto</th><th>Todo en 1 tabla</th><th>3FN = BCNF</th></tr>
+        <tr><td>Accesos por 900 búsquedas (hospital)</td><td>900</td><td>2.700 (≈ +1,8 s al día)</td></tr>
+        <tr><td>Accesos por 900 búsquedas (pedidos)</td><td>900</td><td>4.500 (≈ +3,6 s al día)</td></tr>
+        <tr><td>Filas al cambiar el teléfono de un médico</td><td>≈ 200</td><td>1</td></tr>
+        <tr><td>Filas al cambiar el sector de un cliente</td><td>≈ 50</td><td>1</td></tr>
+      </table></div>
+      <p><strong>Recomendación: quedarnos en 3FN (que ya es BCNF) y no desnormalizar.</strong> 900 búsquedas al día son una cada 96 segundos; los JOIN cuestan unos pocos segundos al día. Solo desnormalizaríamos si midiéramos lentitud real, y con una vista o tabla de reportes.</p>
+    </section>
+
+    <section id="p4" class="pad prose">
+      <div class="sec-head"><span class="num">4</span><h2>Empleados, competencias e idiomas</h2></div>
+      <p>Viola 1FN porque hay varios valores en una celda ("Python, Java, SQL"). Y si se pone un dato por fila sin separar tablas, como las dos listas son independientes hay que combinarlas: Polo con 3 competencias y 2 idiomas termina en 6 filas. Eso es una <strong>dependencia multivaluada</strong>, por eso van en tablas separadas (4FN).</p>
+      <pre class="schema">EMPLEADO             (ID_Empleado PK, Nombre_Empleado)
+EMPLEADO_COMPETENCIA (ID_Empleado FK, Competencia)  PK (ID_Empleado, Competencia)
+EMPLEADO_IDIOMA      (ID_Empleado FK, Idioma)       PK (ID_Empleado, Idioma)
+
+-- Empleados que saben Python Y hablan inglés
+SELECT e.ID_Empleado, e.Nombre_Empleado FROM EMPLEADO e
+JOIN EMPLEADO_COMPETENCIA c ON c.ID_Empleado = e.ID_Empleado
+JOIN EMPLEADO_IDIOMA i      ON i.ID_Empleado = e.ID_Empleado
+WHERE c.Competencia = 'Python' AND i.Idioma = 'Inglés';</pre>
+      <p>¿Una sola columna de texto? Solo si el dato es informativo y nadie lo filtra. Para buscar, sale lenta y confusa ("C" se confunde con "C++", "Pyton" con "python"); con tablas, la PK impide repetidos y la búsqueda es exacta con índice.</p>
+    </section>
+
+    <section id="desafios" class="pad prose">
+      <div class="sec-head"><span class="num">C</span><h2>Desafíos que encontramos</h2></div>
+      <div class="challenge"><span class="n">01</span><div><h4>Escoger la clave antes que todo</h4><p>La forma normal depende de la clave. Con ID_Paciente sola no hay parciales; con historial sí. Tocó escribir el supuesto para poder defenderlo en la sustentación.</p></div></div>
+      <div class="challenge"><span class="n">02</span><div><h4>Parcial contra transitiva</h4><p>Al principio las confundíamos. Lo que nos sirvió fue preguntar en orden: ¿depende de solo una parte de la clave? (2FN) ¿depende de otro atributo que no es clave? (3FN).</p></div></div>
+      <div class="challenge"><span class="n">03</span><div><h4>No caer en la trampa</h4><p>Especialidad → Ala parecía obvia. Pensarlo con un caso real (Cardiología en dos alas) fue lo que nos hizo descartarla.</p></div></div>
+      <div class="challenge"><span class="n">04</span><div><h4>Defender con números</h4><p>No bastaba con decir "3FN es mejor". Tocó poner supuestos de volumen y comparar segundos de JOIN contra filas tocadas en cada cambio.</p></div></div>
+    </section>
+
+    <nav class="pager pad"><a href="taller1-transformacion.html">← Taller 1</a><a href="../index.html#evidencias">Volver al índice →</a></nav>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- Created: 23:26 12-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taller 1 — Reglas de transformación</title>
+  <meta name="description" content="Taller 1 de Bases de Datos 1: reducción a tablas aplicando las reglas de transformación del modelo E-R sobre la Terminal Portuaria Bahía Verde.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <script src="../js/modelos.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
+    <h1>Juan David<br>Polo<br>Herrera</h1>
+    <nav class="rail-nav">
+      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
+      <a href="#enunciado"><span>A</span>Enunciado</a>
+      <a href="#supuestos"><span>B</span>Supuestos</a>
+      <a href="#ej1"><span>1</span>Atributos</a>
+      <a href="#ej2"><span>2</span>Relaciones N:M</a>
+      <a href="#ej3"><span>3</span>Ternaria y agregación</a>
+      <a href="#ej4"><span>4</span>Especialización y recursivas</a>
+      <a href="#ej5"><span>5</span>Modelo del compañero</a>
+      <a href="#desafios"><span>C</span>Desafíos</a>
+    </nav>
+    <div class="rail-foot"><strong>Taller en grupo</strong>Juan David Polo Herrera · Sebastián Castellanos Parra · Juan Miguel Ramos</div>
+  </aside>
+
+  <main>
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Reducción a tablas</div>
+      <h1>Taller 1: Reglas de transformación del modelo E-R</h1>
+      <div class="meta"><span class="tag solid">Modelo transformado</span><span class="tag">Notación Chen</span><span class="tag">draw.io</span><span class="tag">50 puntos</span></div>
+    </section>
+
+    <section id="enunciado" class="pad prose">
+      <div class="sec-head"><span class="num">A</span><h2>Enunciado y contexto</h2></div>
+      <p>Partimos del modelo conceptual de la <strong>Terminal Portuaria Bahía Verde</strong>, ya validado con el área funcional. La tarea no era rediseñarlo ni corregirlo, sino <strong>transformarlo</strong>: dejarlo listo para pasar al modelo relacional. En el modelo transformado solo pueden sobrevivir entidades, atributos simples y relaciones binarias 1:1 y 1:N. Todo lo demás (compuestos, multivaluados, derivados, N:M, ternarias, agregaciones y especializaciones) tiene que salir.</p>
+      <div class="box soft">
+        <div class="box-title">Modelo de partida (resumen)</div>
+        <p>IMPORTADOR (documento, nombre_completo, fecha_registro, correo) · SERVICIO · RECALADA (débil de SERVICIO) · BUQUE · CERTIFICADO · OPERARIO · SUMINISTRO · CONTRATISTA (sede multivaluado y compuesto) · BODEGA. Relaciones: EMBARQUE y CUADRILLA (N:M con atributos), SUPERVISA (N:M recursiva), TRANSBORDA (1:N recursiva), ABASTECE (ternaria M:N:N), DEPOSITA (agregación) y la especialización OPERARIO → GRUERO / ESTIBADOR (parcial y solapada).</p>
+      </div>
+      <p><a href="../docs/Taller1_Enunciado.pdf" target="_blank" rel="noopener">Ver enunciado completo (PDF)</a> · <a href="../docs/Taller1_Respuestas_Grupo.pdf" target="_blank" rel="noopener">Ver documento entregado (PDF)</a></p>
+    </section>
+
+    <section id="supuestos" class="pad prose">
+      <div class="sec-head"><span class="num">B</span><h2>Supuestos</h2></div>
+      <ul>
+        <li>El modelo de partida es correcto: no se agregan ni quitan reglas de negocio, solo se transforma.</li>
+        <li>Puede haber importadores sin correo y contratistas sin sede cargada; por eso el lado fuerte queda con participación <strong>parcial</strong> y el lado débil con participación <strong>total</strong>.</li>
+        <li>La foreign key no se dibuja como atributo: es del modelo relacional. Aquí la relación se muestra con el rombo y sus roles.</li>
+        <li>Los modelos usan la leyenda común del grupo: rectángulo doble = entidad débil, rombo doble = relación identificadora, doble línea = participación total.</li>
+      </ul>
+      <div class="modelo"><div class="modelo-head"><strong>Leyenda del grupo</strong><span class="links"><a href="../modelos/taller1/00_Leyenda.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/00_Leyenda.drawio"><p class="loading">Cargando modelo…</p></div></div>
+    </section>
+
+    <section id="ej1" class="pad prose">
+      <div class="sec-head"><span class="num">1</span><h2>Transformación de atributos</h2></div>
+      <h3>1a. Atributos de IMPORTADOR</h3>
+      <p>IMPORTADOR traía los tres problemas al tiempo. El <strong>compuesto</strong> nombre_completo se borra y quedan sueltos nombres y apellidos. El <strong>multivaluado</strong> correo sale a la entidad débil CORREO_IMPORTADOR, pegada con TENER 1:N. El <strong>derivado</strong> antiguedad_cliente se va porque sale de fecha_registro con una resta.</p>
+      <p>Clave de CORREO_IMPORTADOR: <span class="key">documento + correo</span>. IMPORTADOR (1) parcial — CORREO_IMPORTADOR (N) total.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 1a · IMPORTADOR</strong><span class="links"><a href="https://drive.google.com/file/d/1m9uikW_h-pyCRk6nJUhuFGTGW_b-khY_/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/01_Ej1a_IMPORTADOR.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/01_Ej1a_IMPORTADOR.drawio"><p class="loading">Cargando modelo…</p></div></div>
+
+      <h3>1b. sede de CONTRATISTA (multivaluado y compuesto)</h3>
+      <p>Aquí el orden cambia el resultado, así que pilas. Primero se aplica la regla del multivaluado (sale a SEDE_CONTRATISTA con UBICAR 1:N) y después la del compuesto (ciudad, direccion). Si lo haces al revés, quedan dos multivaluados sueltos y el modelo ya no sabe qué dirección va con qué ciudad: Bogotá–Calle 100 y Cali–Av 6 se vuelven cuatro combinaciones posibles. <strong>Primero se extrae, después se descompone.</strong></p>
+      <p>Clave: <span class="key">nit + ciudad + direccion</span>.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 1b · CONTRATISTA / sede</strong><span class="links"><a href="https://drive.google.com/file/d/1aXwp7K5pTC4laBRlNFfYLKQ3r_OOtxXZ/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/02_Ej1b_CONTRATISTA_sede.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/02_Ej1b_CONTRATISTA_sede.drawio"><p class="loading">Cargando modelo…</p></div></div>
+
+      <h3>1c y 1d. Derivados y el tope de dos correos</h3>
+      <p>antiguedad_cliente y antiguedad se van porque guardar lo que se puede calcular es redundancia, y además se desactualiza solo: mañana la antigüedad cambió aunque nadie tocó nada. No se pierde nada porque fecha_registro y anio_construccion siguen ahí.</p>
+      <p>Si el importador solo puede tener dos correos, la regla no cambia, pero aparece una opción B: correo1 y correo2 como atributos simples. Solo vale la pena si ese tope es una regla de negocio que no se mueve; si es una política que puede cambiar el otro semestre, nos quedamos con la entidad débil.</p>
+    </section>
+
+    <section id="ej2" class="pad prose">
+      <div class="sec-head"><span class="num">2</span><h2>Relaciones N:M con atributos</h2></div>
+      <h3>2a. EMBARQUE</h3>
+      <p>Una N:M no sobrevive al modelo transformado. EMBARQUE se vuelve entidad débil con dos relaciones 1:N, y tipo_carga, peso_toneladas y fecha_solicitud se van para adentro. Ojo, que acá es donde se suele cometer el error: RECALADA también es débil, entonces su identificador es (codigo_servicio, fecha_arribo). La debilidad se va encadenando.</p>
+      <p>Clave: <span class="key">documento + codigo_servicio + fecha_arribo</span>.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 2a · EMBARQUE</strong><span class="links"><a href="https://drive.google.com/file/d/1jDzeretVB1yY-smgEsLuPiXcvvRn_VT5/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/03_Ej2a_EMBARQUE.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/03_Ej2a_EMBARQUE.drawio"><p class="loading">Cargando modelo…</p></div></div>
+
+      <h3>2b. CUADRILLA</h3>
+      <p>Misma receta. turno y horas_trabajadas no son del operario ni de la recalada por aparte: describen el cruce. Si el operario 101 trabaja el 12/05 en la recalada A (noche, 6 h) y el 13/05 en la B (día, 8 h), metiéndolos en OPERARIO solo cabe uno de los dos días; metiéndolos en RECALADA se pierde la diferencia entre operarios y el dato se duplica. Y justo eso es lo que el puerto necesita para pagar la nómina.</p>
+      <p>Clave: <span class="key">id_operario + codigo_servicio + fecha_arribo</span>.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 2b · CUADRILLA</strong><span class="links"><a href="https://drive.google.com/file/d/10DP7bAi7nD--3pEE2a66ZWkjcS8Xin9i/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/04_Ej2b_CUADRILLA.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/04_Ej2b_CUADRILLA.drawio"><p class="loading">Cargando modelo…</p></div></div>
+      <p><strong>2c.</strong> La transformación conserva el significado porque hay una fila de EMBARQUE por cada pareja real. Cambiarla por dos 1:N directas sí lo daña: o cada recalada tendría un solo importador, o cada importador usaría una sola recalada en toda su vida.</p>
+    </section>
+
+    <section id="ej3" class="pad prose">
+      <div class="sec-head"><span class="num">3</span><h2>Ternaria y agregación</h2></div>
+      <h3>3a. ABASTECER (M:N:N)</h3>
+      <p>La ternaria se cambia por una entidad conectada a los tres participantes con 1:N, y cantidad va adentro. Como es M:N:N ninguna pareja determina a la tercera, así que entran los tres identificadores; y como RECALADA es débil, aporta dos pedazos.</p>
+      <p>Clave: <span class="key">nit + codigo_servicio + fecha_arribo + codigo_suministro</span>. Si hubiera un único contratista por recalada y suministro (M:N:1), nit saldría de la clave.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 3a · ABASTECER</strong><span class="links"><a href="https://drive.google.com/file/d/1CwO3wSQ09zExJbqMTt8SilvY4Zz6smfo/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/05_Ej3a_ABASTECER.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/05_Ej3a_ABASTECER.drawio"><p class="loading">Cargando modelo…</p></div></div>
+      <h3>3b. DEPOSITA (agregación)</h3>
+      <p>Esta ya la habíamos resuelto sin darnos cuenta en el 2a: como EMBARQUE ya es entidad, BODEGA se pega contra ella. No puede ir contra IMPORTADOR (cada importador usaría siempre la misma bodega) ni contra RECALADA (toda la carga de la escala a una sola bodega). EMBARQUE (N) total — BODEGA (1) parcial, y codigo_bodega no entra en la clave.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 3b · DEPOSITA</strong><span class="links"><a href="https://drive.google.com/file/d/1R8aQVBqCySu7gEa0GRjeufjclPTspGLH/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/06_Ej3b_DEPOSITA.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/06_Ej3b_DEPOSITA.drawio"><p class="loading">Cargando modelo…</p></div></div>
+    </section>
+
+    <section id="ej4" class="pad prose">
+      <div class="sec-head"><span class="num">4</span><h2>Especialización y recursivas</h2></div>
+      <h3>4a. Jerarquía de OPERARIO</h3>
+      <p>Cada subclase queda como entidad con una relación 1:1 hacia OPERARIO y hereda id_operario. Es <strong>parcial</strong> porque OPERARIO participa con línea sencilla (hay operarios que no son ninguno) y <strong>solapada</strong> porque son dos relaciones separadas: el mismo id puede estar en GRUERO y en ESTIBADOR. Queda descartada la tabla única con discriminante tipo_operario, porque un campo de un solo valor no puede decir "es las dos cosas". equipos_manejados sale a EQUIPO_ESTIBADOR.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 4a · Especialización</strong><span class="links"><a href="https://drive.google.com/file/d/1VA3qdRnHOoKQ6r5av_qI8rVeViVbKgCW/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/07_Ej4a_ESPECIALIZACION.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/07_Ej4a_ESPECIALIZACION.drawio"><p class="loading">Cargando modelo…</p></div></div>
+      <h3>4b y 4c. Recursivas y lo que no se toca</h3>
+      <p>Lo que obliga a transformar no es que sea recursiva, es la cardinalidad. SUPERVISAR es M:N con periodo: se vuelve SUPERVISION, con los roles supervisor / supervisado sobre las líneas y clave <span class="key">id_supervisor + id_supervisado + periodo</span>. TRANSBORDAR es 1:N sin atributos: pasa derecho.</p>
+      <p>Tampoco se tocan IDENTIFICAR, ATENDER y CLASIFICAR: toda binaria 1:1 o 1:N sin atributos propios se resuelve pasando una FK.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Ej. 4b · SUPERVISAR / TRANSBORDAR</strong><span class="links"><a href="https://drive.google.com/file/d/158v_35aEDQM216mMouGztywduhelqhYm/view?usp=sharing" target="_blank" rel="noopener">Drive</a><a href="../modelos/taller1/08_Ej4b_SUPERVISAR_TRANSBORDAR.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/taller1/08_Ej4b_SUPERVISAR_TRANSBORDAR.drawio"><p class="loading">Cargando modelo…</p></div></div>
+    </section>
+
+    <section id="ej5" class="pad prose">
+      <div class="sec-head"><span class="num">5</span><h2>Revisión del modelo del compañero</h2></div>
+      <div class="tbl-wrap"><table>
+        <tr><th>Error</th><th>Regla omitida</th><th>Corrección</th></tr>
+        <tr><td>Sedes como columnas numeradas (ciudad_sede1, ciudad_sede2…)</td><td>Multivaluado: se saca a su entidad, no se repite el campo con un número.</td><td>SEDE_CONTRATISTA con clave nit + ciudad + direccion.</td></tr>
+        <tr><td>peso_toneladas y tipo_carga en IMPORTADOR; correo sin transformar</td><td>Los atributos de una N:M van en la entidad que la reemplaza.</td><td>Mover a EMBARQUE y sacar correo a CORREO_IMPORTADOR.</td></tr>
+        <tr><td>EMBARQUE desconectada de RECALADA, con clave artificial y BODEGA colgada de RECALADA</td><td>La entidad de una N:M se pega a las dos entidades y su clave es la unión de ambas.</td><td>Conectar con RECALADA, clave documento + codigo_servicio + fecha_arribo y apoyar la bodega sobre EMBARQUE.</td></tr>
+      </table></div>
+      <p>Extra: la entidad TRANSITO sobra, porque TRANSBORDAR es 1:N sin atributos.</p>
+    </section>
+
+    <section id="desafios" class="pad prose">
+      <div class="sec-head"><span class="num">C</span><h2>Desafíos que encontramos</h2></div>
+      <div class="challenge"><span class="n">01</span><div><h4>El orden de las reglas</h4><p>Con sede nos dimos cuenta de que no da igual por dónde arrancar. Al principio lo descompusimos primero y tocó devolvernos cuando vimos que se mezclaban ciudades con direcciones.</p></div></div>
+      <div class="challenge"><span class="n">02</span><div><h4>La debilidad encadenada</h4><p>Lo más fácil era olvidar que RECALADA ya era débil. Por eso EMBARQUE termina con tres pedazos de clave y ABASTECER con cuatro, no con dos y tres.</p></div></div>
+      <div class="challenge"><span class="n">03</span><div><h4>¿De quién es el atributo?</h4><p>La pregunta que más nos sirvió: ¿este dato describe a uno solo o al cruce de los dos? Si es del cruce, va en la relación. Así salieron turno, horas_trabajadas y cantidad.</p></div></div>
+      <div class="challenge"><span class="n">04</span><div><h4>No transformar de más</h4><p>Teníamos la tentación de volver entidad todo lo recursivo. Entender que decide la cardinalidad, no la recursividad, nos ahorró TRANSITO y otras entidades que sobraban.</p></div></div>
+    </section>
+
+    <nav class="pager pad"><a href="reduccion-tablas.html">← Reducción a tablas en clase</a><a href="taller-normalizacion.html">Taller de normalización →</a></nav>
+  </main>
+</div>
+</body>
+</html>

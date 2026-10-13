@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- Created: 23:26 12-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz — Veterinaria</title>
+  <meta name="description" content="Quiz de modelado E-R de Bases de Datos 1: identificar y corregir errores en el modelo de una veterinaria.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <script src="../js/modelos.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
+    <h1>Juan David<br>Polo<br>Herrera</h1>
+    <nav class="rail-nav">
+      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
+      <a href="#contexto"><span>A</span>Contexto</a>
+      <a href="#respuesta"><span>B</span>Mi respuesta</a>
+      <a href="#revisado"><span>C</span>Modelo revisado</a>
+      <a href="#reflexion"><span>D</span>Reflexión</a>
+    </nav>
+    <div class="rail-foot"><strong>Evaluación individual</strong>Modelado entidad–relación</div>
+  </aside>
+
+  <main>
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Modelado E-R</div>
+      <h1>Quiz: modelo E-R de una veterinaria</h1>
+      <div class="meta"><span class="tag solid">Quiz individual</span><span class="tag">Notación Chen</span><span class="tag">Nota: 1,5</span></div>
+    </section>
+
+    <section id="contexto" class="pad prose">
+      <div class="sec-head"><span class="num">A</span><h2>Enunciado y contexto</h2></div>
+      <p>El quiz presentaba el modelo E-R de una veterinaria con tres entidades: <strong>DUEÑO</strong>, <strong>MASCOTA</strong> y <strong>VETERINARIO</strong>. Un dueño tiene mascotas y los veterinarios atienden mascotas. La tarea era encontrar los errores de modelado, explicarlos y dibujar el modelo corregido a mano, en el tiempo de la clase.</p>
+      <div class="box soft"><div class="box-title">Supuestos</div>
+        <ul>
+          <li>Una mascota pertenece a un solo dueño y un dueño puede tener varias mascotas (1:N).</li>
+          <li>Una mascota puede ser atendida por varios veterinarios y un veterinario atiende muchas mascotas (M:N).</li>
+          <li>Se guarda la fecha de nacimiento de la mascota; la edad se calcula a partir de ella.</li>
+        </ul></div>
+    </section>
+
+    <section id="respuesta" class="pad prose">
+      <div class="sec-head"><span class="num">B</span><h2>Lo que entregué</h2></div>
+      <p>Encontré cuatro errores:</p>
+      <ol>
+        <li>DUEÑO solo tenía el atributo nombre, cuando es compuesto: debe tener primer_nombre y segundo_nombre.</li>
+        <li>Lo mismo con el apellido: primer_apellido y segundo_apellido.</li>
+        <li>edad en MASCOTA es derivado de fecha_nacimiento y estaba como atributo simple.</li>
+        <li>Las relaciones no estaban en infinitivo: deben ser TENER y ATENDER.</li>
+      </ol>
+      <img class="photo" src="../img/quiz-veterinaria_232636-12Oct2026.jpg" alt="Hoja del quiz de la veterinaria con los errores encontrados y el modelo E-R dibujado a mano" loading="lazy">
+      <p class="cap">Hoja original del quiz. El profesor marcó ATENDER (M:N) y tachó razon_consulta.</p>
+    </section>
+
+    <section id="revisado" class="pad prose">
+      <div class="sec-head"><span class="num">C</span><h2>Modelo revisado en draw.io</h2></div>
+      <p>Al revisar la hoja con calma se ve lo que se me escapó: <strong>razon_consulta y la fecha de la consulta no son de la mascota</strong>. Describen el cruce MASCOTA–VETERINARIO, así que van como atributos de la relación M:N ATENDER. Con eso, fecha_ultima_consulta también sobra: sale del MAX de las fechas de consulta, o sea que sería un derivado.</p>
+      <div class="modelo"><div class="modelo-head"><strong>Veterinaria · modelo revisado</strong><span class="links"><a href="../modelos/quiz/veterinaria_revisado.drawio" download>.drawio</a></span></div>
+        <div class="modelo-body" data-drawio="../modelos/quiz/veterinaria_revisado.drawio"><p class="loading">Cargando modelo…</p></div></div>
+      <p class="cap">Esta versión es mi revisión posterior al quiz, no la que entregué en clase.</p>
+    </section>
+
+    <section id="reflexion" class="pad prose">
+      <div class="sec-head"><span class="num">D</span><h2>Reflexión</h2></div>
+      <div class="challenge"><span class="n">01</span><div><h4>Me faltó agilidad mental para detallar el problema</h4><p>Vi los errores evidentes (compuestos, derivado, nombres de relaciones), pero no alcancé a detallar el modelo completo en el tiempo del quiz. Muchas veces, a medida que avanzaba el ejercicio, iba corrigiendo detalles que debí ver desde el principio.</p></div></div>
+      <div class="challenge"><span class="n">02</span><div><h4>Los atributos de una relación M:N</h4><p>Es justo el mismo error que después corregimos en el Taller 1 con CUADRILLA y EMBARQUE: si el dato describe el cruce de dos entidades, no puede ir en ninguna de las dos.</p></div></div>
+      <div class="challenge"><span class="n">03</span><div><h4>Lo que pulimos después</h4><p>Con los talleres siguientes pulimos la habilidad de identificar entidades débiles, claves parciales y atributos de relación. Ahora antes de dibujar hago una pasada buscando eso: débiles, derivados, multivaluados y datos que viven en la relación.</p></div></div>
+    </section>
+
+    <nav class="pager pad"><a href="modelado-er.html">← Modelos E-R de clase</a><a href="reduccion-tablas.html">Reducción a tablas →</a></nav>
+  </main>
+</div>
+</body>
+</html>

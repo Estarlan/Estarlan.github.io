@@ -1,0 +1,123 @@
+<mxfile host="app.diagrams.net" version="24.0.0">
+  <diagram id="pg1" name="MR - Libreria">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="t1" value="&lt;b&gt;autor&lt;/b&gt;&lt;hr&gt;&lt;u&gt;direccion&lt;/u&gt; (PK)&lt;br&gt;nombre&lt;br&gt;URL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="&lt;b&gt;editor&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre&lt;/u&gt; (PK)&lt;br&gt;direccion&lt;br&gt;telefono&lt;br&gt;URL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="230" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" value="&lt;b&gt;libro&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK)&lt;br&gt;titulo&lt;br&gt;anio&lt;br&gt;precio" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="140" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" value="&lt;b&gt;cliente&lt;/b&gt;&lt;hr&gt;&lt;u&gt;email&lt;/u&gt; (PK)&lt;br&gt;nombre&lt;br&gt;direccion&lt;br&gt;telefono" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="440" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="t5" value="&lt;b&gt;cesta_compra&lt;/b&gt;&lt;hr&gt;&lt;u&gt;IDcesta&lt;/u&gt; (PK)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="620" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="t6" value="&lt;b&gt;almacen&lt;/b&gt;&lt;hr&gt;&lt;u&gt;codigo&lt;/u&gt; (PK)&lt;br&gt;direccion&lt;br&gt;telefono" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="820" width="200" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r1" value="&lt;b&gt;escrito_por&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;libro)&lt;br&gt;&lt;u&gt;dir_autor&lt;/u&gt; (PK, FK-&amp;gt;autor)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="340" y="60" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="&lt;b&gt;editado_por&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;libro)&lt;br&gt;&lt;u&gt;nombre_editor&lt;/u&gt; (PK, FK-&amp;gt;editor)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="340" y="250" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="&lt;b&gt;contiene&lt;/b&gt;&lt;hr&gt;&lt;u&gt;IDcesta&lt;/u&gt; (PK, FK-&amp;gt;cesta_compra)&lt;br&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;libro)&lt;br&gt;numero" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="960" y="600" width="260" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="&lt;b&gt;cesta_de&lt;/b&gt;&lt;hr&gt;&lt;u&gt;IDcesta&lt;/u&gt; (PK, FK-&amp;gt;cesta_compra)&lt;br&gt;&lt;u&gt;email&lt;/u&gt; (PK, FK-&amp;gt;cliente)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="960" y="400" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="&lt;b&gt;almacena&lt;/b&gt;&lt;hr&gt;&lt;u&gt;ISBN&lt;/u&gt; (PK, FK-&amp;gt;libro)&lt;br&gt;&lt;u&gt;codigo&lt;/u&gt; (PK, FK-&amp;gt;almacen)&lt;br&gt;numero" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="640" y="600" width="240" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r1" target="t1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r1" target="t3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r2" target="t2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r2" target="t3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r3" target="t5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r3" target="t3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r4" target="t4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r4" target="t5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r5" target="t3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="r5" target="t6"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="leg1" value="Azul = entidad&#10;Verde = tabla de relacion M:N" style="text;html=1;whiteSpace=wrap;align=left;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="880" width="240" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="pg2" name="MR - Zoologico">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="z1" value="&lt;b&gt;continente&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre&lt;/u&gt; (PK)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="z2" value="&lt;b&gt;habitat&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre&lt;/u&gt; (PK)&lt;br&gt;clima&lt;br&gt;veg" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="260" width="200" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="z3" value="&lt;b&gt;especie&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombC&lt;/u&gt; (PK)&lt;br&gt;nombE&lt;br&gt;desc&lt;br&gt;nombre_zona (FK-&amp;gt;zona) NOT NULL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="250" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="z4" value="&lt;b&gt;zona&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre&lt;/u&gt; (PK)&lt;br&gt;extension" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="60" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="z5" value="&lt;b&gt;cuidador&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre&lt;/u&gt; (PK)&lt;br&gt;dir&lt;br&gt;tel&lt;br&gt;fecha" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="700" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z6" value="&lt;b&gt;itinerario&lt;/b&gt;&lt;hr&gt;&lt;u&gt;i#&lt;/u&gt; (PK)&lt;br&gt;duracion&lt;br&gt;long&lt;br&gt;visitantes" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="440" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z7" value="&lt;b&gt;guia&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre&lt;/u&gt; (PK)&lt;br&gt;dir&lt;br&gt;tel&lt;br&gt;fecha" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="820" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="zr1" value="&lt;b&gt;esta_en_habitat_continente&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre_habitat&lt;/u&gt; (PK, FK-&amp;gt;habitat)&lt;br&gt;&lt;u&gt;nombre_continente&lt;/u&gt; (PK, FK-&amp;gt;continente)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="60" y="150" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zr2" value="&lt;b&gt;vive_en&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre_habitat&lt;/u&gt; (PK, FK-&amp;gt;habitat)&lt;br&gt;&lt;u&gt;nombC&lt;/u&gt; (PK, FK-&amp;gt;especie)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="270" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zr3" value="&lt;b&gt;cuida&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombC&lt;/u&gt; (PK, FK-&amp;gt;especie)&lt;br&gt;&lt;u&gt;nombre_cuidador&lt;/u&gt; (PK, FK-&amp;gt;cuidador)&lt;br&gt;fecha" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="640" y="500" width="260" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="zr4" value="&lt;b&gt;recorre&lt;/b&gt;&lt;hr&gt;&lt;u&gt;nombre_zona&lt;/u&gt; (PK, FK-&amp;gt;zona)&lt;br&gt;&lt;u&gt;i#&lt;/u&gt; (PK, FK-&amp;gt;itinerario)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="250" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zr5" value="&lt;b&gt;lleva&lt;/b&gt;&lt;hr&gt;&lt;u&gt;i#&lt;/u&gt; (PK, FK-&amp;gt;itinerario)&lt;br&gt;&lt;u&gt;nombre_guia&lt;/u&gt; (PK, FK-&amp;gt;guia)&lt;br&gt;hora" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="640" width="240" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ze1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr1" target="z1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr1" target="z2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr2" target="z2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr2" target="z3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr3" target="z3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr3" target="z5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr4" target="z4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr4" target="z6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr5" target="z6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;" edge="1" parent="1" source="zr5" target="z7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ze11" value="N:1 (FK propagada)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;startArrow=ERmany;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="z3" target="z4"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="leg2" value="Azul = entidad&#10;Verde = tabla de relacion M:N&#10;Rojo = unica N:1, no genera tabla" style="text;html=1;whiteSpace=wrap;align=left;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="880" width="280" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

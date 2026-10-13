@@ -1,0 +1,73 @@
+/* Created: 23:26 12-Oct-2026 */
+/* Estilos de las páginas de evidencia (enunciado, supuestos, modelos, tablas) */
+
+.crumb { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; }
+.crumb a { text-decoration: none; }
+.ev-hero { padding-top: 40px; padding-bottom: 30px; border-bottom: 2px solid var(--color-text); }
+.ev-hero h1 {
+  margin: 14px 0 0; font-family: var(--font-black); font-weight: 400;
+  font-size: clamp(28px, 4vw, 58px); line-height: 0.98; letter-spacing: -0.03em; text-transform: uppercase; max-width: 22ch;
+}
+.ev-hero .meta { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+.prose h3 {
+  margin: 34px 0 10px; font-family: var(--font-black); font-weight: 400; font-size: clamp(18px, 1.7vw, 23px);
+  text-transform: uppercase; letter-spacing: -0.01em;
+}
+.prose h4 { margin: 22px 0 6px; font-size: 16px; font-weight: 800; }
+.prose ul, .prose ol { padding-left: 22px; margin: 8px 0; }
+.prose li { margin: 4px 0; }
+.prose code, .key {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.86em;
+  background: var(--color-surface); padding: 1px 5px;
+}
+.key { background: var(--color-accent-100); color: var(--color-accent-700); font-weight: 700; }
+
+.box { border: 2px solid var(--color-text); padding: 18px 20px; margin: 16px 0; background: var(--color-bg); }
+.box.soft { border-color: var(--color-divider); background: var(--color-surface); }
+.box.accent { border-color: var(--color-accent); background: var(--color-accent-100); }
+.box-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; color: var(--color-accent-700); }
+.box p:first-of-type { margin-top: 0; }
+.box p:last-child { margin-bottom: 0; }
+pre.schema {
+  margin: 10px 0; padding: 14px 16px; background: var(--color-text); color: var(--color-bg);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; line-height: 1.55;
+  overflow-x: auto; white-space: pre-wrap;
+}
+
+/* Tablas */
+.tbl-wrap { overflow-x: auto; margin: 14px 0; border: 2px solid var(--color-text); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--color-divider); }
+th { background: var(--color-text); color: var(--color-bg); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+tr:last-child td { border-bottom: 0; }
+
+/* Modelos draw.io */
+.modelo { border: 2px solid var(--color-text); margin: 16px 0 6px; background: #fff; }
+.modelo-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px; border-bottom: 2px solid var(--color-text); background: var(--color-bg);
+}
+.modelo-head strong { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.modelo-head .links { display: flex; gap: 12px; font-size: 12px; font-weight: 700; }
+.modelo-body { min-height: 260px; padding: 8px; overflow: auto; }
+.modelo-body .loading { padding: 40px; text-align: center; color: var(--color-neutral-600); font-size: 13px; }
+.modelo-body img { margin: 0 auto; }
+.cap { font-size: 13px; color: var(--color-neutral-700); margin: 4px 0 18px; }
+
+/* Desafíos y reflexión */
+.challenge {
+  display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 16px 0;
+  border-top: 2px solid var(--color-divider);
+}
+.challenge .n { font-family: var(--font-black); color: var(--color-accent); font-size: 20px; }
+.challenge h4 { margin: 0 0 4px; }
+.challenge p { margin: 0; }
+
+.photo { border: 2px solid var(--color-text); max-width: 560px; }
+.pager {
+  margin-top: 46px; border-top: 2px solid var(--color-text); padding: 18px 0 40px;
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  font-weight: 800; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.pager a { text-decoration: none; }
