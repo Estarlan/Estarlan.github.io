@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- Created: 11:02 28-Oct-2026 -->
+<!-- Updated: 17:22 28-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temas del curso — Bases de Datos 1</title>
+  <meta name="description" content="Temas vistos en Bases de Datos 1: modelado entidad-relación en cuatro notaciones, reducción a tablas, normalización hasta 3FN y álgebra relacional.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/page.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">Proyecto</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html" aria-current="page">Temas</a>
+      <a href="perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero pad">
+    <div class="crumb"><a href="index.html">Inicio</a> <i>/</i> Temas del curso</div>
+    <h1 class="page-title">Temas del <span class="red">curso</span></h1>
+    <p class="page-lead">Lo que trabajamos en Bases de Datos 1, en el orden en que se aprende: primero se modela, después se reduce a tablas, se normaliza y por último se consulta.</p>
+    <div class="page-meta"><span class="chip solid">Bases de Datos 1</span><span class="chip">4 bloques</span><span class="chip">2026-2</span></div>
+  </section>
+
+  <section class="block tight">
+    <div class="wrap">
+
+      <article id="modelado" class="topic reveal">
+        <span class="n">01</span>
+        <h3>Modelado entidad–relación</h3>
+        <div>
+          <p>Cuatro notaciones para el mismo modelo: Chen, ER extendido (EER), Barker y Crow's Foot. Entidades y atributos, cardinalidades 1:1, 1:N y N:M, entidades débiles, relaciones recursivas y especialización.</p>
+          <p style="margin-top:10px;"><a class="mono" href="evidencias/modelado-er.html" style="text-decoration:none;color:var(--red-deep);">Ver los modelos de clase →</a></p>
+        </div>
+      </article>
+
+      <article id="reduccion" class="topic reveal">
+        <span class="n">02</span>
+        <h3>Reducción a tablas</h3>
+        <div>
+          <p>El paso del diagrama al modelo relacional: llaves primarias y foráneas, tablas de relación para los N:M, atributos multivaluados y compuestos, entidades débiles y especialización.</p>
+          <p style="margin-top:10px;"><a class="mono" href="evidencias/reduccion-tablas.html" style="text-decoration:none;color:var(--red-deep);">Ver la reducción en clase →</a></p>
+        </div>
+      </article>
+
+      <article id="normalizacion" class="topic reveal">
+        <span class="n">03</span>
+        <h3>Normalización</h3>
+        <div>
+          <p>De 0FN a 3FN con dependencias funcionales: quitar grupos repetitivos y multivaluados (1FN), dependencias parciales (2FN) y dependencias transitivas (3FN).</p>
+          <p style="margin-top:10px;"><a class="mono" href="evidencias/taller-normalizacion.html" style="text-decoration:none;color:var(--red-deep);">Ver el taller de normalización →</a></p>
+        </div>
+      </article>
+
+      <article id="algebra" class="topic reveal">
+        <span class="n">04</span>
+        <h3>Álgebra relacional</h3>
+        <div>
+          <p>Selección, proyección, unión, diferencia, producto cartesiano, renombramiento y joins. Cada expresión se resuelve paso a paso y se escribe también como consulta SQL para comprobarla.</p>
+          <p style="margin-top:10px;"><a class="mono" href="proyecto.html#algebra" style="text-decoration:none;color:var(--red-deep);">Ver los 55 ejercicios →</a></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="block tight">
+    <div class="wrap">
+      <div class="offtopic reveal">
+        <p class="mono">Fuera del temario</p>
+        <h3>MySQL lo trajo el equipo, no la clase</h3>
+        <p>En Bases de Datos 1 no vimos MySQL. La base de SIGEVET quedó en MySQL 8.4 porque un integrante del equipo ya lo manejaba de antes, y lo usamos para llevar el modelo a una base real. Lo que sí trabajamos en el curso es lo de arriba: modelado, reducción a tablas, normalización y álgebra relacional.</p>
+        <p><a class="mono" href="proyecto.html#basedatos" style="text-decoration:none;color:var(--red-deep);">Ver cómo quedó la base →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">Cómo se aplica</p>
+      <p style="margin-top:16px;">Todo esto converge en SIGEVET: 18 entidades y 22 tablas en 3FN, más 55 ejercicios de álgebra resueltos.</p>
+    </div>
+  </section>
+
+  <nav class="pager pad"><a href="evidencias.html">← Evidencias</a><a href="proyecto.html">SIGEVET →</a></nav>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">SIGEVET</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas del curso</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

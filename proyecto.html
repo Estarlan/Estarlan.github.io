@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!-- Created: 10:52 28-Oct-2026 -->
+<!-- Updated: 17:24 28-Oct-2026 -->
+<!-- Updated: 17:20 28-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIGEVET — Proyecto de Bases de Datos 1</title>
+  <meta name="description" content="SIGEVET, Sistema Integral de Gestión Veterinaria: modelado entidad-relación en cuatro notaciones, modelo relacional en 3FN y base de datos en MySQL 8.4 con 22 tablas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/evidencia.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/site.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html" aria-current="page">Proyecto</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas</a>
+      <a href="perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero pad">
+    <div class="crumb"><a href="index.html">Inicio</a> <i>/</i> Proyecto</div>
+    <h1 class="page-title">SIGEVET <span class="red">·</span> Sistema Integral de Gestión Veterinaria</h1>
+    <p class="page-lead">Diseñé con mi equipo la base de datos de una red de clínicas veterinarias: modelo entidad-relación en varias notaciones, modelo relacional en tercera forma normal y una base en MySQL 8.4 con 22 tablas, vistas, funciones y disparadores. Resolví 55 ejercicios de álgebra relacional y los comprobé en SQL.</p>
+    <div class="page-meta">
+      <span class="chip solid">Proyecto de bases de datos</span>
+      <span class="chip">MySQL 8.4</span><span class="chip">3FN</span><span class="chip">18 entidades · 22 tablas</span>
+    </div>
+  </section>
+
+  <nav class="subnav" aria-label="Secciones del proyecto">
+    <div class="wrap subnav-in">
+      <a href="#caso">A · El caso</a>
+      <a href="#equipo">B · Mi rol</a>
+      <a href="#modelado">1 · Modelado</a>
+      <a href="#basedatos">2 · Base de datos</a>
+      <a href="#algebra">3 · Álgebra y SQL</a>
+      <a href="#diagramas">4 · Diagramas</a>
+      <a href="#herramientas">5 · Herramientas</a>
+      <span class="meta">Huella Sana S.A.S. · 5 sedes</span>
+    </div>
+  </nav>
+
+  <section class="block tight">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b data-count="22">22</b><span>Tablas en 3FN</span></div>
+        <div class="stat"><b data-count="138">138</b><span>Columnas</span></div>
+        <div class="stat"><b data-count="30">30</b><span>Llaves foráneas</span></div>
+        <div class="stat"><b data-count="55">55</b><span>Ejercicios de álgebra</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="caso" class="block pad prose">
+    <div class="sec-head"><span class="num">A</span><h2>El caso</h2><span class="note">Caso inventado</span></div>
+    <p>El proyecto parte de una red inventada de clínicas veterinarias, <strong>Huella Sana S.A.S.</strong>, con 5 sedes. La base de datos cubre clientes, mascotas con su historia clínica, citas, consultas, fórmulas, inventario de medicamentos por sede y facturación.</p>
+    <p>Todos los registros de prueba son inventados; la base no contiene datos de personas ni de animales reales.</p>
+    <div class="box"><div class="box-title">Repositorio del proyecto</div>
+      <p><a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">github.com/Estarlan/proyecto-bd1-sigevet</a> — scripts de creación e inserción, diagramas editables, diccionario de datos y los ejercicios de álgebra relacional con su consulta SQL.</p></div>
+  </section>
+
+  <section id="equipo" class="block pad prose">
+    <div class="sec-head"><span class="num">B</span><h2>Mi rol y el equipo</h2></div>
+    <p>Trabajo en equipo de tres personas. Yo fui <strong>gerente del proyecto y DBA</strong>: coordiné el trabajo y me encargué del diseño y la construcción de la base de datos, los diagramas y la documentación.</p>
+    <ul>
+      <li><strong>Juan David Polo Herrera</strong> — gerente del proyecto y DBA: coordinación, diseño y construcción de la base de datos, diagramas y documentación.</li>
+      <li><strong>Sebastián Castellanos Parra</strong> — analista y modelador de datos.</li>
+      <li><strong>Juan Miguel Ramos</strong> — integrante del equipo.</li>
+    </ul>
+  </section>
+
+  <section id="modelado" class="block pad prose">
+    <div class="sec-head"><span class="num">1</span><h2>Modelado</h2></div>
+    <p>El modelo conceptual tiene <strong>18 entidades y 26 relaciones</strong>: 5 de 1:1, 18 de 1:N y 3 de N:M, más una especialización de EMPLEADO en VETERINARIO y AUXILIAR. Lo dibujé en cuatro notaciones —<strong>Peter Chen</strong>, <strong>ER extendido (EER)</strong>, <strong>Barker</strong> y <strong>Crow's Foot</strong>— para que el mismo modelo se pudiera leer con distintos criterios.</p>
+    <h4>Transformación al modelo relacional</h4>
+    <p>Pasé el modelo conceptual a tablas resolviendo los cuatro casos que rompen la reducción directa: atributos multivaluados, relaciones N:M, una entidad débil y la especialización de EMPLEADO.</p>
+    <h4>Normalización</h4>
+    <p>Partí del formato de origen en 0FN y lo llevé hasta <strong>3FN</strong>, trabajando las dependencias funcionales en cada paso: quitar grupos repetitivos y multivaluados (1FN), dependencias parciales (2FN) y dependencias transitivas (3FN).</p>
+    <p>Los diagramas están editables en Draw.io, sin relleno y con las relaciones nombradas en infinitivo (PERTENECER, TENER, POSEER…).</p>
+  </section>
+
+  <section id="basedatos" class="block pad prose">
+    <div class="sec-head"><span class="num">2</span><h2>Base de datos en MySQL 8.4</h2></div>
+    <p>La base quedó implementada en MySQL 8.4 con 22 tablas en 3FN. MySQL no lo vimos en el curso: lo usamos porque un integrante del equipo ya lo manejaba de antes. El modelado, la reducción y la normalización sí salen de clase; pasar el modelo a una base real fue trabajo aparte.</p>
+    <p>Estas son las cifras del script final:</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Elemento</th><th>Cantidad</th><th>Detalle</th></tr>
+      <tr><td>Tablas</td><td>22</td><td>en 3FN, 138 columnas</td></tr>
+      <tr><td>Llaves foráneas</td><td>30</td><td>integran el modelo relacional</td></tr>
+      <tr><td>Restricciones con nombre</td><td>113</td><td>para que los errores digan qué regla se rompió</td></tr>
+      <tr><td>Vistas</td><td>6</td><td>consultas frecuentes ya resueltas</td></tr>
+      <tr><td>Funciones</td><td>2</td><td>cálculos dentro de la base</td></tr>
+      <tr><td>Disparadores</td><td>6</td><td>reglas que se verifican solas</td></tr>
+      <tr><td>Registros de prueba</td><td>1.091</td><td>todos inventados</td></tr>
+    </table></div>
+    <h4>Cómo están organizados los scripts</h4>
+    <ul>
+      <li><code>database/01_ddl</code> — creación de tablas, índices, vistas y programas (funciones y disparadores).</li>
+      <li><code>database/02_dml</code> — inserción de los datos de prueba.</li>
+      <li><code>database/03_varios</code> — consultas, verificación y reinicio de la base.</li>
+    </ul>
+    <p>Además dejé usuarios de base de datos con permisos mínimos y un <strong>diccionario de datos</strong> completo: por cada columna, su tipo, si acepta nulos, sus llaves, sus restricciones y una descripción.</p>
+  </section>
+
+  <section id="algebra" class="block pad prose">
+    <div class="sec-head"><span class="num">3</span><h2>Álgebra relacional y SQL</h2></div>
+    <p>Resolví <strong>55 ejercicios de álgebra relacional</strong>. Cada uno tiene su expresión, su consulta SQL equivalente y su resultado verificado en MySQL, así que la respuesta no queda en el papel: se comprueba contra la base real.</p>
+  </section>
+
+  <section id="diagramas" class="block pad">
+    <div class="sec-head"><span class="num">4</span><h2>Diagramas</h2><span class="note">Clic para ampliar</span></div>
+    <div class="prose" style="padding-top:0;">
+      <p>Cuatro vistas del mismo proyecto: el modelo conceptual global, el mismo modelo en Crow's Foot, el modelo relacional y el paso de 0FN a 3FN. Las imágenes están reducidas para que la página cargue rápido; al hacer clic se abre el diagrama completo.</p>
+    </div>
+    <div class="gal">
+      <button class="gal-item reveal" type="button" data-lightbox
+              data-src="img/sigevet/chen-global_164325-28Oct2026.png"
+              data-alt="Modelo E-R global en notación Peter Chen: 18 entidades y 26 relaciones"
+              data-cap="Modelo E-R global · Peter Chen — 18 entidades y 26 relaciones">
+        <img src="img/sigevet/chen-global_164325-28Oct2026.png" alt="Modelo E-R global en notación Peter Chen con las 18 entidades y 26 relaciones">
+        <span class="gal-tag">Peter Chen</span>
+        <span class="gal-zoom">Ampliar</span>
+      </button>
+      <button class="gal-item reveal" type="button" data-lightbox
+              data-src="img/sigevet/crowsfoot-global_164325-28Oct2026.png"
+              data-alt="Modelo global en notación Crow's Foot con las cardinalidades de las 26 relaciones"
+              data-cap="Modelo global · Crow's Foot — las 26 relaciones con sus cardinalidades">
+        <img src="img/sigevet/crowsfoot-global_164325-28Oct2026.png" alt="Modelo global en Crow's Foot con las cardinalidades de las 26 relaciones">
+        <span class="gal-tag">Crow's Foot</span>
+        <span class="gal-zoom">Ampliar</span>
+      </button>
+      <button class="gal-item reveal" type="button" data-lightbox
+              data-src="img/sigevet/relacional-global_164325-28Oct2026.png"
+              data-alt="Modelo relacional global con tablas, llaves primarias y llaves foráneas"
+              data-cap="Modelo relacional global — tablas, PK y FK, en 3FN">
+        <img src="img/sigevet/relacional-global_164325-28Oct2026.png" alt="Modelo relacional global con tablas, llaves primarias y llaves foráneas">
+        <span class="gal-tag">Relacional</span>
+        <span class="gal-zoom">Ampliar</span>
+      </button>
+      <button class="gal-item reveal" type="button" data-lightbox
+              data-src="img/sigevet/normalizacion_164325-28Oct2026.png"
+              data-alt="Proceso de normalización de 0FN a 3FN con las tablas resultantes"
+              data-cap="Normalización de 0FN a 3FN — paso a paso hasta las 22 tablas">
+        <img src="img/sigevet/normalizacion_164325-28Oct2026.png" alt="Proceso de normalización de 0FN a 3FN con las tablas resultantes">
+        <span class="gal-tag">Normalización</span>
+        <span class="gal-zoom">Ampliar</span>
+      </button>
+    </div>
+    <p class="gal-cap">El modelo conceptual, su lectura en Crow's Foot, el resultado relacional y el camino de normalización.</p>
+  </section>
+
+  <section id="herramientas" class="block pad">
+    <div class="sec-head"><span class="num">5</span><h2>Herramientas</h2></div>
+    <div class="chips">
+      <span class="chip solid">MySQL 8.4</span>
+      <span class="chip">MySQL Workbench</span>
+      <span class="chip">Oracle SQL Developer Data Modeler</span>
+      <span class="chip">Draw.io</span>
+      <span class="chip">SQL</span>
+      <span class="chip">Álgebra relacional</span>
+      <span class="chip">Modelo entidad-relación</span>
+      <span class="chip">Normalización</span>
+    </div>
+  </section>
+
+  <nav class="pager pad"><a href="evidencias.html">← Todas las evidencias</a><a href="temas.html">Temas del curso →</a></nav>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">SIGEVET</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas del curso</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Diagrama ampliado" hidden>
+  <button class="lb-close" type="button">Cerrar ✕</button>
+  <button class="lb-prev" type="button" aria-label="Diagrama anterior">←</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button class="lb-next" type="button" aria-label="Diagrama siguiente">→</button>
+</div>
+</body>
+</html>

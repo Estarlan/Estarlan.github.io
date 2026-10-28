@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- Created: 23:26 12-Oct-2026 -->
+<!-- Updated: 17:05 28-Oct-2026 -->
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -8,45 +9,68 @@
   <meta name="description" content="Taller 1 de Bases de Datos 1: reducción a tablas aplicando las reglas de transformación del modelo E-R sobre la Terminal Portuaria Bahía Verde.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
   <link rel="stylesheet" href="../css/evidencia.css">
+  <script>document.documentElement.classList.add("js");</script>
   <script src="../js/modelos.js" defer></script>
+  <script src="../js/site.js" defer></script>
 </head>
 <body>
-<div class="shell">
-  <aside class="rail">
-    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
-    <h1>Juan David<br>Polo<br>Herrera</h1>
-    <nav class="rail-nav">
-      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
-      <a href="#enunciado"><span>A</span>Enunciado</a>
-      <a href="#supuestos"><span>B</span>Supuestos</a>
-      <a href="#ej1"><span>1</span>Atributos</a>
-      <a href="#ej2"><span>2</span>Relaciones N:M</a>
-      <a href="#ej3"><span>3</span>Ternaria y agregación</a>
-      <a href="#ej4"><span>4</span>Especialización y recursivas</a>
-      <a href="#ej5"><span>5</span>Modelo del compañero</a>
-      <a href="#desafios"><span>C</span>Desafíos</a>
-    </nav>
-    <div class="rail-foot"><strong>Taller en grupo</strong>Juan David Polo Herrera · Sebastián Castellanos Parra · Juan Miguel Ramos</div>
-  </aside>
+<a class="skip" href="#main">Ir al contenido</a>
 
-  <main>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  
     <section class="ev-hero pad">
-      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Reducción a tablas</div>
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Reducción a tablas</div>
       <h1>Taller 1: Reglas de transformación del modelo E-R</h1>
       <div class="meta"><span class="tag solid">Modelo transformado</span><span class="tag">Notación Chen</span><span class="tag">draw.io</span><span class="tag">50 puntos</span></div>
     </section>
 
-    <section id="enunciado" class="pad prose">
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a>
+      <a href="#enunciado">A · Enunciado</a>
+      <a href="#supuestos">B · Supuestos</a>
+      <a href="#ej1">1 · Atributos</a>
+      <a href="#ej2">2 · Relaciones N:M</a>
+      <a href="#ej3">3 · Ternaria y agregación</a>
+      <a href="#ej4">4 · Especialización y recursivas</a>
+      <a href="#ej5">5 · Modelo del compañero</a>
+      <a href="#desafios">C · Desafíos</a>
+      <span class="meta">Taller en grupo · Juan David Polo Herrera · Sebastián Castellanos Parra · Juan Miguel Ramos</span>
+    </div>
+  </nav>
+
+  <section id="enunciado" class="pad prose">
       <div class="sec-head"><span class="num">A</span><h2>Enunciado y contexto</h2></div>
       <p>Partimos del modelo conceptual de la <strong>Terminal Portuaria Bahía Verde</strong>, ya validado con el área funcional. La tarea no era rediseñarlo ni corregirlo, sino <strong>transformarlo</strong>: dejarlo listo para pasar al modelo relacional. En el modelo transformado solo pueden sobrevivir entidades, atributos simples y relaciones binarias 1:1 y 1:N. Todo lo demás (compuestos, multivaluados, derivados, N:M, ternarias, agregaciones y especializaciones) tiene que salir.</p>
       <div class="box soft">
         <div class="box-title">Modelo de partida (resumen)</div>
         <p>IMPORTADOR (documento, nombre_completo, fecha_registro, correo) · SERVICIO · RECALADA (débil de SERVICIO) · BUQUE · CERTIFICADO · OPERARIO · SUMINISTRO · CONTRATISTA (sede multivaluado y compuesto) · BODEGA. Relaciones: EMBARQUE y CUADRILLA (N:M con atributos), SUPERVISA (N:M recursiva), TRANSBORDA (1:N recursiva), ABASTECE (ternaria M:N:N), DEPOSITA (agregación) y la especialización OPERARIO → GRUERO / ESTIBADOR (parcial y solapada).</p>
       </div>
-      <p><a href="../docs/Taller1_Enunciado.pdf" target="_blank" rel="noopener">Ver enunciado completo (PDF)</a> · <a href="../docs/Taller1_Respuestas_Grupo.pdf" target="_blank" rel="noopener">Ver documento entregado (PDF)</a></p>
+      <p class="doc-actions"><a class="btn ghost" href="../docs/Taller1_Enunciado.pdf" target="_blank" rel="noopener">Ver enunciado <span class="arw">↗</span></a><a class="btn ghost" href="../docs/Taller1_Respuestas_Grupo.pdf" target="_blank" rel="noopener">Ver documento entregado <span class="arw">↗</span></a></p>
     </section>
 
     <section id="supuestos" class="pad prose">
@@ -143,6 +167,27 @@
 
     <nav class="pager pad"><a href="reduccion-tablas.html">← Reducción a tablas en clase</a><a href="taller-normalizacion.html">Taller de normalización →</a></nav>
   </main>
-</div>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

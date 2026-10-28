@@ -1,144 +1,199 @@
 <!DOCTYPE html>
-<!-- Created: 23:26 12-Oct-2026 -->
+<!-- Created: 10:40 28-Oct-2026 -->
+<!-- Updated: 17:22 28-Oct-2026 -->
+<!-- Updated: 17:20 28-Oct-2026 -->
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Juan David Polo — E-portafolio BD1</title>
-  <meta name="description" content="E-portafolio de Bases de Datos 1 de Juan David Polo Herrera, Ingeniería de Sistemas, Universidad El Bosque.">
+  <title>Juan David Polo — E-portafolio Bases de Datos 1</title>
+  <meta name="description" content="E-portafolio de Bases de Datos 1 de Juan David Polo Herrera: modelado entidad-relación, reducción a tablas, normalización y álgebra relacional. Proyecto SIGEVET.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/site.js" defer></script>
 </head>
 <body>
-<div class="shell">
+<a class="skip" href="#main">Ir al contenido</a>
 
-  <aside class="rail">
-    <div class="brand"><a class="brand-mark" href="index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
-    <h1>Juan David<br>Polo<br>Herrera</h1>
-    <div class="rail-meta"><strong>Ingeniería de Sistemas</strong><span>Universidad El Bosque</span></div>
-    <div class="tags"><span class="tag solid">Bases de Datos 1</span><span class="tag">Colocompras</span><span class="tag">Desarrollo</span></div>
-    <nav class="rail-nav">
-      <a href="#declaracion"><span>00</span>Declaración</a>
-      <a href="#perfil"><span>01</span>Perfil</a>
-      <a href="#video"><span>02</span>Video</a>
-      <a href="#evidencias"><span>03</span>Evidencias</a>
-      <a href="#aprendizajes"><span>04</span>Aprendizajes</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="proyecto.html">Proyecto</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas</a>
+      <a href="perfil.html">Perfil</a>
     </nav>
-    <div class="rail-foot"><strong>© 2026 Juan David Polo Herrera</strong>Bases de Datos 1 · Ing. Christian Felipe Duarte</div>
-  </aside>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
 
-  <main>
-    <section id="declaracion" class="statement pad">
-      <div class="kicker">00 Declaración</div>
-      <p class="big">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
-      <p class="sub">Este portafolio documenta el proceso, no la teoría: cada evidencia trae el enunciado, los supuestos que tomamos, el modelo en draw.io y lo que de verdad nos costó resolver.</p>
-    </section>
+<main id="main">
 
-    <section id="perfil" class="pad">
-      <div class="sec-head"><span class="num">01</span><h2>Perfil</h2></div>
-      <div class="row">
-        <div class="row-label"><div class="kicker">Retrato</div></div>
-        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:22px;">
-          <div class="portrait"><img src="img/foto.jpg" alt="Juan David Polo Herrera"></div>
-          <div><div class="kicker">Cómo me llaman</div><div class="alias">Juan David</div></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-txt">
+        <p class="kicker hero-kicker">E-portafolio 2026-2 · Bases de Datos 1</p>
+        <h1 class="hero-h1">Juan David<br>Polo <span class="red">Herrera</span></h1>
+        <p class="hero-sub">Construyo sistemas, negocios digitales y software con enfoque en impacto real. Aquí documento el proceso: modelos, decisiones y lo que de verdad costó resolver.</p>
+        <div class="hero-cta">
+          <a class="btn" href="proyecto.html">Ver el proyecto SIGEVET <span class="arw">→</span></a>
+          <a class="btn ghost" href="evidencias.html">Las evidencias</a>
+        </div>
+        <dl class="hero-meta">
+          <div><dt>Curso</dt><dd>Bases de Datos 1</dd></div>
+          <div><dt>Programa</dt><dd>Ingeniería de Sistemas</dd></div>
+          <div><dt>Universidad</dt><dd>El Bosque</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="kicker">Esquema relacional · 3FN</div>
+        <div class="sch">
+          <div class="sch-card">
+            <div class="sch-head"><span>CLIENTE</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="sch-row"><span class="k">PK</span>id_cliente</div>
+            <div class="sch-row"><span class="k fk">FK</span>id_ciudad</div>
+            <div class="sch-row muted">nombre</div>
+            <div class="sch-row muted">telefono</div>
+          </div>
+          <div class="sch-rel"><span>PERTENECER</span><span class="sch-badge">1 : N</span></div>
+          <div class="sch-card">
+            <div class="sch-head"><span>MASCOTA</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="sch-row"><span class="k">PK</span>id_mascota</div>
+            <div class="sch-row"><span class="k fk">FK</span>id_cliente</div>
+            <div class="sch-row"><span class="k fk">FK</span>id_raza</div>
+            <div class="sch-row muted">nombre</div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="row-label"><div class="kicker">Sobre mí</div></div>
-        <p>Me gusta entrenar. Llevo tiempo en esto, actualmente lo estoy retomando, y esa misma disciplina la aplico a construir negocios y sistemas. Manejo Colocompras, mi tienda de e-commerce, junto con varios proyectos de desarrollo de software.</p>
-      </div>
-      <div class="row last">
-        <div class="row-label"><div class="kicker">Por qué Bases de Datos 1</div></div>
-        <p>Todo lo que construyo, Colocompras, sistemas de gestión, proyectos académicos, depende de datos bien modelados. Sin una base de datos sólida, cualquier sistema que diseñe se cae al escalar. Esta materia es la base técnica real detrás de lo que ya estoy construyendo.</p>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="video" class="pad">
-      <div class="sec-head"><span class="num">02</span><h2>Video de presentación</h2></div>
-      <div class="video">
-        <iframe src="https://www.youtube.com/embed/YOavuPmf6hA" title="Presentación — Juan David Polo" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+  <section class="block tight">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">00</span><h2>El proyecto en cifras</h2><span class="note">SIGEVET · Huella Sana S.A.S.</span></div>
+      <div class="stats">
+        <div class="stat"><b data-count="18">18</b><span>Entidades</span></div>
+        <div class="stat"><b data-count="26">26</b><span>Relaciones</span></div>
+        <div class="stat"><b data-count="22">22</b><span>Tablas en 3FN</span></div>
+        <div class="stat"><b data-count="55">55</b><span>Ejercicios de álgebra</span></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="evidencias" class="pad">
-      <div class="sec-head"><span class="num">03</span><h2>Evidencias</h2><span class="note">Organizadas por categoría</span></div>
-      <p style="margin:0 0 6px;font-size:14px;color:var(--color-neutral-700);">Cada entrada abre una página con enunciado, supuestos, contexto, desarrollo, modelos interactivos en draw.io y los desafíos que encontramos.</p>
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">01</span><h2>Proyecto destacado</h2><span class="note">Diseño y base de datos</span></div>
+      <a class="feat reveal" href="proyecto.html">
+        <div class="feat-main">
+          <p class="kicker">Sistema Integral de Gestión Veterinaria</p>
+          <p class="feat-title">SIGEVET</p>
+          <p class="feat-desc">La base de datos de una red de clínicas veterinarias con 5 sedes: clientes, mascotas con historia clínica, citas, consultas, fórmulas, inventario por sede y facturación. Modelo entidad-relación en cuatro notaciones, modelo relacional en 3FN y base implementada en MySQL 8.4.</p>
+          <div class="chips" style="margin-top:auto;padding-top:20px;">
+            <span class="chip solid">MySQL 8.4</span><span class="chip">3FN</span><span class="chip">Draw.io</span><span class="chip">18 entidades</span>
+          </div>
+        </div>
+        <div class="feat-side">
+          <span class="big">01</span>
+          <ul>
+            <li><span>Tablas</span><b>22</b></li>
+            <li><span>Llaves foráneas</span><b>30</b></li>
+            <li><span>Vistas</span><b>6</b></li>
+            <li><span>Disparadores</span><b>6</b></li>
+          </ul>
+          <span class="btn" style="background:var(--red);color:var(--paper);border-color:var(--red);">Ver el caso <span class="arw">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
 
-      <div class="cat-title">Modelado entidad–relación</div>
-      <div class="ev-list">
-        <a class="ev" href="evidencias/modelado-er.html">
-          <span class="n">01</span><h3>Modelos E-R de clase</h3>
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">02</span><h2>Evidencias</h2><a class="note" href="evidencias.html">Ver las 7 →</a></div>
+      <div class="cards three">
+        <a class="ecard reveal" href="evidencias/modelado-er.html" data-cat="modelado">
+          <div class="ecard-top"><span class="n">01</span><span class="cat">Modelado entidad–relación</span></div>
+          <h3>Modelos E-R de clase</h3>
           <p>Torneo de fútbol, Librería (con correcciones) y CineAndes: entidades, atributos, cardinalidades, débiles, recursivas y especialización.</p>
-          <span class="state done">Publicado</span>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
         </a>
-        <a class="ev" href="evidencias/quiz-veterinaria.html">
-          <span class="n">02</span><h3>Quiz: Veterinaria</h3>
-          <p>Encontrar los errores de un modelo E-R y corregirlo. Lo que me salió, lo que se me escapó y el modelo revisado.</p>
-          <span class="state done">Publicado</span>
-        </a>
-      </div>
-
-      <div class="cat-title">Reducción a tablas · modelo transformado</div>
-      <div class="ev-list">
-        <a class="ev" href="evidencias/reduccion-tablas.html">
-          <span class="n">03</span><h3>Reducción a tablas en clase</h3>
+        <a class="ecard reveal" href="evidencias/reduccion-tablas.html" data-cat="reduccion">
+          <div class="ecard-top"><span class="n">03</span><span class="cat">Reducción a tablas</span></div>
+          <h3>Reducción a tablas en clase</h3>
           <p>Librería con los 11 pasos y Zoológico: de diagrama E-R a modelo relacional con PK, FK y tablas de relación.</p>
-          <span class="state done">Publicado</span>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
         </a>
-        <a class="ev" href="evidencias/taller1-transformacion.html">
-          <span class="n">04</span><h3>Taller 1: Reglas de transformación</h3>
-          <p>Terminal Portuaria Bahía Verde: multivaluados, compuestos, derivados, N:M, ternaria, agregación, especialización y recursivas. 8 modelos.</p>
-          <span class="state done">Publicado</span>
-        </a>
-      </div>
-
-      <div class="cat-title">Normalización</div>
-      <div class="ev-list">
-        <a class="ev" href="evidencias/taller-normalizacion.html">
-          <span class="n">05</span><h3>Taller de normalización</h3>
+        <a class="ecard reveal" href="evidencias/taller-normalizacion.html" data-cat="normalizacion">
+          <div class="ecard-top"><span class="n">05</span><span class="cat">Normalización</span></div>
+          <h3>Taller de normalización</h3>
           <p>Hospital, Pedidos y Empleados: dependencias funcionales, anomalías, 1FN a 3FN, BCNF y la decisión defendida con números.</p>
-          <span class="state done">Publicado</span>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
         </a>
       </div>
+    </div>
+  </section>
 
-      <div class="cat-title">SQL y proyecto</div>
-      <div class="ev-list">
-        <div class="ev">
-          <span class="n">06</span><h3>SQL</h3>
-          <p>Consultas, joins y scripts del semestre. Se publican a medida que avance el curso.</p>
-          <span class="state">Próximamente</span>
-        </div>
-        <div class="ev">
-          <span class="n">07</span><h3>Proyecto final</h3>
-          <p>Diseño e implementación de la base de datos del proyecto del curso.</p>
-          <span class="state">En curso</span>
-        </div>
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">03</span><h2>Temas del curso</h2><a class="note" href="temas.html">El temario completo →</a></div>
+      <div class="tlines">
+        <a class="tline reveal" href="temas.html#modelado">
+          <span class="n">01</span><h3>Modelado E–R</h3><p>Chen, EER, Barker y Crow's Foot. Entidades, cardinalidades, débiles y especialización.</p><span class="arw">→</span>
+        </a>
+        <a class="tline reveal" href="temas.html#reduccion">
+          <span class="n">02</span><h3>Reducción a tablas</h3><p>PK, FK, tablas de relación, multivaluados, débiles y especialización.</p><span class="arw">→</span>
+        </a>
+        <a class="tline reveal" href="temas.html#normalizacion">
+          <span class="n">03</span><h3>Normalización</h3><p>De 0FN a 3FN con dependencias funcionales y sus anomalías.</p><span class="arw">→</span>
+        </a>
+        <a class="tline reveal" href="temas.html#algebra">
+          <span class="n">04</span><h3>Álgebra relacional</h3><p>Selección, proyección, unión, diferencia, producto y joins, comprobados en SQL.</p><span class="arw">→</span>
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="aprendizajes" class="pad">
-      <div class="sec-head"><span class="num">04</span><h2>Aprendizajes del semestre</h2></div>
-      <div class="row">
-        <div class="row-label"><div class="kicker">Lo que más nos costó</div></div>
-        <p>Casi nunca el problema era no saber la regla, sino aplicarla en el orden correcto y fijarse en el detalle. Por ejemplo, con un atributo multivaluado y compuesto, primero se extrae y después se descompone; si lo haces al revés el modelo deja de saber qué dirección va con qué ciudad. Y la debilidad se va encadenando: si RECALADA ya es débil, todo lo que dependa de ella hereda una clave más larga.</p>
-      </div>
-      <div class="row">
-        <div class="row-label"><div class="kicker">Dónde mejoré</div></div>
-        <p>Pulimos mucho la habilidad de identificar entidades débiles, claves parciales y dónde van los atributos de una relación. Antes los metía en una de las entidades; ahora me pregunto si el dato describe a uno solo o al cruce de los dos. Si es del cruce, va en la relación.</p>
-      </div>
-      <div class="row last">
-        <div class="row-label"><div class="kicker">Lo que sigo trabajando</div></div>
-        <p>La agilidad mental para detallar el problema completo de una vez. En el quiz y en varios ejercicios las correcciones me iban saliendo a medida que avanzaba, no desde el principio. Mi meta es llegar al análisis completo en la primera pasada: leer el enunciado buscando débiles, derivados y atributos de relación antes de dibujar.</p>
-      </div>
-    </section>
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">Compromiso del semestre</p>
+      <p style="margin-top:16px;">Aplicar lo aprendido en clase directamente a proyectos reales que ya tengo en marcha, no solo en ejercicios de tablero.</p>
+    </div>
+  </section>
 
-    <section class="band pad">
-      <div class="kicker">Compromiso del semestre</div>
-      <p>Aplicar lo aprendido en clase directamente a proyectos reales que ya tengo en marcha, no solo en ejercicios de tablero.</p>
-    </section>
-  </main>
-</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">SIGEVET</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas del curso</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

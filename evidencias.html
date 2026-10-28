@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Created: 10:58 28-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evidencias — E-portafolio Bases de Datos 1</title>
+  <meta name="description" content="Evidencias del curso Bases de Datos 1: modelado entidad-relación, reducción a tablas, normalización, SQL y el proyecto SIGEVET.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/page.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">Proyecto</a>
+      <a href="evidencias.html" aria-current="page">Evidencias</a>
+      <a href="temas.html">Temas</a>
+      <a href="perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero pad">
+    <div class="crumb"><a href="index.html">Inicio</a> <i>/</i> Evidencias</div>
+    <h1 class="page-title">Evidencias <span class="red">07</span></h1>
+    <p class="page-lead">Cada entrada abre una página con el enunciado, los supuestos, el desarrollo, los modelos y los desafíos que encontramos. Están organizadas por el tipo de trabajo que se hizo.</p>
+  </section>
+
+  <section class="block tight">
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filtrar evidencias">
+        <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Todas <span>07</span></button>
+        <button class="filter" type="button" data-filter="modelado" aria-pressed="false">Modelado E-R <span>02</span></button>
+        <button class="filter" type="button" data-filter="reduccion" aria-pressed="false">Reducción a tablas <span>02</span></button>
+        <button class="filter" type="button" data-filter="normalizacion" aria-pressed="false">Normalización <span>01</span></button>
+        <button class="filter" type="button" data-filter="sql" aria-pressed="false">SQL <span>01</span></button>
+        <button class="filter" type="button" data-filter="proyecto" aria-pressed="false">Proyecto <span>01</span></button>
+      </div>
+      <p class="mono" id="filterCount" aria-live="polite" style="margin:0 0 14px;">7 evidencias</p>
+
+      <div class="cards">
+        <a class="ecard reveal" href="evidencias/modelado-er.html" data-cat="modelado">
+          <div class="ecard-top"><span class="n">01</span><span class="cat">Modelado entidad–relación</span></div>
+          <h3>Modelos E-R de clase</h3>
+          <p>Torneo de fútbol, Librería (con correcciones) y CineAndes: entidades, atributos, cardinalidades, débiles, recursivas y especialización.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/quiz-veterinaria.html" data-cat="modelado">
+          <div class="ecard-top"><span class="n">02</span><span class="cat">Modelado entidad–relación</span></div>
+          <h3>Quiz: Veterinaria</h3>
+          <p>Encontrar los errores de un modelo E-R y corregirlo. Lo que me salió, lo que se me escapó y el modelo revisado.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/reduccion-tablas.html" data-cat="reduccion">
+          <div class="ecard-top"><span class="n">03</span><span class="cat">Reducción a tablas</span></div>
+          <h3>Reducción a tablas en clase</h3>
+          <p>Librería con los 11 pasos y Zoológico: de diagrama E-R a modelo relacional con PK, FK y tablas de relación.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/taller1-transformacion.html" data-cat="reduccion">
+          <div class="ecard-top"><span class="n">04</span><span class="cat">Reducción a tablas</span></div>
+          <h3>Taller 1: Reglas de transformación</h3>
+          <p>Terminal Portuaria Bahía Verde: multivaluados, compuestos, derivados, N:M, ternaria, agregación, especialización y recursivas. 8 modelos.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/taller-normalizacion.html" data-cat="normalizacion">
+          <div class="ecard-top"><span class="n">05</span><span class="cat">Normalización</span></div>
+          <h3>Taller de normalización</h3>
+          <p>Hospital, Pedidos y Empleados: dependencias funcionales, anomalías, 1FN a 3FN, BCNF y la decisión defendida con números.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="proyecto.html#algebra" data-cat="sql">
+          <div class="ecard-top"><span class="n">06</span><span class="cat">SQL y álgebra relacional</span></div>
+          <h3>SQL y álgebra relacional</h3>
+          <p>Los 55 ejercicios del proyecto: cada expresión de álgebra relacional con su consulta SQL y el resultado verificado en MySQL.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="proyecto.html" data-cat="proyecto">
+          <div class="ecard-top"><span class="n">07</span><span class="cat">Proyecto</span></div>
+          <h3>SIGEVET</h3>
+          <p>Base de datos de una red de clínicas veterinarias: modelo E-R en varias notaciones, modelo relacional en 3FN y base en MySQL 8.4 con 22 tablas, vistas, funciones y disparadores.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="pager pad"><a href="index.html">← Inicio</a><a href="proyecto.html">SIGEVET →</a></nav>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">SIGEVET</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas del curso</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

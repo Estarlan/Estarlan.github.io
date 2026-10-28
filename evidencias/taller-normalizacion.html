@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <!-- Created: 23:26 12-Oct-2026 -->
+<!-- Updated: 16:48 28-Oct-2026 -->
+<!-- Updated: 17:05 28-Oct-2026 -->
+<!-- Updated: 17:20 28-Oct-2026 -->
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -8,36 +11,58 @@
   <meta name="description" content="Taller de normalización de Bases de Datos 1: dependencias funcionales, anomalías, 1FN a 3FN y BCNF en tres casos empresariales.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
   <link rel="stylesheet" href="../css/evidencia.css">
+  <script src="../js/site.js" defer></script>
 </head>
 <body>
-<div class="shell">
-  <aside class="rail">
-    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
-    <h1>Juan David<br>Polo<br>Herrera</h1>
-    <nav class="rail-nav">
-      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
-      <a href="#enunciado"><span>A</span>Enunciado</a>
-      <a href="#supuestos"><span>B</span>Supuestos</a>
-      <a href="#p1"><span>1</span>Análisis</a>
-      <a href="#p2"><span>2</span>Paso a paso</a>
-      <a href="#p3"><span>3</span>¿3FN o BCNF?</a>
-      <a href="#p4"><span>4</span>Empleados</a>
-      <a href="#desafios"><span>C</span>Desafíos</a>
-    </nav>
-    <div class="rail-foot"><strong>Taller en grupo · 27/09/2026</strong>Juan David Polo Herrera · Sebastián Castellanos Parra · Juan Miguel Ramos</div>
-  </aside>
+<a class="skip" href="#main">Ir al contenido</a>
 
-  <main>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  
     <section class="ev-hero pad">
-      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Normalización</div>
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Normalización</div>
       <h1>Taller de normalización</h1>
       <div class="meta"><span class="tag solid">1FN → BCNF</span><span class="tag">Dependencias funcionales</span><span class="tag">Anomalías</span><span class="tag">50 puntos</span></div>
     </section>
 
-    <section id="enunciado" class="pad prose">
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a>
+      <a href="#enunciado">A · Enunciado</a>
+      <a href="#supuestos">B · Supuestos</a>
+      <a href="#p1">1 · Análisis</a>
+      <a href="#p2">2 · Paso a paso</a>
+      <a href="#p3">3 · ¿3FN o BCNF?</a>
+      <a href="#p4">4 · Empleados</a>
+      <a href="#desafios">C · Desafíos</a>
+      <span class="meta">Taller en grupo · Juan David Polo Herrera · Sebastián Castellanos Parra · Juan Miguel Ramos</span>
+    </div>
+  </nav>
+
+  <section id="enunciado" class="pad prose">
       <div class="sec-head"><span class="num">A</span><h2>Enunciado y contexto</h2></div>
       <p>Tres contextos empresariales sin datos de ejemplo, en grupos de 3 y con sustentación de 15-20 minutos: (1) un <strong>hospital</strong> con pacientes, médicos, especialidades y camas; (2) una empresa que vende <strong>productos a clientes a través de vendedores</strong>; (3) <strong>empleados</strong> con varias competencias e idiomas. Por cada esquema había que encontrar las dependencias funcionales, decir en qué forma normal está, describir anomalías, normalizar paso a paso y defender con números si vale la pena BCNF o desnormalizar.</p>
       <pre class="schema">HOSPITALIZACION (ID_Paciente, Nombre_Paciente, Especialidad_Tratamiento, Cama_Asignada,
@@ -48,7 +73,7 @@ PEDIDO_CLIENTE_PRODUCTO (ID_Pedido, Fecha_Pedido, ID_Cliente, Nombre_Cliente, Se
   ID_Vendedor, Nombre_Vendedor, Comisión_Vendedor)
 
 EMPLEADO (ID_Empleado, Nombre_Empleado, Competencias_Técnicas, Idiomas)</pre>
-      <p><a href="../docs/Taller_Normalizacion_Enunciado.pdf" target="_blank" rel="noopener">Ver enunciado (PDF)</a> · <a href="../docs/NORMALIZACION.xlsx" download>Descargar el paso a paso (Excel)</a></p>
+      <p class="doc-actions"><a class="btn ghost" href="../docs/Taller_Normalizacion_Enunciado.pdf" target="_blank" rel="noopener">Ver enunciado <span class="arw">↗</span></a><a class="btn ghost" href="../docs/NORMALIZACION.xlsx" download>Descargar el paso a paso <span class="arw">↓</span></a></p>
     </section>
 
     <section id="supuestos" class="pad prose">
@@ -138,8 +163,29 @@ WHERE c.Competencia = 'Python' AND i.Idioma = 'Inglés';</pre>
       <div class="challenge"><span class="n">04</span><div><h4>Defender con números</h4><p>No bastaba con decir "3FN es mejor". Tocó poner supuestos de volumen y comparar segundos de JOIN contra filas tocadas en cada cambio.</p></div></div>
     </section>
 
-    <nav class="pager pad"><a href="taller1-transformacion.html">← Taller 1</a><a href="../index.html#evidencias">Volver al índice →</a></nav>
+    <nav class="pager pad"><a href="taller1-transformacion.html">← Taller 1</a><a href="../proyecto.html">SIGEVET →</a></nav>
   </main>
-</div>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

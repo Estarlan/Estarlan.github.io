@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- Created: 11:05 28-Oct-2026 -->
+<!-- Updated: 17:20 28-Oct-2026 -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil — Juan David Polo Herrera</title>
+  <meta name="description" content="Perfil de Juan David Polo Herrera, estudiante de Ingeniería de Sistemas: por qué Bases de Datos 1 y lo que aprendió en el semestre.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/page.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">Proyecto</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas</a>
+      <a href="perfil.html" aria-current="page">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero pad">
+    <div class="crumb"><a href="index.html">Inicio</a> <i>/</i> Perfil</div>
+    <h1 class="page-title">Quién <span class="red">soy</span></h1>
+    <p class="page-lead">Estudiante de Ingeniería de Sistemas en la Universidad El Bosque. Este portafolio documenta el proceso de Bases de Datos 1: modelos, decisiones y lo que de verdad costó resolver.</p>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">01</span><h2>Perfil</h2></div>
+      <div class="row">
+        <div class="row-label"><div class="kicker">Retrato</div></div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:22px;">
+          <div class="portrait"><img src="img/foto.jpg" alt="Juan David Polo Herrera"></div>
+          <div><div class="kicker">Cómo me llaman</div><div class="alias">Juan David</div></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-label"><div class="kicker">Sobre mí</div></div>
+        <p>Me gusta entrenar. Llevo tiempo en esto, actualmente lo estoy retomando, y esa misma disciplina la aplico a construir negocios y sistemas. Manejo Colocompras, mi tienda de e-commerce, junto con varios proyectos de desarrollo de software.</p>
+      </div>
+      <div class="row last">
+        <div class="row-label"><div class="kicker">Por qué Bases de Datos 1</div></div>
+        <p>Todo lo que construyo, Colocompras, sistemas de gestión, proyectos académicos, depende de datos bien modelados. Sin una base de datos sólida, cualquier sistema que diseñe se cae al escalar. Esta materia es la base técnica real detrás de lo que ya estoy construyendo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="video" class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">02</span><h2>Video de presentación</h2><span class="note">1 minuto</span></div>
+      <div class="video reveal">
+        <iframe src="https://www.youtube.com/embed/YOavuPmf6hA" title="Presentación — Juan David Polo" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="aprendizajes" class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">03</span><h2>Aprendizajes del semestre</h2></div>
+      <div class="prow reveal">
+        <h3>Lo que más nos costó</h3>
+        <p>Casi nunca el problema era no saber la regla, sino aplicarla en el orden correcto y fijarse en el detalle. Por ejemplo, con un atributo multivaluado y compuesto, primero se extrae y después se descompone; si lo haces al revés el modelo deja de saber qué dirección va con qué ciudad. Y la debilidad se va encadenando: si RECALADA ya es débil, todo lo que dependa de ella hereda una clave más larga.</p>
+      </div>
+      <div class="prow reveal">
+        <h3>Dónde mejoré</h3>
+        <p>Pulimos mucho la habilidad de identificar entidades débiles, claves parciales y dónde van los atributos de una relación. Antes los metía en una de las entidades; ahora me pregunto si el dato describe a uno solo o al cruce de los dos. Si es del cruce, va en la relación.</p>
+      </div>
+      <div class="prow reveal">
+        <h3>Lo que sigo trabajando</h3>
+        <p>La agilidad mental para detallar el problema completo de una vez. En el quiz y en varios ejercicios las correcciones me iban saliendo a medida que avanzaba, no desde el principio. Mi meta es llegar al análisis completo en la primera pasada: leer el enunciado buscando débiles, derivados y atributos de relación antes de dibujar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">Compromiso del semestre</p>
+      <p style="margin-top:16px;">Aplicar lo aprendido en clase directamente a proyectos reales que ya tengo en marcha, no solo en ejercicios de tablero.</p>
+    </div>
+  </section>
+
+  <nav class="pager pad"><a href="temas.html">← Temas del curso</a><a href="proyecto.html">SIGEVET →</a></nav>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="proyecto.html">SIGEVET</a>
+      <a href="evidencias.html">Evidencias</a>
+      <a href="temas.html">Temas del curso</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

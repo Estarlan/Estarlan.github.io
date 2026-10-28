@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- Created: 23:26 12-Oct-2026 -->
+<!-- Updated: 17:05 28-Oct-2026 -->
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -8,34 +9,57 @@
   <meta name="description" content="Modelos entidad-relación desarrollados en Bases de Datos 1: torneo de fútbol, librería y CineAndes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
   <link rel="stylesheet" href="../css/evidencia.css">
+  <script>document.documentElement.classList.add("js");</script>
   <script src="../js/modelos.js" defer></script>
+  <script src="../js/site.js" defer></script>
 </head>
 <body>
-<div class="shell">
-  <aside class="rail">
-    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
-    <h1>Juan David<br>Polo<br>Herrera</h1>
-    <nav class="rail-nav">
-      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
-      <a href="#torneo"><span>1</span>Torneo de fútbol</a>
-      <a href="#libreria"><span>2</span>Librería</a>
-      <a href="#cineandes"><span>3</span>CineAndes</a>
-      <a href="#desafios"><span>C</span>Desafíos</a>
-    </nav>
-    <div class="rail-foot"><strong>Ejercicios de clase</strong>Modelado entidad–relación · draw.io</div>
-  </aside>
+<a class="skip" href="#main">Ir al contenido</a>
 
-  <main>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  
     <section class="ev-hero pad">
-      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Modelado E-R</div>
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Modelado E-R</div>
       <h1>Modelos entidad–relación de clase</h1>
       <div class="meta"><span class="tag solid">Modelo conceptual</span><span class="tag">Notación Chen</span><span class="tag">draw.io</span></div>
     </section>
 
-    <section id="torneo" class="pad prose">
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a>
+      <a href="#torneo">1 · Torneo de fútbol</a>
+      <a href="#libreria">2 · Librería</a>
+      <a href="#cineandes">3 · CineAndes</a>
+      <a href="#desafios">C · Desafíos</a>
+      <span class="meta">Ejercicios de clase · Modelado entidad–relación · draw.io</span>
+    </div>
+  </nav>
+
+  <section id="torneo" class="pad prose">
       <div class="sec-head"><span class="num">1</span><h2>Torneo de fútbol universitario</h2></div>
       <p><strong>Contexto:</strong> primer modelo del semestre. Un torneo interno donde los equipos están formados por estudiantes, juegan partidos entre sí y ocupan una posición en la tabla.</p>
       <p><strong>Supuestos:</strong> un jugador pertenece a un solo equipo (1:N); un equipo juega muchos partidos y cada partido lo juegan varios equipos (M:N); cada equipo tiene una fila en la tabla con PG, PE, PP, puntaje y posición.</p>
@@ -85,8 +109,29 @@
       <div class="challenge"><span class="n">03</span><div><h4>Débiles que dependen de débiles</h4><p>En CineAndes, SILLA no se identifica sola ni con la sala sola: necesita sede + sala + fila + número. Es la misma debilidad encadenada que después vimos con RECALADA en el Taller 1.</p></div></div>
     </section>
 
-    <nav class="pager pad"><a href="../index.html#evidencias">← Índice</a><a href="quiz-veterinaria.html">Quiz: Veterinaria →</a></nav>
+    <nav class="pager pad"><a href="../evidencias.html">← Índice</a><a href="quiz-veterinaria.html">Quiz: Veterinaria →</a></nav>
   </main>
-</div>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

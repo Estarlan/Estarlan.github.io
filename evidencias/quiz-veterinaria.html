@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- Created: 23:26 12-Oct-2026 -->
+<!-- Updated: 17:05 28-Oct-2026 -->
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -8,34 +9,57 @@
   <meta name="description" content="Quiz de modelado E-R de Bases de Datos 1: identificar y corregir errores en el modelo de una veterinaria.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
   <link rel="stylesheet" href="../css/evidencia.css">
+  <script>document.documentElement.classList.add("js");</script>
   <script src="../js/modelos.js" defer></script>
+  <script src="../js/site.js" defer></script>
 </head>
 <body>
-<div class="shell">
-  <aside class="rail">
-    <div class="brand"><a class="brand-mark" href="../index.html">JD</a><span class="kicker">E-portafolio 2026-2</span></div>
-    <h1>Juan David<br>Polo<br>Herrera</h1>
-    <nav class="rail-nav">
-      <a href="../index.html#evidencias"><span>←</span>Todas las evidencias</a>
-      <a href="#contexto"><span>A</span>Contexto</a>
-      <a href="#respuesta"><span>B</span>Mi respuesta</a>
-      <a href="#revisado"><span>C</span>Modelo revisado</a>
-      <a href="#reflexion"><span>D</span>Reflexión</a>
-    </nav>
-    <div class="rail-foot"><strong>Evaluación individual</strong>Modelado entidad–relación</div>
-  </aside>
+<a class="skip" href="#main">Ir al contenido</a>
 
-  <main>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  
     <section class="ev-hero pad">
-      <div class="crumb"><a href="../index.html#evidencias">Evidencias</a> / Modelado E-R</div>
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Modelado E-R</div>
       <h1>Quiz: modelo E-R de una veterinaria</h1>
       <div class="meta"><span class="tag solid">Quiz individual</span><span class="tag">Notación Chen</span><span class="tag">Nota: 1,5</span></div>
     </section>
 
-    <section id="contexto" class="pad prose">
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a>
+      <a href="#contexto">A · Contexto</a>
+      <a href="#respuesta">B · Mi respuesta</a>
+      <a href="#revisado">C · Modelo revisado</a>
+      <a href="#reflexion">D · Reflexión</a>
+      <span class="meta">Evaluación individual · Modelado entidad–relación</span>
+    </div>
+  </nav>
+
+  <section id="contexto" class="pad prose">
       <div class="sec-head"><span class="num">A</span><h2>Enunciado y contexto</h2></div>
       <p>El quiz presentaba el modelo E-R de una veterinaria con tres entidades: <strong>DUEÑO</strong>, <strong>MASCOTA</strong> y <strong>VETERINARIO</strong>. Un dueño tiene mascotas y los veterinarios atienden mascotas. La tarea era encontrar los errores de modelado, explicarlos y dibujar el modelo corregido a mano, en el tiempo de la clase.</p>
       <div class="box soft"><div class="box-title">Supuestos</div>
@@ -76,6 +100,27 @@
 
     <nav class="pager pad"><a href="modelado-er.html">← Modelos E-R de clase</a><a href="reduccion-tablas.html">Reducción a tablas →</a></nav>
   </main>
-</div>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
