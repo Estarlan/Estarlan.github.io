@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Práctica SQL sobre HR — 4 ejercicios</title>
+  <meta name="description" content="Práctica de SQL sobre el esquema HR de Oracle con cuatro ejercicios de dificultad creciente.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <link rel="stylesheet" href="../css/fichas.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / SQL</div>
+      <h1>Práctica SQL sobre HR — 4 ejercicios</h1>
+      <div class="meta"><span class="tag solid">Práctica</span><span class="tag">SQL · Oracle</span><span class="tag">Esquema HR</span><span class="tag">Bases de Datos 1</span></div>
+    </section>
+
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a><a href="#archivos">A · Archivos</a><a href="#intro">1 · De qué se trata</a>
+    </div>
+  </nav>
+
+  <section id="archivos" class="pad prose"><div class="sec-head"><span class="num">A</span><h2>Archivos de la entrega</h2></div><p class="doc-actions"><a class="btn ghost" href="../archivos/practica-sql-hr/practica_hr.sql" target="_blank" rel="noopener">Los cuatro ejercicios (SQL) <span class="arw">↗</span></a></p></section>
+<section id="intro" class="pad prose"><div class="sec-head"><span class="num">1</span><h2>De qué se trata</h2></div>
+<p>Quise practicar un poco más con el esquema HR de Oracle, así que me inventé cuatro ejercicios de menos a más difícil: un filtro, una agrupación, un JOIN de tres tablas y una subconsulta correlacionada. Son prácticas mías, no un taller del curso.</p>
+<p>Las consultas están escritas para Oracle y solo leen HR. Para mostrar resultados acá las probé con una muestra de 20 empleados con la misma estructura de HR pero con datos inventados, así que si las corres en el HR de verdad los números van a ser otros (la idea es que las corras y compares).</p>
+<h3 id="e1">Ejercicio 1 — Empleados bien pagados del departamento 50</h3>
+<p><strong>Pide:</strong> Los empleados del departamento 50 que ganan más de 3000, del que más gana al que menos.</p>
+<p>Es lo más básico: un WHERE con dos condiciones unidas por AND y un ORDER BY ... DESC para ordenar de mayor a menor. Lo único para fijarse es que el &quot;mayor que 3000&quot; deja afuera a quien gana justo 3000.</p>
+<pre class="schema">SELECT first_name, last_name, salary
+FROM   employees
+WHERE  department_id = 50
+  AND  salary &gt; 3000
+ORDER  BY salary DESC;</pre>
+<h4>Resultado en la muestra (5 filas)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>first_name</th><th>last_name</th><th>salary</th></tr></thead><tbody><tr><td>Irene</td><td>Soto</td><td>8200</td></tr><tr><td>Hugo</td><td>Ibarra</td><td>8000</td></tr><tr><td>Marina</td><td>Gil</td><td>3600</td></tr><tr><td>Karen</td><td>Lara</td><td>3300</td></tr><tr><td>Jorge</td><td>Pinto</td><td>3200</td></tr></tbody></table></div>
+<h3 id="e2">Ejercicio 2 — Departamentos grandes</h3>
+<p><strong>Pide:</strong> Cuántos empleados tiene cada departamento y cuánto ganan en promedio, solo para los que tienen más de 3 empleados.</p>
+<p>Aquí toca agrupar con GROUP BY y contar con COUNT(*). Como la condición es sobre el resultado del conteo no puede ir en el WHERE, tiene que ir en HAVING. También quité a los empleados sin departamento (los que tienen department_id nulo) porque formarían un grupo raro.</p>
+<pre class="schema">SELECT department_id,
+       COUNT(*)              AS empleados,
+       ROUND(AVG(salary), 2) AS salario_promedio
+FROM   employees
+WHERE  department_id IS NOT NULL
+GROUP  BY department_id
+HAVING COUNT(*) &gt; 3
+ORDER  BY department_id;</pre>
+<h4>Resultado en la muestra (3 filas)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>department_id</th><th>empleados</th><th>salario_promedio</th></tr></thead><tbody><tr><td>50</td><td>6</td><td>4850.0</td></tr><tr><td>60</td><td>4</td><td>6000.0</td></tr><tr><td>80</td><td>4</td><td>11625.0</td></tr></tbody></table></div>
+<h3 id="e3">Ejercicio 3 — Quién trabaja dónde</h3>
+<p><strong>Pide:</strong> Nombre completo, departamento y ciudad de los empleados contratados desde el 1 de enero de 2006.</p>
+<p>Sale de juntar tres tablas: EMPLOYEES con DEPARTMENTS por department_id y DEPARTMENTS con LOCATIONS por location_id. El nombre completo lo armo con el operador || de Oracle, y la fecha la escribo con TO_DATE para que no dependa del formato de cada computador.</p>
+<pre class="schema">SELECT e.first_name || &#x27; &#x27; || e.last_name AS empleado,
+       d.department_name                  AS departamento,
+       l.city                             AS ciudad
+FROM   employees   e
+JOIN   departments d ON d.department_id = e.department_id
+JOIN   locations   l ON l.location_id   = d.location_id
+WHERE  e.hire_date &gt;= TO_DATE(&#x27;2006-01-01&#x27;, &#x27;YYYY-MM-DD&#x27;)
+ORDER  BY e.hire_date;</pre>
+<h4>Resultado en la muestra (7 filas)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>empleado</th><th>departamento</th><th>ciudad</th></tr></thead><tbody><tr><td>Diego Ponce</td><td>IT</td><td>Southlake</td></tr><tr><td>Gina Lopez</td><td>IT</td><td>Southlake</td></tr><tr><td>Rosa Luna</td><td>Sales</td><td>Oxford</td></tr><tr><td>Jorge Pinto</td><td>Shipping</td><td>South San Francisco</td></tr><tr><td>Elisa Cruz</td><td>IT</td><td>Southlake</td></tr><tr><td>Karen Lara</td><td>Shipping</td><td>South San Francisco</td></tr><tr><td>Luis Mora</td><td>Shipping</td><td>South San Francisco</td></tr></tbody></table></div>
+<h3 id="e4">Ejercicio 4 — Los que ganan más que su departamento</h3>
+<p><strong>Pide:</strong> Los empleados que ganan más que el promedio de su propio departamento.</p>
+<p>Esta es la más complicada de las cuatro. Uso una subconsulta correlacionada: para cada empleado (e) calculo el promedio de los empleados de su mismo departamento (x) y lo comparo con su salario. Es &quot;correlacionada&quot; porque la subconsulta depende de la fila que se está revisando afuera.</p>
+<pre class="schema">SELECT e.first_name, e.last_name, e.department_id, e.salary
+FROM   employees e
+WHERE  e.salary &gt; (SELECT AVG(x.salary)
+                   FROM   employees x
+                   WHERE  x.department_id = e.department_id)
+ORDER  BY e.department_id, e.salary DESC;</pre>
+<h4>Resultado en la muestra (8 filas)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>first_name</th><th>last_name</th><th>department_id</th><th>salary</th></tr></thead><tbody><tr><td>Tomas</td><td>Rueda</td><td>20</td><td>13000</td></tr><tr><td>Irene</td><td>Soto</td><td>50</td><td>8200</td></tr><tr><td>Hugo</td><td>Ibarra</td><td>50</td><td>8000</td></tr><tr><td>Diego</td><td>Ponce</td><td>60</td><td>9000</td></tr><tr><td>Nelson</td><td>Rey</td><td>80</td><td>14000</td></tr><tr><td>Olga</td><td>Paz</td><td>80</td><td>13500</td></tr><tr><td>Pablo</td><td>Tapia</td><td>80</td><td>12000</td></tr><tr><td>Ana</td><td>Rivera</td><td>90</td><td>24000</td></tr></tbody></table></div>
+<p class="ev-credit">Práctica elaborada por mí; no es un taller del curso.</p></section>
+
+    <nav class="pager pad"><a href="normalizacion-repaso.html">← Ejercicio de repaso de normalización</a><a href="../proyecto.html">SIGEVET →</a></nav>
+  </main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

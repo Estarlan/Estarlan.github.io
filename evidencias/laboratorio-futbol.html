@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratorio — Fútbol: LIGA, EQUIPO y JUGADOR</title>
+  <meta name="description" content="Laboratorio de álgebra relacional: tablas LIGA, EQUIPO y JUGADOR en Oracle SQL Developer y tres expresiones con su equivalente en SQL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <link rel="stylesheet" href="../css/fichas.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Álgebra relacional / Laboratorio</div>
+      <h1>Laboratorio — Fútbol: LIGA, EQUIPO y JUGADOR</h1>
+      <div class="meta"><span class="tag solid">Laboratorio</span><span class="tag">Oracle SQL Developer</span><span class="tag">Álgebra relacional</span><span class="tag">Bases de Datos 1</span></div>
+    </section>
+
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a><a href="#archivos">A · Archivos</a><a href="#enunciado">1 · Enunciado</a><a href="#modelo">2 · Modelo relacional</a><a href="#script">3 · Script de creación de …</a><a href="#algebra">4 · Tres expresiones de ál…</a><a href="#notas">5 · Notas</a>
+    </div>
+  </nav>
+
+  <section id="archivos" class="pad prose"><div class="sec-head"><span class="num">A</span><h2>Archivos de la entrega</h2></div><p class="doc-actions"><a class="btn ghost" href="../archivos/laboratorio-futbol/laboratorio_futbol.sql" target="_blank" rel="noopener">Script SQL completo (Oracle) <span class="arw">↗</span></a></p></section>
+<section id="enunciado" class="pad prose"><div class="sec-head"><span class="num">1</span><h2>Enunciado</h2></div>
+<p>El profe dejó un ejercicio de laboratorio: en Oracle SQL Developer había que escribir tres tablas con temática de fútbol (<strong>jugador</strong>, <strong>liga</strong> y <strong>equipo</strong>), con sus atributos y relacionadas entre sí, y después plantear tres expresiones de álgebra relacional sobre ellas.</p>
+<p>En clase no alcanzamos a hacerlo, así que lo resolví después y lo agregué acá como práctica complementaria.</p>
+</section>
+<section id="modelo" class="pad prose"><div class="sec-head"><span class="num">2</span><h2>Modelo relacional</h2></div>
+<p>La idea es simple: una liga tiene muchos equipos y un equipo tiene muchos jugadores. Las dos son relaciones uno a muchos y las resolví con llaves foráneas: <code>equipo.id_liga</code> apunta a <code>liga</code> y <code>jugador.id_equipo</code> apunta a <code>equipo</code>.</p>
+<svg class="erd" viewBox="0 0 1040 308" role="img" aria-labelledby="erd-t erd-d"><title id="erd-t">Modelo relacional del laboratorio de fútbol</title><desc id="erd-d">Una LIGA tiene muchos EQUIPOS y un EQUIPO inscribe muchos JUGADORES; las llaves foráneas id_liga e id_equipo implementan las relaciones uno a muchos.</desc><rect class="box" x="20" y="24" width="270" height="140"/><rect class="head" x="20" y="24" width="270" height="34"/><text class="head-t" x="34" y="47">LIGA</text><text class="attr pk" x="34" y="80">PK id_liga</text><text class="attr" x="276" y="80" text-anchor="end" style="fill:#605d5d">NUMBER(3)</text><text class="attr attr" x="34" y="104">nombre</text><text class="attr" x="276" y="104" text-anchor="end" style="fill:#605d5d">VARCHAR2(60)</text><text class="attr attr" x="34" y="128">pais</text><text class="attr" x="276" y="128" text-anchor="end" style="fill:#605d5d">VARCHAR2(40)</text><text class="attr attr" x="34" y="152">anio_fundacion</text><text class="attr" x="276" y="152" text-anchor="end" style="fill:#605d5d">NUMBER(4)</text><rect class="box" x="385" y="24" width="270" height="188"/><rect class="head" x="385" y="24" width="270" height="34"/><text class="head-t" x="399" y="47">EQUIPO</text><text class="attr pk" x="399" y="80">PK id_equipo</text><text class="attr" x="641" y="80" text-anchor="end" style="fill:#605d5d">NUMBER(4)</text><text class="attr attr" x="399" y="104">nombre</text><text class="attr" x="641" y="104" text-anchor="end" style="fill:#605d5d">VARCHAR2(60)</text><text class="attr attr" x="399" y="128">ciudad</text><text class="attr" x="641" y="128" text-anchor="end" style="fill:#605d5d">VARCHAR2(40)</text><text class="attr attr" x="399" y="152">estadio</text><text class="attr" x="641" y="152" text-anchor="end" style="fill:#605d5d">VARCHAR2(60)</text><text class="attr attr" x="399" y="176">anio_fundacion</text><text class="attr" x="641" y="176" text-anchor="end" style="fill:#605d5d">NUMBER(4)</text><text class="attr fk" x="399" y="200">FK id_liga</text><text class="attr" x="641" y="200" text-anchor="end" style="fill:#605d5d">NUMBER(3)</text><rect class="box" x="750" y="24" width="270" height="260"/><rect class="head" x="750" y="24" width="270" height="34"/><text class="head-t" x="764" y="47">JUGADOR</text><text class="attr pk" x="764" y="80">PK id_jugador</text><text class="attr" x="1006" y="80" text-anchor="end" style="fill:#605d5d">NUMBER(6)</text><text class="attr attr" x="764" y="104">nombre</text><text class="attr" x="1006" y="104" text-anchor="end" style="fill:#605d5d">VARCHAR2(50)</text><text class="attr attr" x="764" y="128">apellido</text><text class="attr" x="1006" y="128" text-anchor="end" style="fill:#605d5d">VARCHAR2(50)</text><text class="attr attr" x="764" y="152">fecha_nacimiento</text><text class="attr" x="1006" y="152" text-anchor="end" style="fill:#605d5d">DATE</text><text class="attr attr" x="764" y="176">nacionalidad</text><text class="attr" x="1006" y="176" text-anchor="end" style="fill:#605d5d">VARCHAR2(40)</text><text class="attr attr" x="764" y="200">posicion</text><text class="attr" x="1006" y="200" text-anchor="end" style="fill:#605d5d">VARCHAR2(15)</text><text class="attr attr" x="764" y="224">dorsal</text><text class="attr" x="1006" y="224" text-anchor="end" style="fill:#605d5d">NUMBER(2)</text><text class="attr attr" x="764" y="248">goles</text><text class="attr" x="1006" y="248" text-anchor="end" style="fill:#605d5d">NUMBER(4)</text><text class="attr fk" x="764" y="272">FK id_equipo</text><text class="attr" x="1006" y="272" text-anchor="end" style="fill:#605d5d">NUMBER(4)</text><path class="rel" d="M290 76 H337 V196 H385"/><text class="card" x="296" y="69">1</text><text class="card" x="369" y="189">N</text><text class="rel-lbl" x="337" y="67" text-anchor="middle">tiene</text><path class="rel" d="M655 76 H702 V268 H750"/><text class="card" x="661" y="69">1</text><text class="card" x="734" y="261">N</text><text class="rel-lbl" x="702" y="67" text-anchor="middle">tiene</text></svg>
+<p style="margin-top:18px">A cada tabla le puse llave primaria, <code>NOT NULL</code> en lo obligatorio, <code>UNIQUE</code> donde tenía sentido (el nombre de la liga, el nombre del equipo y el dorsal dentro de un equipo) y algunos <code>CHECK</code>: que la posición sea una de las válidas, que el dorsal esté entre 1 y 99 y que los goles no sean negativos.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Tabla</th><th>Atributos</th></tr></thead><tbody><tr><td>LIGA</td><td>id_liga (PK), nombre (único), pais, anio_fundacion</td></tr><tr><td>EQUIPO</td><td>id_equipo (PK), nombre (único), ciudad, estadio, anio_fundacion, id_liga (FK → LIGA)</td></tr><tr><td>JUGADOR</td><td>id_jugador (PK), nombre, apellido, fecha_nacimiento, nacionalidad, posicion, dorsal, goles, id_equipo (FK → EQUIPO)</td></tr></tbody></table></div>
+</section>
+<section id="script" class="pad prose"><div class="sec-head"><span class="num">3</span><h2>Script de creación de tablas</h2></div>
+<p>Este es el script para Oracle SQL Developer. El archivo completo, con los datos de ejemplo y las tres consultas, se puede descargar arriba.</p>
+<pre class="schema">CREATE TABLE liga (
+    id_liga          NUMBER(3)      NOT NULL,
+    nombre           VARCHAR2(60)   NOT NULL,
+    pais             VARCHAR2(40)   NOT NULL,
+    anio_fundacion   NUMBER(4)      NOT NULL,
+    CONSTRAINT pk_liga        PRIMARY KEY (id_liga),
+    CONSTRAINT uq_liga_nombre UNIQUE (nombre),
+    CONSTRAINT ck_liga_anio   CHECK (anio_fundacion BETWEEN 1850 AND 2100)
+);
+
+CREATE TABLE equipo (
+    id_equipo        NUMBER(4)      NOT NULL,
+    nombre           VARCHAR2(60)   NOT NULL,
+    ciudad           VARCHAR2(40)   NOT NULL,
+    estadio          VARCHAR2(60),
+    anio_fundacion   NUMBER(4)      NOT NULL,
+    id_liga          NUMBER(3)      NOT NULL,
+    CONSTRAINT pk_equipo      PRIMARY KEY (id_equipo),
+    CONSTRAINT uq_equipo_nom  UNIQUE (nombre),
+    CONSTRAINT fk_equipo_liga FOREIGN KEY (id_liga) REFERENCES liga (id_liga),
+    CONSTRAINT ck_equipo_anio CHECK (anio_fundacion BETWEEN 1850 AND 2100)
+);
+
+CREATE TABLE jugador (
+    id_jugador        NUMBER(6)      NOT NULL,
+    nombre            VARCHAR2(50)   NOT NULL,
+    apellido          VARCHAR2(50)   NOT NULL,
+    fecha_nacimiento  DATE           NOT NULL,
+    nacionalidad      VARCHAR2(40)   NOT NULL,
+    posicion          VARCHAR2(15)   NOT NULL,
+    dorsal            NUMBER(2)      NOT NULL,
+    goles             NUMBER(4)      DEFAULT 0 NOT NULL,
+    id_equipo         NUMBER(4)      NOT NULL,
+    CONSTRAINT pk_jugador        PRIMARY KEY (id_jugador),
+    CONSTRAINT fk_jugador_equipo FOREIGN KEY (id_equipo) REFERENCES equipo (id_equipo),
+    CONSTRAINT uq_jugador_dorsal UNIQUE (id_equipo, dorsal),
+    CONSTRAINT ck_jugador_pos    CHECK (posicion IN (&#x27;Portero&#x27;,&#x27;Defensa&#x27;,&#x27;Mediocampista&#x27;,&#x27;Delantero&#x27;)),
+    CONSTRAINT ck_jugador_dorsal CHECK (dorsal BETWEEN 1 AND 99),
+    CONSTRAINT ck_jugador_goles  CHECK (goles &gt;= 0)
+);</pre>
+<details><summary>Datos de ejemplo (3 ligas, 7 equipos, 14 jugadores ficticios)</summary>
+<pre class="schema">INSERT INTO liga VALUES (1, &#x27;Liga BetPlay&#x27;,    &#x27;Colombia&#x27;,   1948);
+INSERT INTO liga VALUES (2, &#x27;LaLiga&#x27;,          &#x27;España&#x27;,     1929);
+INSERT INTO liga VALUES (3, &#x27;Premier League&#x27;,  &#x27;Inglaterra&#x27;, 1992);
+
+INSERT INTO equipo VALUES (1, &#x27;Atlético Nacional&#x27;,  &#x27;Medellín&#x27;,  &#x27;Atanasio Girardot&#x27;,  1947, 1);
+INSERT INTO equipo VALUES (2, &#x27;Millonarios FC&#x27;,     &#x27;Bogotá&#x27;,    &#x27;El Campín&#x27;,          1946, 1);
+INSERT INTO equipo VALUES (3, &#x27;Junior de Barranquilla&#x27;, &#x27;Barranquilla&#x27;, &#x27;Metropolitano Roberto Meléndez&#x27;, 1924, 1);
+INSERT INTO equipo VALUES (4, &#x27;Real Madrid CF&#x27;,     &#x27;Madrid&#x27;,    &#x27;Santiago Bernabéu&#x27;,  1902, 2);
+INSERT INTO equipo VALUES (5, &#x27;FC Barcelona&#x27;,       &#x27;Barcelona&#x27;, &#x27;Spotify Camp Nou&#x27;,   1899, 2);
+INSERT INTO equipo VALUES (6, &#x27;Liverpool FC&#x27;,       &#x27;Liverpool&#x27;, &#x27;Anfield&#x27;,            1892, 3);
+INSERT INTO equipo VALUES (7, &#x27;Deportivo Nuevo FC&#x27;, &#x27;Bogotá&#x27;,    NULL,                 2026, 1);  -- recién inscrito, sin plantilla
+
+INSERT INTO jugador VALUES (1,  &#x27;Andrés&#x27;,   &#x27;Moreno&#x27;,    TO_DATE(&#x27;1998-03-14&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Delantero&#x27;,     9,  14, 1);
+INSERT INTO jugador VALUES (2,  &#x27;Felipe&#x27;,   &#x27;Rojas&#x27;,     TO_DATE(&#x27;2001-07-02&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Mediocampista&#x27;, 8,   5, 1);
+INSERT INTO jugador VALUES (3,  &#x27;Camilo&#x27;,   &#x27;Vargas&#x27;,    TO_DATE(&#x27;1995-11-20&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Portero&#x27;,       1,   0, 1);
+INSERT INTO jugador VALUES (4,  &#x27;Daniel&#x27;,   &#x27;Quintero&#x27;,  TO_DATE(&#x27;1999-01-30&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Delantero&#x27;,    11,  11, 2);
+INSERT INTO jugador VALUES (5,  &#x27;Sebastián&#x27;,&#x27;Peña&#x27;,      TO_DATE(&#x27;1997-09-09&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Argentina&#x27;, &#x27;Delantero&#x27;,     7,  17, 2);
+INSERT INTO jugador VALUES (6,  &#x27;Mateo&#x27;,    &#x27;Ríos&#x27;,      TO_DATE(&#x27;2000-05-25&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Defensa&#x27;,       4,   2, 2);
+INSERT INTO jugador VALUES (7,  &#x27;Jhon&#x27;,     &#x27;Caicedo&#x27;,   TO_DATE(&#x27;1996-12-12&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Delantero&#x27;,     9,   8, 3);
+INSERT INTO jugador VALUES (8,  &#x27;Luis&#x27;,     &#x27;Barrios&#x27;,   TO_DATE(&#x27;1994-04-18&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Mediocampista&#x27;, 10,  6, 3);
+INSERT INTO jugador VALUES (9,  &#x27;Carlos&#x27;,   &#x27;Medina&#x27;,    TO_DATE(&#x27;1993-08-03&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;España&#x27;,    &#x27;Defensa&#x27;,       2,   1, 4);
+INSERT INTO jugador VALUES (10, &#x27;Iván&#x27;,     &#x27;Duarte&#x27;,    TO_DATE(&#x27;2002-02-14&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Brasil&#x27;,    &#x27;Delantero&#x27;,    10,  19, 4);
+INSERT INTO jugador VALUES (11, &#x27;Pablo&#x27;,    &#x27;Serrano&#x27;,   TO_DATE(&#x27;1999-06-21&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;España&#x27;,    &#x27;Mediocampista&#x27;, 8,   7, 5);
+INSERT INTO jugador VALUES (12, &#x27;Marcos&#x27;,   &#x27;Lemos&#x27;,     TO_DATE(&#x27;1998-10-05&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Uruguay&#x27;,   &#x27;Delantero&#x27;,     9,  15, 5);
+INSERT INTO jugador VALUES (13, &#x27;Harry&#x27;,    &#x27;Collins&#x27;,   TO_DATE(&#x27;1996-03-29&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Inglaterra&#x27;,&#x27;Delantero&#x27;,    11,  21, 6);
+INSERT INTO jugador VALUES (14, &#x27;Tomás&#x27;,    &#x27;Villa&#x27;,     TO_DATE(&#x27;2003-01-17&#x27;,&#x27;YYYY-MM-DD&#x27;), &#x27;Colombia&#x27;,  &#x27;Portero&#x27;,       1,   0, 6);
+
+COMMIT;</pre></details>
+</section>
+<section id="algebra" class="pad prose"><div class="sec-head"><span class="num">4</span><h2>Tres expresiones de álgebra relacional</h2></div>
+<p>Cada expresión va en álgebra relacional, con su consulta equivalente en SQL y lo que devuelve con los datos de ejemplo. Los símbolos: σ es selección, π proyección, × producto cartesiano, ρ renombrar, ⋈ reunión y − diferencia.</p>
+<h3 id="expr-1">Expresión 1 — Selección y proyección</h3>
+<p><strong>Se pide:</strong> Nombre, apellido y goles de los delanteros colombianos con 10 o más goles.</p>
+<h4>Álgebra relacional</h4>
+<pre class="schema">π nombre, apellido, goles (
+    σ posicion = &#x27;Delantero&#x27; ∧ nacionalidad = &#x27;Colombia&#x27; ∧ goles ≥ 10 ( JUGADOR )
+)</pre>
+<p>Solo se usa una tabla: la selección se queda con las filas que cumplen las tres condiciones y la proyección deja nada más las tres columnas que piden.</p>
+<h4>Equivalente en SQL (Oracle)</h4>
+<pre class="schema">SELECT nombre, apellido, goles
+FROM   jugador
+WHERE  posicion = &#x27;Delantero&#x27;
+  AND  nacionalidad = &#x27;Colombia&#x27;
+  AND  goles &gt;= 10;</pre>
+<h4>Resultado con los datos de ejemplo (2 filas)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>nombre</th><th>apellido</th><th>goles</th></tr></thead><tbody><tr><td>Andrés</td><td>Moreno</td><td>14</td></tr><tr><td>Daniel</td><td>Quintero</td><td>11</td></tr></tbody></table></div>
+<h3 id="expr-2">Expresión 2 — Reunión de las tres tablas</h3>
+<p><strong>Se pide:</strong> Apellido del jugador, nombre de su equipo y nombre de la liga, solo para la Liga BetPlay.</p>
+<h4>Álgebra relacional</h4>
+<pre class="schema">π J.apellido, E.nombre, L.nombre (
+    σ J.id_equipo = E.id_equipo ∧ E.id_liga = L.id_liga ∧ L.nombre = &#x27;Liga BetPlay&#x27;
+      ( ρJ(JUGADOR) × ρE(EQUIPO) × ρL(LIGA) )
+)</pre>
+<p>Está en la notación de clase: producto cartesiano más selección. Las igualdades de llave dentro de la selección hacen el trabajo de la reunión (⋈); da lo mismo que JUGADOR ⋈ EQUIPO ⋈ LIGA con la liga filtrada.</p>
+<h4>Equivalente en SQL (Oracle)</h4>
+<pre class="schema">SELECT j.apellido, e.nombre AS equipo, l.nombre AS liga
+FROM   jugador j, equipo e, liga l
+WHERE  j.id_equipo = e.id_equipo
+  AND  e.id_liga   = l.id_liga
+  AND  l.nombre    = &#x27;Liga BetPlay&#x27;;</pre>
+<h4>Resultado con los datos de ejemplo (8 filas)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>apellido</th><th>equipo</th><th>liga</th></tr></thead><tbody><tr><td>Moreno</td><td>Atlético Nacional</td><td>Liga BetPlay</td></tr><tr><td>Rojas</td><td>Atlético Nacional</td><td>Liga BetPlay</td></tr><tr><td>Vargas</td><td>Atlético Nacional</td><td>Liga BetPlay</td></tr><tr><td>Quintero</td><td>Millonarios FC</td><td>Liga BetPlay</td></tr><tr><td>Peña</td><td>Millonarios FC</td><td>Liga BetPlay</td></tr><tr><td>Ríos</td><td>Millonarios FC</td><td>Liga BetPlay</td></tr><tr><td>Caicedo</td><td>Junior de Barranquilla</td><td>Liga BetPlay</td></tr><tr><td>Barrios</td><td>Junior de Barranquilla</td><td>Liga BetPlay</td></tr></tbody></table></div>
+<h3 id="expr-3">Expresión 3 — Diferencia de conjuntos</h3>
+<p><strong>Se pide:</strong> Equipos que no tienen ningún jugador registrado.</p>
+<h4>Álgebra relacional</h4>
+<pre class="schema">π nombre, ciudad (
+    EQUIPO ⋈ ( π id_equipo (EQUIPO)  −  π id_equipo (JUGADOR) )
+)</pre>
+<p>La resta deja los id_equipo que están en EQUIPO pero no aparecen nunca en JUGADOR, y la reunión me trae el nombre y la ciudad de esos equipos. En Oracle la resta se escribe MINUS.</p>
+<h4>Equivalente en SQL (Oracle)</h4>
+<pre class="schema">SELECT nombre, ciudad
+FROM   equipo
+WHERE  id_equipo IN (SELECT id_equipo FROM equipo
+                     MINUS
+                     SELECT id_equipo FROM jugador);</pre>
+<h4>Resultado con los datos de ejemplo (1 fila)</h4>
+<div class="tbl-wrap"><table><thead><tr><th>nombre</th><th>ciudad</th></tr></thead><tbody><tr><td>Deportivo Nuevo FC</td><td>Bogotá</td></tr></tbody></table></div>
+
+</section>
+<section id="notas" class="pad prose"><div class="sec-head"><span class="num">5</span><h2>Notas</h2></div>
+<ul>
+<li>Los jugadores son inventados; las ligas y los equipos sí son reales, solo para darle contexto al ejemplo.</li>
+<li>El equipo «Deportivo Nuevo FC» no tiene jugadores a propósito: es justo el que devuelve la expresión 3.</li>
+<li>El script está escrito con sintaxis de Oracle (<code>NUMBER</code>, <code>VARCHAR2</code>, <code>TO_DATE</code>, <code>MINUS</code>).</li>
+</ul><p class="ev-credit">Entrega elaborada por mí en el curso Bases de Datos 1.</p></section>
+
+    <nav class="pager pad"><a href="algebra-clase-9.html">← Clase 9 — Álgebra relacional</a><a href="normalizacion-repaso.html">Ejercicio de repaso de normalización →</a></nav>
+  </main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

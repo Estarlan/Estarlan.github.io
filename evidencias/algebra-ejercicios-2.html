@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicios de álgebra relacional (2)</title>
+  <meta name="description" content="Ejercicios de álgebra relacional (2): once consultas resueltas con selección, proyección, reunión, diferencia, intersección y división.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <link rel="stylesheet" href="../css/fichas.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Álgebra relacional</div>
+      <h1>Ejercicios de álgebra relacional (2)</h1>
+      <div class="meta"><span class="tag solid">Taller</span><span class="tag">Álgebra relacional</span><span class="tag">División</span><span class="tag">Bases de Datos 1</span></div>
+    </section>
+
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a><a href="#archivos">A · Archivos</a><a href="#intro">1 · Cómo lo hice</a><a href="#modelo">2 · El modelo</a><a href="#consultas">3 · Las once consultas</a>
+    </div>
+  </nav>
+
+  <section id="archivos" class="pad prose"><div class="sec-head"><span class="num">A</span><h2>Archivos de la entrega</h2></div><p class="doc-actions"><a class="btn ghost" href="../archivos/ejercicios-algebra-2/ejercicios2_datos_y_sql.sql" target="_blank" rel="noopener">Datos de prueba y SQL equivalente <span class="arw">↗</span></a></p></section>
+<section id="intro" class="pad prose"><div class="sec-head"><span class="num">1</span><h2>Cómo lo hice</h2></div>
+<p>Otras once consultas de álgebra relacional, esta vez con clientes, productos y ventas. Igual que con la guía 1, me armé una base de prueba chiquita con casos raros a propósito (un producto que suma exactamente 500 unidades, otro que pasa de 500 sumando ventas pequeñas, un código igual a su descripción, un cliente sin compras) y comprobé cada respuesta de dos formas: con un evaluador de álgebra y escribiéndola en SQL. Las once coinciden.</p>
+<p>En el enunciado los nombres traen espacios y tildes, así que para escribirlos más fácil los cambié así:</p>
+<div class="tbl-wrap"><table><thead><tr><th>En el enunciado</th><th>En esta página</th></tr></thead><tbody><tr><td>Nº Cliente</td><td>NumCliente</td></tr><tr><td>Cod Producto</td><td>CodProducto</td></tr><tr><td>Id Venta</td><td>IdVenta</td></tr><tr><td>Nº Factura</td><td>NumFactura</td></tr><tr><td>Población</td><td>Poblacion</td></tr><tr><td>Descripción</td><td>Descripcion</td></tr></tbody></table></div>
+<p>Los símbolos son los de siempre: Π proyección, σ selección, × producto cartesiano, ⋈ reunión, − diferencia, ∩ intersección, ÷ división, ρ renombrar y ← para ponerle nombre a un paso. En el ejercicio 3 uso además γ, la agrupación con suma de la álgebra extendida.</p>
+</section>
+<section id="modelo" class="pad prose"><div class="sec-head"><span class="num">2</span><h2>El modelo</h2></div>
+<div class="tbl-wrap"><table><thead><tr><th>Relación</th><th>Atributos</th></tr></thead><tbody><tr><td>CLIENTES</td><td>NumCliente, Nombre, Dirección, Teléfono, Población</td></tr><tr><td>PRODUCTO</td><td>CodProducto, Descripción, Precio</td></tr><tr><td>VENTA</td><td>CodProducto, NumCliente, Cantidad, IdVenta</td></tr><tr><td>FACTURA (solo para los puntos 10 y 11)</td><td>NumFactura, Fecha, Pagada, NumCliente</td></tr></tbody></table></div>
+<p>Los puntos 10 y 11 usan una tabla de facturas, y las demás usan solo CLIENTES, PRODUCTO y VENTA.</p>
+<details><summary>Datos de prueba que usé</summary><h5>CLIENTES</h5><div class="tbl-wrap"><table><thead><tr><th>NumCliente</th><th>Nombre</th><th>Dirección</th><th>Teléfono</th><th>Población</th></tr></thead><tbody><tr><td>1</td><td>Lucía Pérez</td><td>Calle Mayor 3</td><td>979111111</td><td>Palencia</td></tr><tr><td>2</td><td>Mario Gómez</td><td>Plaza Nueva 5</td><td>979222222</td><td>Palencia</td></tr><tr><td>3</td><td>Nuria Sanz</td><td>Av. Madrid 10</td><td>983333333</td><td>Valladolid</td></tr><tr><td>4</td><td>Óscar Ruiz</td><td>Calle Sol 7</td><td>983444444</td><td>Valladolid</td></tr><tr><td>5</td><td>Paula Díaz</td><td>Calle Luna 2</td><td>987555555</td><td>León</td></tr><tr><td>6</td><td>Raúl Vega</td><td>Calle Río 9</td><td>923666666</td><td>Salamanca</td></tr></tbody></table></div><h5>PRODUCTO</h5><div class="tbl-wrap"><table><thead><tr><th>CodProducto</th><th>Descripción</th><th>Precio</th></tr></thead><tbody><tr><td>TORNILLO</td><td>TORNILLO</td><td>0.1</td></tr><tr><td>TUERCA</td><td>Tuerca M8</td><td>0.15</td></tr><tr><td>ARANDELA</td><td>Arandela</td><td>0.05</td></tr><tr><td>MARTILLO</td><td>Martillo 500g</td><td>9.5</td></tr><tr><td>SIERRA</td><td>Sierra manual</td><td>12</td></tr><tr><td>CLAVO</td><td>Clavo</td><td>0.02</td></tr></tbody></table></div><h5>VENTA</h5><div class="tbl-wrap"><table><thead><tr><th>CodProducto</th><th>NumCliente</th><th>Cantidad</th><th>IdVenta</th></tr></thead><tbody><tr><td>TORNILLO</td><td>1</td><td>600</td><td>11</td></tr><tr><td>TUERCA</td><td>1</td><td>20</td><td>12</td></tr><tr><td>MARTILLO</td><td>2</td><td>5</td><td>13</td></tr><tr><td>TORNILLO</td><td>3</td><td>500</td><td>14</td></tr><tr><td>TUERCA</td><td>3</td><td>250</td><td>15</td></tr><tr><td>ARANDELA</td><td>3</td><td>100</td><td>16</td></tr><tr><td>MARTILLO</td><td>3</td><td>2</td><td>17</td></tr><tr><td>ARANDELA</td><td>2</td><td>40</td><td>18</td></tr><tr><td>SIERRA</td><td>3</td><td>3</td><td>19</td></tr><tr><td>CLAVO</td><td>3</td><td>800</td><td>20</td></tr><tr><td>TORNILLO</td><td>4</td><td>10</td><td>21</td></tr><tr><td>TUERCA</td><td>5</td><td>230</td><td>22</td></tr><tr><td>ARANDELA</td><td>5</td><td>400</td><td>23</td></tr></tbody></table></div><h5>FACTURA</h5><div class="tbl-wrap"><table><thead><tr><th>NumFactura</th><th>Fecha</th><th>Pagada</th><th>NumCliente</th></tr></thead><tbody><tr><td>101</td><td>2026-03-01</td><td>1</td><td>1</td></tr><tr><td>102</td><td>2026-03-04</td><td>1</td><td>1</td></tr><tr><td>103</td><td>2026-03-06</td><td>0</td><td>2</td></tr><tr><td>104</td><td>2026-03-08</td><td>1</td><td>3</td></tr><tr><td>105</td><td>2026-03-10</td><td>0</td><td>3</td></tr><tr><td>106</td><td>2026-03-12</td><td>1</td><td>4</td></tr><tr><td>107</td><td>2026-03-15</td><td>1</td><td>5</td></tr></tbody></table></div></details>
+</section>
+<section id="consultas" class="pad prose"><div class="sec-head"><span class="num">3</span><h2>Las once consultas</h2></div>
+<h3 id="q1">1. Clientes de Palencia</h3>
+<p>Una selección por población y una proyección del nombre. Es la más simple de las once.</p>
+<pre class="schema">ΠNombre(σPoblacion=&#x27;Palencia&#x27;(CLIENTES))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Nombre</th></tr></thead><tbody><tr><td>Lucía Pérez</td></tr><tr><td>Mario Gómez</td></tr></tbody></table></div>
+<h3 id="q2">2. Productos con código igual a su descripción</h3>
+<p>Acá la selección compara dos atributos entre sí, no contra una constante. Solo cumple el tornillo. El clavo no entra aunque se parezca: el código es CLAVO y la descripción es &quot;Clavo&quot;, y con la mayúscula ya cambia.</p>
+<pre class="schema">ΠCodProducto,Descripcion(σCodProducto=Descripcion(PRODUCTO))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>CodProducto</th><th>Descripcion</th></tr></thead><tbody><tr><td>TORNILLO</td><td>TORNILLO</td></tr></tbody></table></div>
+<h3 id="q3">3. Ventas de los productos que pasan de 500 unidades</h3>
+<p>Aquí el &quot;más de 500 unidades&quot; es del producto en total, sumando todas sus ventas a lo largo del tiempo, no de una venta suelta. Para sumar necesito un operador de álgebra extendida, la agrupación (γ): agrupo VENTA por producto y sumo las cantidades. Me quedo con los productos que pasan de 500 y con eso saco todas sus ventas y el nombre de quien compró. Entran el tornillo (1110), el clavo (800) y la arandela, que llega a 540 sumando varias ventas pequeñas. La tuerca suma exactamente 500, así que no entra.</p>
+<pre class="schema">Totales ← γCodProducto; SUM(Cantidad)→Total(VENTA)
+Populares ← ΠCodProducto(σTotal&gt;500(Totales))
+ΠNombre,IdVenta,Cantidad(VENTA ⋈ Populares ⋈ CLIENTES)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Nombre</th><th>IdVenta</th><th>Cantidad</th></tr></thead><tbody><tr><td>Lucía Pérez</td><td>11</td><td>600</td></tr><tr><td>Mario Gómez</td><td>18</td><td>40</td></tr><tr><td>Nuria Sanz</td><td>14</td><td>500</td></tr><tr><td>Nuria Sanz</td><td>16</td><td>100</td></tr><tr><td>Nuria Sanz</td><td>20</td><td>800</td></tr><tr><td>Paula Díaz</td><td>23</td><td>400</td></tr><tr><td>Óscar Ruiz</td><td>21</td><td>10</td></tr></tbody></table></div>
+<h3 id="q4">4. Clientes que no han comprado nada</h3>
+<p>Resto: todos los clientes menos los que aparecen en VENTA. Lo que queda son los que nunca compraron, y con una reunión recupero el nombre.</p>
+<pre class="schema">SinVentas ← ΠNumCliente(CLIENTES) − ΠNumCliente(VENTA)
+ΠNombre(CLIENTES ⋈ SinVentas)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Nombre</th></tr></thead><tbody><tr><td>Raúl Vega</td></tr></tbody></table></div>
+<h3 id="q5">5. Clientes que compraron todos los productos</h3>
+<p>Es una división: las parejas cliente–producto que sí se vendieron entre la lista completa de productos. Solo Nuria compró los seis, y algunos los compró en ventas distintas, lo cual no importa.</p>
+<pre class="schema">Compras ← ΠNumCliente,CodProducto(VENTA)
+Todos ← Compras ÷ ΠCodProducto(PRODUCTO)
+ΠNombre(CLIENTES ⋈ Todos)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Nombre</th></tr></thead><tbody><tr><td>Nuria Sanz</td></tr></tbody></table></div>
+<h3 id="q6">6. Ventas que superan a la venta 18</h3>
+<p>Saco la cantidad de la venta 18 (como IdVenta es único, es una sola fila) y se la pego a cada venta con un producto cartesiano, para poder comparar. La venta 18 no sale porque no se supera a sí misma.</p>
+<pre class="schema">V18 ← ρCantidad→Cant18(ΠCantidad(σIdVenta=18(VENTA)))
+ΠIdVenta(σCantidad&gt;Cant18(VENTA × V18))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>IdVenta</th></tr></thead><tbody><tr><td>11</td></tr><tr><td>14</td></tr><tr><td>15</td></tr><tr><td>16</td></tr><tr><td>20</td></tr><tr><td>22</td></tr><tr><td>23</td></tr></tbody></table></div>
+<h3 id="q7">7. Productos que nunca se compraron en Palencia</h3>
+<p>Primero averiguo qué sí se compró en Palencia y se lo resto a todos los productos. Lo que sobra es lo que nunca se vendió ahí.</p>
+<pre class="schema">EnPalencia ← ΠCodProducto(VENTA ⋈ σPoblacion=&#x27;Palencia&#x27;(CLIENTES))
+ΠCodProducto,Descripcion(PRODUCTO ⋈ (ΠCodProducto(PRODUCTO) − EnPalencia))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>CodProducto</th><th>Descripcion</th></tr></thead><tbody><tr><td>CLAVO</td><td>Clavo</td></tr><tr><td>SIERRA</td><td>Sierra manual</td></tr></tbody></table></div>
+<h3 id="q8">8. Productos vendidos en Palencia y en Valladolid</h3>
+<p>Dos listas de productos, una por población, y me quedo con los que están en las dos usando intersección.</p>
+<pre class="schema">Pal ← ΠCodProducto(VENTA ⋈ σPoblacion=&#x27;Palencia&#x27;(CLIENTES))
+Vall ← ΠCodProducto(VENTA ⋈ σPoblacion=&#x27;Valladolid&#x27;(CLIENTES))
+ΠCodProducto,Descripcion(PRODUCTO ⋈ (Pal ∩ Vall))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>CodProducto</th><th>Descripcion</th></tr></thead><tbody><tr><td>ARANDELA</td><td>Arandela</td></tr><tr><td>MARTILLO</td><td>Martillo 500g</td></tr><tr><td>TORNILLO</td><td>TORNILLO</td></tr><tr><td>TUERCA</td><td>Tuerca M8</td></tr></tbody></table></div>
+<h3 id="q9">9. Poblaciones a las que se vendieron todos los productos</h3>
+<p>Misma idea de la división del ejercicio 5, pero ahora la pareja es población–producto. El resultado ya es la lista de poblaciones, así que no hace falta unir con nada más. Sale solo Valladolid.</p>
+<pre class="schema">Vendidos ← ΠPoblacion,CodProducto(VENTA ⋈ CLIENTES)
+Vendidos ÷ ΠCodProducto(PRODUCTO)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Poblacion</th></tr></thead><tbody><tr><td>Valladolid</td></tr></tbody></table></div>
+<h3 id="q10">10. Clientes con alguna factura sin pagar</h3>
+<p>Directo: las facturas con Pagada = 0 unidas con el cliente. Para este ejercicio y el siguiente solo hacen falta FACTURA y CLIENTES.</p>
+<pre class="schema">ΠNombre(CLIENTES ⋈ σPagada=0(FACTURA))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Nombre</th></tr></thead><tbody><tr><td>Mario Gómez</td></tr><tr><td>Nuria Sanz</td></tr></tbody></table></div>
+<h3 id="q11">11. Clientes que han pagado todas sus facturas</h3>
+<p>Resta otra vez: los que tienen facturas menos los que tienen alguna sin pagar. Dejé la condición de &quot;tener facturas&quot; a propósito, porque si no Raúl (que nunca compró) saldría como si hubiera pagado todo.</p>
+<pre class="schema">ConFactura ← ΠNumCliente(FACTURA)
+ConDeuda ← ΠNumCliente(σPagada=0(FACTURA))
+ΠNombre(CLIENTES ⋈ (ConFactura − ConDeuda))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>Nombre</th></tr></thead><tbody><tr><td>Lucía Pérez</td></tr><tr><td>Paula Díaz</td></tr><tr><td>Óscar Ruiz</td></tr></tbody></table></div>
+<p class="ev-credit">Entrega elaborada por mí en el curso Bases de Datos 1.</p></section>
+
+    <nav class="pager pad"><a href="algebra-guia-1.html">← Guía 1 de álgebra relacional</a><a href="algebra-clase-9.html">Clase 9 — Álgebra relacional →</a></nav>
+  </main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Evidencias — E-portafolio Bases de Datos 1</title>
-  <meta name="description" content="Evidencias del curso Bases de Datos 1: modelado entidad-relación, reducción a tablas, normalización, SQL y el proyecto SIGEVET.">
+  <meta name="description" content="Evidencias del curso Bases de Datos 1: modelado entidad-relación, reducción a tablas, normalización, álgebra relacional, SQL y el proyecto SIGEVET.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -40,21 +40,22 @@
 
   <section class="page-hero pad">
     <div class="crumb"><a href="index.html">Inicio</a> <i>/</i> Evidencias</div>
-    <h1 class="page-title">Evidencias <span class="red">07</span></h1>
+    <h1 class="page-title">Evidencias <span class="red">13</span></h1>
     <p class="page-lead">Cada entrada abre una página con el enunciado, los supuestos, el desarrollo, los modelos y los desafíos que encontramos. Están organizadas por el tipo de trabajo que se hizo.</p>
   </section>
 
   <section class="block tight">
     <div class="wrap">
       <div class="filters" role="group" aria-label="Filtrar evidencias">
-        <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Todas <span>07</span></button>
+        <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Todas <span>13</span></button>
         <button class="filter" type="button" data-filter="modelado" aria-pressed="false">Modelado E-R <span>02</span></button>
         <button class="filter" type="button" data-filter="reduccion" aria-pressed="false">Reducción a tablas <span>02</span></button>
-        <button class="filter" type="button" data-filter="normalizacion" aria-pressed="false">Normalización <span>01</span></button>
-        <button class="filter" type="button" data-filter="sql" aria-pressed="false">SQL <span>01</span></button>
+        <button class="filter" type="button" data-filter="normalizacion" aria-pressed="false">Normalización <span>02</span></button>
+        <button class="filter" type="button" data-filter="algebra" aria-pressed="false">Álgebra relacional <span>04</span></button>
+        <button class="filter" type="button" data-filter="sql" aria-pressed="false">SQL <span>02</span></button>
         <button class="filter" type="button" data-filter="proyecto" aria-pressed="false">Proyecto <span>01</span></button>
       </div>
-      <p class="mono" id="filterCount" aria-live="polite" style="margin:0 0 14px;">7 evidencias</p>
+      <p class="mono" id="filterCount" aria-live="polite" style="margin:0 0 14px;">13 evidencias</p>
 
       <div class="cards">
         <a class="ecard reveal" href="evidencias/modelado-er.html" data-cat="modelado">
@@ -87,14 +88,50 @@
           <p>Hospital, Pedidos y Empleados: dependencias funcionales, anomalías, 1FN a 3FN, BCNF y la decisión defendida con números.</p>
           <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
         </a>
+        <a class="ecard reveal" href="evidencias/normalizacion-repaso.html" data-cat="normalizacion">
+          <div class="ecard-top"><span class="n">06</span><span class="cat">Normalización</span></div>
+          <h3>Repaso de normalización</h3>
+          <p>Seis ejercicios de 1FN a BCNF, con diagramas de dependencias y una comprobación en SQL de que no se pierde información.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/algebra-guia-1.html" data-cat="algebra">
+          <div class="ecard-top"><span class="n">07</span><span class="cat">Álgebra relacional</span></div>
+          <h3>Guía 1 de álgebra relacional</h3>
+          <p>Once consultas sobre clientes, productos y facturas, con base de prueba y el resultado de cada una. Incluye divisiones, diferencias y una agrupación.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/algebra-ejercicios-2.html" data-cat="algebra">
+          <div class="ecard-top"><span class="n">08</span><span class="cat">Álgebra relacional</span></div>
+          <h3>Ejercicios de álgebra (2)</h3>
+          <p>Otras once consultas (clientes, productos y ventas), comprobadas tanto en álgebra relacional como en SQL.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/algebra-clase-9.html" data-cat="algebra">
+          <div class="ecard-top"><span class="n">09</span><span class="cat">Álgebra relacional</span></div>
+          <h3>Clase 9: EMPLEADOS y Banco</h3>
+          <p>Los siete ejercicios de repaso resueltos con producto cartesiano y selección, como se vio en clase.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
+        <a class="ecard reveal" href="evidencias/laboratorio-futbol.html" data-cat="algebra">
+          <div class="ecard-top"><span class="n">10</span><span class="cat">Álgebra relacional</span></div>
+          <h3>Laboratorio: fútbol</h3>
+          <p>Tres tablas (LIGA, EQUIPO y JUGADOR) para Oracle SQL Developer y tres expresiones de álgebra relacional con su SQL.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
         <a class="ecard reveal" href="proyecto.html#algebra" data-cat="sql">
-          <div class="ecard-top"><span class="n">06</span><span class="cat">SQL y álgebra relacional</span></div>
+          <div class="ecard-top"><span class="n">11</span><span class="cat">SQL y álgebra relacional</span></div>
           <h3>SQL y álgebra relacional</h3>
           <p>Los 55 ejercicios del proyecto: cada expresión de álgebra relacional con su consulta SQL y el resultado verificado en MySQL.</p>
           <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
         </a>
+        <a class="ecard reveal" href="evidencias/practica-sql-hr.html" data-cat="sql">
+          <div class="ecard-top"><span class="n">12</span><span class="cat">SQL</span></div>
+          <h3>Práctica SQL sobre HR</h3>
+          <p>Cuatro ejercicios míos sobre el esquema HR de Oracle: un filtro, una agrupación, un JOIN de tres tablas y una subconsulta.</p>
+          <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>
+        </a>
         <a class="ecard reveal" href="proyecto.html" data-cat="proyecto">
-          <div class="ecard-top"><span class="n">07</span><span class="cat">Proyecto</span></div>
+          <div class="ecard-top"><span class="n">13</span><span class="cat">Proyecto</span></div>
           <h3>SIGEVET</h3>
           <p>Base de datos de una red de clínicas veterinarias: modelo E-R en varias notaciones, modelo relacional en 3FN y base en MySQL 8.4 con 22 tablas, vistas, funciones y disparadores.</p>
           <div class="ecard-bot"><span class="state done">Publicado</span><span class="arw">→</span></div>

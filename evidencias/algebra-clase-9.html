@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 9 — Álgebra relacional</title>
+  <meta name="description" content="Clase 9 de álgebra relacional: siete ejercicios de repaso resueltos con producto cartesiano, selección y proyección.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <link rel="stylesheet" href="../css/fichas.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Álgebra relacional</div>
+      <h1>Clase 9 — Álgebra relacional</h1>
+      <div class="meta"><span class="tag solid">Clase</span><span class="tag">Álgebra relacional</span><span class="tag">Producto y selección</span><span class="tag">Bases de Datos 1</span></div>
+    </section>
+
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a><a href="#archivos">A · Archivos</a><a href="#intro">1 · De qué trata</a><a href="#esquemas">2 · Los esquemas</a><a href="#ejercicios">3 · Los siete ejercicios</a>
+    </div>
+  </nav>
+
+  <section id="archivos" class="pad prose"><div class="sec-head"><span class="num">A</span><h2>Archivos de la entrega</h2></div><p class="doc-actions"><a class="btn ghost" href="../archivos/clase-9-algebra/clase9_datos_y_sql.sql" target="_blank" rel="noopener">Datos de prueba y SQL equivalente <span class="arw">↗</span></a></p></section>
+<section id="intro" class="pad prose"><div class="sec-head"><span class="num">1</span><h2>De qué trata</h2></div>
+<p>En la clase 9 (unidad IV, operaciones sobre bases de datos relacionales) vimos los operadores del álgebra con dos bases de ejemplo, EMPLEADOS y Banco, y al final dejaron siete ejercicios de repaso: cuatro de empleados y tres del banco. Esta es mi resolución.</p>
+<p>Usé la notación de la clase: producto cartesiano más selección. La idea es siempre la misma: el producto junta todas las combinaciones posibles de filas de las dos tablas, la selección se queda solo con las que tienen sentido (igualando la llave de las dos tablas y poniendo la condición del enunciado) y la proyección escoge las columnas que piden. Cuando dos relaciones tienen un atributo con el mismo nombre (por ejemplo <code>ciudad</code> en empleado y en empresa) le pongo adelante el nombre de la relación, como en la clase: <code>empleado.ciudad</code>.</p>
+<p>Para cada ejercicio respondí las mismas tres preguntas que sugería la clase: qué atributos piden, qué relaciones necesito y qué condición se requiere. Y como en los otros ejercicios, comprobé cada expresión con datos inventados: la corrí con un evaluador de álgebra y también la escribí en SQL, y las siete coinciden.</p>
+</section>
+<section id="esquemas" class="pad prose"><div class="sec-head"><span class="num">2</span><h2>Los esquemas</h2></div>
+<div class="tbl-wrap"><table><thead><tr><th>Base de datos</th><th>Relaciones</th></tr></thead><tbody><tr><td>EMPLEADOS</td><td>empleado(nombre_empleado, calle, ciudad) · trabaja(nombre_empleado, nombre_empresa, sueldo) · empresa(nombre_empresa, ciudad) · jefe(nombre_empleado, nombre_jefe)</td></tr><tr><td>Banco</td><td>sucursal(nombre_sucursal, ciudad_sucursal, activos) · cuenta(número_cuenta, nombre_sucursal, saldo) · impositor(nombre_cliente, número_cuenta) · cliente(nombre_cliente, calle_cliente, ciudad_cliente) · préstamo(número_préstamo, nombre_sucursal, importe) · prestatario(nombre_cliente, número_préstamo)</td></tr></tbody></table></div>
+<details><summary>Datos de prueba que usé</summary><h4>EMPLEADOS</h4><h5>empleado</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_empleado</th><th>calle</th><th>ciudad</th></tr></thead><tbody><tr><td>Ana López</td><td>Calle 1</td><td>Xalapa</td></tr><tr><td>Beto Cruz</td><td>Calle 2</td><td>Veracruz</td></tr><tr><td>Carla Díaz</td><td>Calle 3</td><td>Xalapa</td></tr><tr><td>Dani Ríos</td><td>Calle 4</td><td>Xalapa</td></tr><tr><td>Eva Mora</td><td>Calle 5</td><td>Coatepec</td></tr><tr><td>Fer Gil</td><td>Calle 6</td><td>Veracruz</td></tr><tr><td>Gus Paz</td><td>Calle 7</td><td>Veracruz</td></tr><tr><td>Hugo Sosa</td><td>Calle 8</td><td>Coatepec</td></tr></tbody></table></div><h5>trabaja</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_empleado</th><th>nombre_empresa</th><th>sueldo</th></tr></thead><tbody><tr><td>Ana López</td><td>BANAMEX</td><td>12000</td></tr><tr><td>Beto Cruz</td><td>BANAMEX</td><td>9000</td></tr><tr><td>Carla Díaz</td><td>Soriana</td><td>15000</td></tr><tr><td>Dani Ríos</td><td>BANAMEX</td><td>10000</td></tr><tr><td>Eva Mora</td><td>Soriana</td><td>11000</td></tr><tr><td>Fer Gil</td><td>BANAMEX</td><td>20000</td></tr><tr><td>Gus Paz</td><td>Soriana</td><td>8000</td></tr><tr><td>Hugo Sosa</td><td>Soriana</td><td>9500</td></tr></tbody></table></div><h5>jefe</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_empleado</th><th>nombre_jefe</th></tr></thead><tbody><tr><td>Ana López</td><td>Fer Gil</td></tr><tr><td>Beto Cruz</td><td>Fer Gil</td></tr><tr><td>Carla Díaz</td><td>Gus Paz</td></tr><tr><td>Dani Ríos</td><td>Gus Paz</td></tr><tr><td>Eva Mora</td><td>Gus Paz</td></tr><tr><td>Hugo Sosa</td><td>Mia Vega</td></tr></tbody></table></div><h4>Banco</h4><h5>sucursal</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_sucursal</th><th>ciudad_sucursal</th><th>activos</th></tr></thead><tbody><tr><td>Centro</td><td>Madrid</td><td>9000000</td></tr><tr><td>Navacerrada</td><td>Navacerrada</td><td>1700000</td></tr><tr><td>Xalapa Sur</td><td>Xalapa</td><td>4000000</td></tr><tr><td>Veracruz</td><td>Veracruz</td><td>2100000</td></tr></tbody></table></div><h5>cuenta</h5><div class="tbl-wrap"><table><thead><tr><th>número_cuenta</th><th>nombre_sucursal</th><th>saldo</th></tr></thead><tbody><tr><td>C-101</td><td>Centro</td><td>500</td></tr><tr><td>C-102</td><td>Navacerrada</td><td>60000</td></tr><tr><td>C-103</td><td>Xalapa Sur</td><td>75000</td></tr><tr><td>C-104</td><td>Veracruz</td><td>45000</td></tr><tr><td>C-105</td><td>Centro</td><td>52000</td></tr></tbody></table></div><h5>impositor</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_cliente</th><th>número_cuenta</th></tr></thead><tbody><tr><td>Ana</td><td>C-101</td></tr><tr><td>Bruno</td><td>C-102</td></tr><tr><td>Carla</td><td>C-103</td></tr><tr><td>Diego</td><td>C-104</td></tr><tr><td>Elena</td><td>C-105</td></tr></tbody></table></div><h5>cliente</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_cliente</th><th>calle_cliente</th><th>ciudad_cliente</th></tr></thead><tbody><tr><td>Ana</td><td>Calle 1</td><td>Xalapa</td></tr><tr><td>Bruno</td><td>Calle 2</td><td>Veracruz</td></tr><tr><td>Carla</td><td>Calle 3</td><td>Xalapa</td></tr><tr><td>Diego</td><td>Calle 4</td><td>Madrid</td></tr><tr><td>Elena</td><td>Calle 5</td><td>Madrid</td></tr><tr><td>Fabio</td><td>Calle 6</td><td>Xalapa</td></tr></tbody></table></div><h5>préstamo</h5><div class="tbl-wrap"><table><thead><tr><th>número_préstamo</th><th>nombre_sucursal</th><th>importe</th></tr></thead><tbody><tr><td>L-11</td><td>Centro</td><td>900</td></tr><tr><td>L-12</td><td>Navacerrada</td><td>1500</td></tr><tr><td>L-13</td><td>Xalapa Sur</td><td>1000</td></tr><tr><td>L-14</td><td>Veracruz</td><td>2500</td></tr><tr><td>L-15</td><td>Centro</td><td>1200</td></tr></tbody></table></div><h5>prestatario</h5><div class="tbl-wrap"><table><thead><tr><th>nombre_cliente</th><th>número_préstamo</th></tr></thead><tbody><tr><td>Ana</td><td>L-11</td></tr><tr><td>Bruno</td><td>L-12</td></tr><tr><td>Carla</td><td>L-13</td></tr><tr><td>Diego</td><td>L-14</td></tr><tr><td>Elena</td><td>L-15</td></tr></tbody></table></div></details>
+</section>
+<section id="ejercicios" class="pad prose"><div class="sec-head"><span class="num">3</span><h2>Los siete ejercicios</h2></div>
+<h3 id="q1">EMPLEADOS · 1 — Nombre y ciudad de los empleados que trabajan en el Banco BANAMEX</h3>
+<p><strong>Qué piden:</strong> nombre y ciudad del empleado. <strong>Relaciones que necesito:</strong> empleado (nombre y ciudad) y trabaja (la empresa). <strong>Condición:</strong> que sea el mismo empleado en las dos y que la empresa sea BANAMEX.</p>
+<pre class="schema">Πempleado.nombre_empleado, empleado.ciudad(
+  σempleado.nombre_empleado = trabaja.nombre_empleado ∧ trabaja.nombre_empresa = &#x27;BANAMEX&#x27;
+  (empleado × trabaja))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_empleado</th><th>ciudad</th></tr></thead><tbody><tr><td>Ana López</td><td>Xalapa</td></tr><tr><td>Beto Cruz</td><td>Veracruz</td></tr><tr><td>Dani Ríos</td><td>Xalapa</td></tr><tr><td>Fer Gil</td><td>Veracruz</td></tr></tbody></table></div>
+<h3 id="q2">EMPLEADOS · 2 — Nombre, domicilio y ciudad de los empleados que ganan más de 10.000</h3>
+<p><strong>Qué piden:</strong> nombre, calle y ciudad. <strong>Relaciones que necesito:</strong> empleado (datos personales) y trabaja (el sueldo). <strong>Condición:</strong> mismo empleado y sueldo mayor a 10.000.</p>
+<pre class="schema">Πempleado.nombre_empleado, empleado.calle, empleado.ciudad(
+  σempleado.nombre_empleado = trabaja.nombre_empleado ∧ trabaja.sueldo &gt; 10000
+  (empleado × trabaja))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_empleado</th><th>calle</th><th>ciudad</th></tr></thead><tbody><tr><td>Ana López</td><td>Calle 1</td><td>Xalapa</td></tr><tr><td>Carla Díaz</td><td>Calle 3</td><td>Xalapa</td></tr><tr><td>Eva Mora</td><td>Calle 5</td><td>Coatepec</td></tr><tr><td>Fer Gil</td><td>Calle 6</td><td>Veracruz</td></tr></tbody></table></div>
+<h3 id="q3">EMPLEADOS · 3 — Nombre, domicilio y ciudad de los que trabajan en BANAMEX y ganan más de 10.000</h3>
+<p><strong>Qué piden:</strong> lo mismo que en el 2. <strong>Relaciones que necesito:</strong> empleado y trabaja. <strong>Condición:</strong> mismo empleado, empresa BANAMEX y sueldo mayor a 10.000 (se juntan las dos condiciones con ∧).</p>
+<pre class="schema">Πempleado.nombre_empleado, empleado.calle, empleado.ciudad(
+  σempleado.nombre_empleado = trabaja.nombre_empleado ∧ trabaja.nombre_empresa = &#x27;BANAMEX&#x27; ∧ trabaja.sueldo &gt; 10000
+  (empleado × trabaja))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_empleado</th><th>calle</th><th>ciudad</th></tr></thead><tbody><tr><td>Ana López</td><td>Calle 1</td><td>Xalapa</td></tr><tr><td>Fer Gil</td><td>Calle 6</td><td>Veracruz</td></tr></tbody></table></div>
+<h3 id="q4">EMPLEADOS · 4 — Nombre de los jefes con empleados en la ciudad de Xalapa</h3>
+<p><strong>Qué piden:</strong> solo el nombre del jefe. <strong>Relaciones que necesito:</strong> jefe (quién es jefe de quién) y empleado (dónde vive cada empleado). <strong>Condición:</strong> que el empleado de jefe sea el de empleado y que viva en Xalapa.</p>
+<pre class="schema">Πjefe.nombre_jefe(
+  σjefe.nombre_empleado = empleado.nombre_empleado ∧ empleado.ciudad = &#x27;Xalapa&#x27;
+  (jefe × empleado))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_jefe</th></tr></thead><tbody><tr><td>Fer Gil</td></tr><tr><td>Gus Paz</td></tr></tbody></table></div>
+<h3 id="q5">Banco · 1 — nombre_sucursal y ciudad_sucursal de las sucursales con préstamos de importe mayor a 1000</h3>
+<p><strong>Qué piden:</strong> nombre y ciudad de la sucursal. <strong>Relaciones que necesito:</strong> sucursal (la ciudad) y préstamo (el importe). <strong>Condición:</strong> misma sucursal en las dos e importe mayor a 1000.</p>
+<pre class="schema">Πsucursal.nombre_sucursal, sucursal.ciudad_sucursal(
+  σsucursal.nombre_sucursal = préstamo.nombre_sucursal ∧ préstamo.importe &gt; 1000
+  (sucursal × préstamo))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_sucursal</th><th>ciudad_sucursal</th></tr></thead><tbody><tr><td>Centro</td><td>Madrid</td></tr><tr><td>Navacerrada</td><td>Navacerrada</td></tr><tr><td>Veracruz</td><td>Veracruz</td></tr></tbody></table></div>
+<h3 id="q6">Banco · 2 — Nombre, ciudad y número de cuenta de los clientes con una cuenta abierta</h3>
+<p><strong>Qué piden:</strong> nombre y ciudad del cliente y el número de cuenta. <strong>Relaciones que necesito:</strong> cliente (la ciudad) e impositor (qué cuenta tiene cada cliente). <strong>Condición:</strong> que el cliente sea el mismo en las dos; no hace falta nada más porque estar en impositor ya significa tener cuenta.</p>
+<pre class="schema">Πcliente.nombre_cliente, cliente.ciudad_cliente, impositor.número_cuenta(
+  σcliente.nombre_cliente = impositor.nombre_cliente
+  (cliente × impositor))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_cliente</th><th>ciudad_cliente</th><th>número_cuenta</th></tr></thead><tbody><tr><td>Ana</td><td>Xalapa</td><td>C-101</td></tr><tr><td>Bruno</td><td>Veracruz</td><td>C-102</td></tr><tr><td>Carla</td><td>Xalapa</td><td>C-103</td></tr><tr><td>Diego</td><td>Madrid</td><td>C-104</td></tr><tr><td>Elena</td><td>Madrid</td><td>C-105</td></tr></tbody></table></div>
+<h3 id="q7">Banco · 3 — Nombre de la sucursal y activos de las que tienen cuentas con saldo mayor a 50000</h3>
+<p><strong>Qué piden:</strong> nombre de la sucursal y sus activos. <strong>Relaciones que necesito:</strong> sucursal (los activos) y cuenta (el saldo). <strong>Condición:</strong> misma sucursal y saldo mayor a 50000.</p>
+<pre class="schema">Πsucursal.nombre_sucursal, sucursal.activos(
+  σsucursal.nombre_sucursal = cuenta.nombre_sucursal ∧ cuenta.saldo &gt; 50000
+  (sucursal × cuenta))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>nombre_sucursal</th><th>activos</th></tr></thead><tbody><tr><td>Centro</td><td>9000000</td></tr><tr><td>Navacerrada</td><td>1700000</td></tr><tr><td>Xalapa Sur</td><td>4000000</td></tr></tbody></table></div>
+<p class="ev-credit">Entrega elaborada por mí en el curso Bases de Datos 1.</p></section>
+
+    <nav class="pager pad"><a href="algebra-ejercicios-2.html">← Ejercicios de álgebra relacional (2)</a><a href="laboratorio-futbol.html">Laboratorio — Fútbol: LIGA, EQUIPO y JUGADOR →</a></nav>
+  </main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

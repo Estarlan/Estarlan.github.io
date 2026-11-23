@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía 1 de álgebra relacional</title>
+  <meta name="description" content="Guía 1 de álgebra relacional: once consultas resueltas con selección, proyección, reunión, diferencia y división.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <link rel="stylesheet" href="../css/fichas.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Álgebra relacional</div>
+      <h1>Guía 1 de álgebra relacional</h1>
+      <div class="meta"><span class="tag solid">Guía</span><span class="tag">Álgebra relacional</span><span class="tag">División</span><span class="tag">Bases de Datos 1</span></div>
+    </section>
+
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a><a href="#archivos">A · Archivos</a><a href="#intro">1 · Cómo lo hice</a><a href="#modelo">2 · El modelo</a><a href="#consultas">3 · Las once consultas</a>
+    </div>
+  </nav>
+
+  <section id="archivos" class="pad prose"><div class="sec-head"><span class="num">A</span><h2>Archivos de la entrega</h2></div><p class="doc-actions"><a class="btn ghost" href="../archivos/guia-1-algebra/guia1_datos_y_sql.sql" target="_blank" rel="noopener">Datos de prueba y SQL equivalente <span class="arw">↗</span></a></p></section>
+<section id="intro" class="pad prose"><div class="sec-head"><span class="num">1</span><h2>Cómo lo hice</h2></div>
+<p>Esta guía tiene once consultas sobre clientes, productos y facturas, y todas se piden en álgebra relacional. Como la guía no trae datos, me inventé una base chiquita (abajo está) con casos medio raros a propósito: un cliente sin facturas, un producto que suma exactamente 500 unidades, otro que pasa de 500 solo sumando líneas pequeñas, un producto con Id 100, etc. Así se nota si la consulta está bien o solo parece estarlo.</p>
+<p>Cada respuesta la comprobé dos veces: la corrí contra esos datos con un evaluador de álgebra que armé y también la escribí en SQL, y en las once los resultados fueron iguales. El SQL está en el archivo de la entrega por si lo quieres ver.</p>
+<p><strong>Notación:</strong> Π es proyección, σ selección, × producto cartesiano, ⋈ reunión natural (une por los atributos con el mismo nombre), − diferencia, ∩ intersección, ÷ división y ρ renombrar. La flecha ← es para ponerle nombre a un paso intermedio. En el ejercicio 3 uso además γ, la agrupación con suma de la álgebra extendida. Para que las reuniones funcionen renombré tres cosas: <code>C ← ρNombre→NomCliente(CLIENTE)</code>, <code>L ← ρNombre→NomLocalidad(LOCALIDAD)</code> y <code>F ← ρIdCliente→Id_Cliente(FACTURA)</code>.</p>
+</section>
+<section id="modelo" class="pad prose"><div class="sec-head"><span class="num">2</span><h2>El modelo</h2></div>
+<div class="tbl-wrap"><table><thead><tr><th>Relación</th><th>Atributos</th></tr></thead><tbody><tr><td>CLIENTE</td><td>Id_Cliente, Nombre, Dirección, Teléfono, IdLocalidad</td></tr><tr><td>PRODUCTO</td><td>IdProducto, Descripción, Precio</td></tr><tr><td>FACTURA</td><td>IdFactura, IdCliente, Fecha, Pagada</td></tr><tr><td>DETALLE</td><td>IdFactura, IdProducto, Cantidad, PrecioVta</td></tr><tr><td>LOCALIDAD</td><td>IdLocalidad, Nombre</td></tr></tbody></table></div>
+<details><summary>Datos de prueba que usé</summary><h5>LOCALIDAD</h5><div class="tbl-wrap"><table><thead><tr><th>IdLocalidad</th><th>Nombre</th></tr></thead><tbody><tr><td>1</td><td>Luján</td></tr><tr><td>2</td><td>Cortines</td></tr><tr><td>3</td><td>Pilar</td></tr><tr><td>4</td><td>Escobar</td></tr></tbody></table></div><h5>CLIENTE</h5><div class="tbl-wrap"><table><thead><tr><th>Id_Cliente</th><th>Nombre</th><th>Dirección</th><th>Teléfono</th><th>IdLocalidad</th></tr></thead><tbody><tr><td>1</td><td>Ana Torres</td><td>Calle 1</td><td>3001111111</td><td>1</td></tr><tr><td>2</td><td>Bruno Díaz</td><td>Calle 2</td><td>3002222222</td><td>1</td></tr><tr><td>3</td><td>Carla Ruiz</td><td>Calle 3</td><td>3003333333</td><td>2</td></tr><tr><td>4</td><td>Diego Paz</td><td>Calle 4</td><td>3004444444</td><td>2</td></tr><tr><td>5</td><td>Elena Soto</td><td>Calle 5</td><td>3005555555</td><td>3</td></tr><tr><td>6</td><td>Fabio Gil</td><td>Calle 6</td><td>3006666666</td><td>4</td></tr></tbody></table></div><h5>PRODUCTO</h5><div class="tbl-wrap"><table><thead><tr><th>IdProducto</th><th>Descripción</th><th>Precio</th></tr></thead><tbody><tr><td>50</td><td>Teclado</td><td>100</td></tr><tr><td>100</td><td>Mouse</td><td>50</td></tr><tr><td>101</td><td>Monitor</td><td>900</td></tr><tr><td>150</td><td>Impresora</td><td>700</td></tr><tr><td>200</td><td>Parlantes</td><td>120</td></tr></tbody></table></div><h5>FACTURA</h5><div class="tbl-wrap"><table><thead><tr><th>IdFactura</th><th>IdCliente</th><th>Fecha</th><th>Pagada</th></tr></thead><tbody><tr><td>10</td><td>1</td><td>2026-03-01</td><td>1</td></tr><tr><td>11</td><td>1</td><td>2026-03-05</td><td>1</td></tr><tr><td>12</td><td>2</td><td>2026-03-06</td><td>0</td></tr><tr><td>13</td><td>3</td><td>2026-03-07</td><td>1</td></tr><tr><td>14</td><td>3</td><td>2026-03-09</td><td>0</td></tr><tr><td>15</td><td>4</td><td>2026-03-10</td><td>1</td></tr><tr><td>16</td><td>5</td><td>2026-03-12</td><td>1</td></tr><tr><td>18</td><td>2</td><td>2026-03-15</td><td>1</td></tr></tbody></table></div><h5>DETALLE</h5><div class="tbl-wrap"><table><thead><tr><th>IdFactura</th><th>IdProducto</th><th>Cantidad</th><th>PrecioVta</th></tr></thead><tbody><tr><td>10</td><td>50</td><td>10</td><td>100</td></tr><tr><td>10</td><td>100</td><td>5</td><td>50</td></tr><tr><td>10</td><td>101</td><td>2</td><td>900</td></tr><tr><td>11</td><td>150</td><td>1</td><td>700</td></tr><tr><td>11</td><td>101</td><td>600</td><td>880</td></tr><tr><td>12</td><td>50</td><td>3</td><td>100</td></tr><tr><td>13</td><td>50</td><td>2</td><td>100</td></tr><tr><td>13</td><td>100</td><td>20</td><td>50</td></tr><tr><td>13</td><td>101</td><td>1</td><td>900</td></tr><tr><td>14</td><td>150</td><td>4</td><td>700</td></tr><tr><td>14</td><td>200</td><td>500</td><td>120</td></tr><tr><td>15</td><td>50</td><td>7</td><td>100</td></tr><tr><td>15</td><td>101</td><td>1</td><td>900</td></tr><tr><td>15</td><td>150</td><td>750</td><td>690</td></tr><tr><td>16</td><td>150</td><td>2</td><td>700</td></tr><tr><td>16</td><td>100</td><td>450</td><td>50</td></tr><tr><td>18</td><td>100</td><td>40</td><td>50</td></tr></tbody></table></div></details>
+</section>
+<section id="consultas" class="pad prose"><div class="sec-head"><span class="num">3</span><h2>Las once consultas</h2></div>
+<h3 id="q1">1. Productos con Id mayor a 100</h3>
+<p>Una selección para quedarme con los Id mayores a 100 y después una proyección para mostrar solo Id y descripción. Ojo con el mouse (Id 100): como es &quot;mayor que&quot; y no &quot;mayor o igual&quot;, se queda por fuera.</p>
+<pre class="schema">ΠIdProducto,Descripción(σIdProducto&gt;100(PRODUCTO))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>IdProducto</th><th>Descripción</th></tr></thead><tbody><tr><td>101</td><td>Monitor</td></tr><tr><td>150</td><td>Impresora</td></tr><tr><td>200</td><td>Parlantes</td></tr></tbody></table></div>
+<h3 id="q2">2. Clientes de Luján</h3>
+<p>El cliente solo guarda el IdLocalidad, así que tengo que unirlo con LOCALIDAD para saber el nombre de la localidad. Como las dos tablas tienen un atributo &quot;Nombre&quot; renombré antes (C y L) para que no se crucen.</p>
+<pre class="schema">ΠNomCliente(σNomLocalidad=&#x27;Luján&#x27;(C ⋈ L))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomCliente</th></tr></thead><tbody><tr><td>Ana Torres</td></tr><tr><td>Bruno Díaz</td></tr></tbody></table></div>
+<h3 id="q3">3. Ventas de los productos que pasan de 500 unidades</h3>
+<p>Acá el &quot;más de 500 unidades&quot; es del producto en total, sumando todas sus líneas de DETALLE, no de una línea suelta. Para sumar por producto necesito la agrupación (γ) de la álgebra extendida. Pasan el monitor (604), la impresora (757) y el mouse, que llega a 515 sumando líneas pequeñas; los parlantes suman exactamente 500 y no entran. Con esos productos salto de DETALLE a la factura (F) y de ahí al cliente (C).</p>
+<pre class="schema">Totales ← γIdProducto; SUM(Cantidad)→Total(DETALLE)
+Populares ← ΠIdProducto(σTotal&gt;500(Totales))
+ΠNomCliente,IdFactura,IdProducto,Cantidad(DETALLE ⋈ Populares ⋈ F ⋈ C)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomCliente</th><th>IdFactura</th><th>IdProducto</th><th>Cantidad</th></tr></thead><tbody><tr><td>Ana Torres</td><td>10</td><td>100</td><td>5</td></tr><tr><td>Ana Torres</td><td>10</td><td>101</td><td>2</td></tr><tr><td>Ana Torres</td><td>11</td><td>101</td><td>600</td></tr><tr><td>Ana Torres</td><td>11</td><td>150</td><td>1</td></tr><tr><td>Bruno Díaz</td><td>18</td><td>100</td><td>40</td></tr><tr><td>Carla Ruiz</td><td>13</td><td>100</td><td>20</td></tr><tr><td>Carla Ruiz</td><td>13</td><td>101</td><td>1</td></tr><tr><td>Carla Ruiz</td><td>14</td><td>150</td><td>4</td></tr><tr><td>Diego Paz</td><td>15</td><td>101</td><td>1</td></tr><tr><td>Diego Paz</td><td>15</td><td>150</td><td>750</td></tr><tr><td>Elena Soto</td><td>16</td><td>100</td><td>450</td></tr><tr><td>Elena Soto</td><td>16</td><td>150</td><td>2</td></tr></tbody></table></div>
+<h3 id="q4">4. Clientes que no han comprado nada</h3>
+<p>La idea es restar: todos los clientes menos los que aparecen en FACTURA. Lo que queda son los Id de los que nunca han comprado, y con una reunión recupero el nombre.</p>
+<pre class="schema">SinFactura ← ΠId_Cliente(C) − ΠId_Cliente(F)
+ΠNomCliente(C ⋈ SinFactura)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomCliente</th></tr></thead><tbody><tr><td>Fabio Gil</td></tr></tbody></table></div>
+<h3 id="q5">5. Clientes que compraron todos los productos</h3>
+<p>Esta es la típica de división. Armo las parejas cliente–producto que sí se compraron y las divido entre la lista completa de productos: quedan los clientes que aparecen con todos. Carla los compró repartidos entre dos facturas y aun así cuenta.</p>
+<pre class="schema">Comprados ← ΠId_Cliente,IdProducto(F ⋈ DETALLE)
+Todos ← Comprados ÷ ΠIdProducto(PRODUCTO)
+ΠNomCliente(C ⋈ Todos)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomCliente</th></tr></thead><tbody><tr><td>Carla Ruiz</td></tr></tbody></table></div>
+<h3 id="q6">6. Facturas con cantidad mayor a la de la factura 18</h3>
+<p>Saco la cantidad de la factura 18 y la pego a cada línea de DETALLE con un producto cartesiano, así puedo comparar. Supuse que la factura 18 tiene una sola línea; si tuviera varias, la consulta compararía contra cada una.</p>
+<pre class="schema">Q18 ← ρCantidad→Cant18(ΠCantidad(σIdFactura=18(DETALLE)))
+ΠIdFactura(σCantidad&gt;Cant18(DETALLE × Q18))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>IdFactura</th></tr></thead><tbody><tr><td>11</td></tr><tr><td>14</td></tr><tr><td>15</td></tr><tr><td>16</td></tr></tbody></table></div>
+<h3 id="q7">7. Productos que no se han comprado en Luján</h3>
+<p>Primero averiguo qué sí se compró en Luján (pasando de DETALLE a la localidad) y se lo resto a todos los productos. Lo que sobra es lo que nunca se vendió ahí.</p>
+<pre class="schema">EnLujan ← ΠIdProducto(σNomLocalidad=&#x27;Luján&#x27;(DETALLE ⋈ F ⋈ C ⋈ L))
+Faltan ← ΠIdProducto(PRODUCTO) − EnLujan
+ΠIdProducto,Descripción(PRODUCTO ⋈ Faltan)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>IdProducto</th><th>Descripción</th></tr></thead><tbody><tr><td>200</td><td>Parlantes</td></tr></tbody></table></div>
+<h3 id="q8">8. Productos vendidos en Luján y en Cortines</h3>
+<p>Armo dos listas de productos, una por localidad, y me quedo con lo que está en las dos usando intersección.</p>
+<pre class="schema">Lujan ← ΠIdProducto(σNomLocalidad=&#x27;Luján&#x27;(DETALLE ⋈ F ⋈ C ⋈ L))
+Cortines ← ΠIdProducto(σNomLocalidad=&#x27;Cortines&#x27;(DETALLE ⋈ F ⋈ C ⋈ L))
+ΠIdProducto,Descripción(PRODUCTO ⋈ (Lujan ∩ Cortines))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>IdProducto</th><th>Descripción</th></tr></thead><tbody><tr><td>100</td><td>Mouse</td></tr><tr><td>101</td><td>Monitor</td></tr><tr><td>150</td><td>Impresora</td></tr><tr><td>50</td><td>Teclado</td></tr></tbody></table></div>
+<h3 id="q9">9. Localidades a las que se vendieron todos los productos</h3>
+<p>Es la misma lógica de la división del ejercicio 5, pero ahora la pareja es localidad–producto. Sale solo Cortines: en Luján nunca se vendieron los parlantes.</p>
+<pre class="schema">Vendidos ← ΠIdLocalidad,IdProducto(DETALLE ⋈ F ⋈ C)
+Todas ← Vendidos ÷ ΠIdProducto(PRODUCTO)
+ΠNomLocalidad(L ⋈ Todas)</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomLocalidad</th></tr></thead><tbody><tr><td>Cortines</td></tr></tbody></table></div>
+<h3 id="q10">10. Clientes con alguna factura sin pagar</h3>
+<p>Directo: facturas con Pagada = 0 y unir con el cliente. Si alguien tiene varias deudas aparece una sola vez porque el resultado es un conjunto.</p>
+<pre class="schema">ΠNomCliente(C ⋈ σPagada=0(F))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomCliente</th></tr></thead><tbody><tr><td>Bruno Díaz</td></tr><tr><td>Carla Ruiz</td></tr></tbody></table></div>
+<h3 id="q11">11. Clientes que han pagado todas sus facturas</h3>
+<p>Aquí uso resta otra vez: los que tienen facturas menos los que tienen alguna sin pagar. Puse la condición de &quot;tener facturas&quot; a propósito, porque si no, Fabio (que nunca compró) saldría como si hubiera pagado todo.</p>
+<pre class="schema">ConFactura ← ΠId_Cliente(F)
+ConDeuda ← ΠId_Cliente(σPagada=0(F))
+ΠNomCliente(C ⋈ (ConFactura − ConDeuda))</pre>
+<div class="tbl-wrap"><table><thead><tr><th>NomCliente</th></tr></thead><tbody><tr><td>Ana Torres</td></tr><tr><td>Diego Paz</td></tr><tr><td>Elena Soto</td></tr></tbody></table></div>
+<p class="ev-credit">Entrega elaborada por mí en el curso Bases de Datos 1.</p></section>
+
+    <nav class="pager pad"><a href="../evidencias.html">← Evidencias</a><a href="algebra-ejercicios-2.html">Ejercicios de álgebra relacional (2) →</a></nav>
+  </main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

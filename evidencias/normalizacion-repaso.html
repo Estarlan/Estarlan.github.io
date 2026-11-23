@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio de repaso de normalización</title>
+  <meta name="description" content="Ejercicio de repaso de normalización de Bases de Datos 1: seis puntos resueltos de 1FN a 3FN y BCNF, con diagramas de dependencias funcionales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/page.css">
+  <link rel="stylesheet" href="../css/evidencia.css">
+  <link rel="stylesheet" href="../css/fichas.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html" aria-label="Inicio">
+      <span class="brand-mark">JD</span>
+      <span class="brand-txt"><strong>Juan David Polo</strong><em>Bases de Datos 1</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">Proyecto</a>
+      <a href="../evidencias.html" aria-current="page">Evidencias</a>
+      <a href="../temas.html">Temas</a>
+      <a href="../perfil.html">Perfil</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+    <section class="ev-hero pad">
+      <div class="crumb"><a href="../evidencias.html">Evidencias</a> / Normalización</div>
+      <h1>Ejercicio de repaso de normalización</h1>
+      <div class="meta"><span class="tag solid">Taller</span><span class="tag">1FN · 2FN · 3FN · BCNF</span><span class="tag">Dependencias funcionales</span><span class="tag">Bases de Datos 1</span></div>
+    </section>
+
+  <nav class="subnav" aria-label="Secciones de la página">
+    <div class="wrap subnav-in">
+      <a href="../evidencias.html">← Evidencias</a><a href="#archivos">A · Archivos</a><a href="#resumen">1 · Resumen</a><a href="#p1">2 · Punto 1 — Proyectos, e…</a><a href="#p2">3 · Punto 2 — Estudiantes …</a><a href="#p3">4 · Punto 3 — Cenas de un …</a><a href="#p4">5 · Punto 4 — Visitas médi…</a><a href="#p5">6 · Punto 5 — Alquiler de …</a><a href="#p6">7 · Punto 6 — Reflexión: d…</a>
+    </div>
+  </nav>
+
+  <section id="archivos" class="pad prose"><div class="sec-head"><span class="num">A</span><h2>Archivos de la entrega</h2></div><p class="doc-actions"><a class="btn ghost" href="../archivos/normalizacion/enunciado-taller-normalizacion.pdf" target="_blank" rel="noopener">Enunciado del ejercicio de repaso (PDF, del docente) <span class="arw">↗</span></a><a class="btn ghost" href="../archivos/normalizacion/normalizacion_3fn.sql" target="_blank" rel="noopener">Esquemas finales en 3FN y comprobación (SQL) <span class="arw">↗</span></a></p></section>
+<section id="resumen" class="pad prose"><div class="sec-head"><span class="num">1</span><h2>Resumen</h2></div>
+<p>Además del taller en grupo, el profe Christian Duarte dejó un ejercicio de repaso de normalización con seis puntos, y los resolví todos. En cada uno digo en qué forma normal está la tabla, saco las dependencias funcionales, hago el diagrama y la voy partiendo paso a paso hasta la tercera forma normal, explicando por qué hago cada cosa. El enunciado original está en la sección de archivos.</p>
+<p>Para estar seguro de no equivocarme armé las tablas finales en SQL y comprobé que, al juntarlas con un JOIN, sale exactamente la tabla original. O sea, la descomposición no pierde nada.</p>
+<h3>Las reglas que uso</h3>
+<ul>
+<li><strong>1FN:</strong> valores simples (no listas en una celda), sin grupos repetidos y con llave primaria.</li>
+<li><strong>2FN:</strong> 1FN y ningún dato depende de solo una parte de una clave compuesta.</li>
+<li><strong>3FN:</strong> 2FN y ningún dato depende de otro dato que no sea clave.</li>
+<li><strong>BCNF:</strong> el determinante de cada dependencia funcional tiene que ser llave candidata.</li>
+</ul>
+</section>
+<section id="p1" class="pad prose"><div class="sec-head"><span class="num">2</span><h2>Punto 1 — Proyectos, empleados y horas</h2></div>
+<p>La Tabla No. 1 dice qué empleados trabajan en qué proyectos, qué profesión tienen, cuánto vale su hora y cuántas horas tienen asignadas. Había que decir en qué forma normal está y llevarla a 3FN con el paso a paso.</p>
+<div class="tbl-wrap"><table><thead><tr><th class="pk">cod_proyecto</th><th>nom_proyecto</th><th class="pk">cod_empleado</th><th>nom_empleado</th><th>profesion</th><th>vlr_hora</th><th>hrs_asignadas</th></tr></thead><tbody><tr><td>1010</td><td>ERP</td><td>2010</td><td>Sandra</td><td>Ingeniero</td><td>100000</td><td>20</td></tr><tr><td>1010</td><td>ERP</td><td>2020</td><td>Claudia</td><td>Analista</td><td>50000</td><td>10</td></tr><tr><td>1010</td><td>ERP</td><td>2030</td><td>Yamile</td><td>Programador</td><td>20000</td><td>10</td></tr><tr><td>1020</td><td>CRM</td><td>2010</td><td>Sandra</td><td>Ingeniero</td><td>100000</td><td>10</td></tr><tr><td>1020</td><td>CRM</td><td>2020</td><td>Claudia</td><td>Analista</td><td>50000</td><td>15</td></tr><tr><td>1020</td><td>CRM</td><td>2030</td><td>Yamile</td><td>Programador</td><td>20000</td><td>20</td></tr><tr><td>1030</td><td>BI</td><td>2010</td><td>Sandra</td><td>Ingeniero</td><td>100000</td><td>10</td></tr><tr><td>1030</td><td>BI</td><td>2020</td><td>Claudia</td><td>Analista</td><td>50000</td><td>15</td></tr><tr><td>1030</td><td>BI</td><td>2030</td><td>Yamile</td><td>Programador</td><td>20000</td><td>10</td></tr><tr><td>1010</td><td>ERP</td><td>2040</td><td>Andrea</td><td>Ingeniero</td><td>100000</td><td>40</td></tr></tbody></table></div>
+<p><strong>Ojo con los datos:</strong> en la tabla del enunciado el empleado 2030 aparece escrito de tres formas (Yamyle, Yamile y Llamile) y a Andrea le pusieron «ingeniero» en minúscula. Yo tomé «Yamile» e «Ingeniero» como lo correcto. Justo ese tipo de errores es lo que la normalización evita, porque después de separar las tablas cada dato se guarda una sola vez.</p>
+<h3>a) ¿En qué forma normal está?</h3>
+<p>Está en <strong>1FN</strong>: todos los valores son simples, no hay grupos repetidos y la clave (<code>cod_proyecto</code> + <code>cod_empleado</code>) identifica cada fila. Pero <strong>no está en 2FN</strong>, porque hay datos que dependen solo de una parte de la clave: el nombre del proyecto depende nada más del proyecto, y el nombre, la profesión y el valor por hora dependen nada más del empleado. Tampoco cumple 3FN, porque el valor por hora depende de la profesión y no del empleado en sí.</p>
+<h3>Dependencias funcionales</h3>
+<ul>
+<li><code>cod_proyecto → nom_proyecto</code></li>
+<li><code>cod_empleado → nom_empleado, profesion</code></li>
+<li><code>profesion → vlr_hora</code> (cada profesión tiene siempre el mismo valor: Ingeniero 100000, Analista 50000, Programador 20000)</li>
+<li><code>cod_proyecto, cod_empleado → hrs_asignadas</code></li>
+</ul>
+<svg class="dep" viewBox="0 0 867 184" role="img" aria-label="Diagrama de dependencias funcionales de la Tabla No. 1"><title>Diagrama de dependencias funcionales de la Tabla No. 1</title><rect class="abox akey" x="12" y="16" width="115" height="34"/><text class="atxt bold" x="69" y="38" text-anchor="middle">cod_proyecto</text><rect class="abox" x="141" y="16" width="115" height="34"/><text class="atxt" x="198" y="38" text-anchor="middle">nom_proyecto</text><rect class="abox akey" x="270" y="16" width="115" height="34"/><text class="atxt bold" x="327" y="38" text-anchor="middle">cod_empleado</text><rect class="abox" x="398" y="16" width="115" height="34"/><text class="atxt" x="456" y="38" text-anchor="middle">nom_empleado</text><rect class="abox" x="527" y="16" width="93" height="34"/><text class="atxt" x="574" y="38" text-anchor="middle">profesion</text><rect class="abox" x="634" y="16" width="85" height="34"/><text class="atxt" x="676" y="38" text-anchor="middle">vlr_hora</text><rect class="abox" x="733" y="16" width="122" height="34"/><text class="atxt" x="794" y="38" text-anchor="middle">hrs_asignadas</text><line class="dl l-total" x1="69" y1="50" x2="69" y2="68"/><line class="dl l-total" x1="327" y1="50" x2="327" y2="68"/><line class="dl l-total" x1="69" y1="68" x2="794" y2="68"/><line class="dl l-total" x1="794" y1="68" x2="794" y2="57"/><polygon class="dh l-total" points="789,59 799,59 794,51"/><line class="dl l-parcial" x1="69" y1="50" x2="69" y2="92"/><line class="dl l-parcial" x1="69" y1="92" x2="198" y2="92"/><line class="dl l-parcial" x1="198" y1="92" x2="198" y2="57"/><polygon class="dh l-parcial" points="193,59 203,59 198,51"/><line class="dl l-parcial" x1="327" y1="50" x2="327" y2="116"/><line class="dl l-parcial" x1="327" y1="116" x2="574" y2="116"/><line class="dl l-parcial" x1="456" y1="116" x2="456" y2="57"/><polygon class="dh l-parcial" points="451,59 461,59 456,51"/><line class="dl l-parcial" x1="574" y1="116" x2="574" y2="57"/><polygon class="dh l-parcial" points="568,59 578,59 574,51"/><line class="dl l-trans" x1="574" y1="50" x2="574" y2="140"/><line class="dl l-trans" x1="574" y1="140" x2="676" y2="140"/><line class="dl l-trans" x1="676" y1="140" x2="676" y2="57"/><polygon class="dh l-trans" points="671,59 681,59 676,51"/></svg><p class="dep-legend"><span class="lg l-total">Dependencia total (de toda la clave)</span><span class="lg l-parcial">Dependencia parcial (de parte de la clave)</span><span class="lg l-trans">Dependencia transitiva (a través de un atributo no clave)</span></p>
+<h3>b) Paso a paso hasta la 3FN</h3>
+<ol>
+<li><strong>1FN:</strong> ya se cumple, no hay que tocar nada.</li>
+<li><strong>Pasar a 2FN:</strong> separo cada dato con lo que lo determina. El nombre del proyecto se va con <code>cod_proyecto</code>; el nombre, la profesión y el valor por hora se van con <code>cod_empleado</code>. Lo que sí depende de la clave completa (las horas asignadas) se queda en una tabla de asignación.</li>
+<li><strong>Pasar a 3FN:</strong> en la tabla de empleados queda un problema: <code>cod_empleado → profesion → vlr_hora</code>. El valor por hora no es del empleado, es de la profesión. Entonces creo una tabla de profesiones y en empleado dejo solo la profesión como llave foránea.</li>
+<li><strong>Revisión final:</strong> en las cuatro tablas el único determinante es la llave primaria, así que además queda en BCNF.</li>
+</ol>
+<h4>Esquema resultante</h4>
+<ul class="schemas">
+<li><code class="schema">PROYECTO(<u>cod_proyecto</u>, nom_proyecto)</code></li>
+<li><code class="schema">PROFESION(<u>profesion</u>, vlr_hora)</code></li>
+<li><code class="schema">EMPLEADO(<u>cod_empleado</u>, nom_empleado, profesion<sup>FK</sup>)</code></li>
+<li><code class="schema">ASIGNACION(<u>cod_proyecto</u><sup>FK</sup>, <u>cod_empleado</u><sup>FK</sup>, hrs_asignadas)</code></li>
+</ul>
+<div class="cols">
+<div><h5>PROYECTO</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">cod_proyecto</th><th>nom_proyecto</th></tr></thead><tbody><tr><td>1010</td><td>ERP</td></tr><tr><td>1020</td><td>CRM</td></tr><tr><td>1030</td><td>BI</td></tr></tbody></table></div></div>
+<div><h5>PROFESION</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">profesion</th><th>vlr_hora</th></tr></thead><tbody><tr><td>Ingeniero</td><td>100000</td></tr><tr><td>Analista</td><td>50000</td></tr><tr><td>Programador</td><td>20000</td></tr></tbody></table></div></div>
+<div><h5>EMPLEADO</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">cod_empleado</th><th>nom_empleado</th><th>profesion</th></tr></thead><tbody><tr><td>2010</td><td>Sandra</td><td>Ingeniero</td></tr><tr><td>2020</td><td>Claudia</td><td>Analista</td></tr><tr><td>2030</td><td>Yamile</td><td>Programador</td></tr><tr><td>2040</td><td>Andrea</td><td>Ingeniero</td></tr></tbody></table></div></div>
+<div><h5>ASIGNACION</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">cod_proyecto</th><th class="pk">cod_empleado</th><th>hrs_asignadas</th></tr></thead><tbody><tr><td>1010</td><td>2010</td><td>20</td></tr><tr><td>1010</td><td>2020</td><td>10</td></tr><tr><td>1010</td><td>2030</td><td>10</td></tr><tr><td>1020</td><td>2010</td><td>10</td></tr><tr><td>1020</td><td>2020</td><td>15</td></tr><tr><td>1020</td><td>2030</td><td>20</td></tr><tr><td>1030</td><td>2010</td><td>10</td></tr><tr><td>1030</td><td>2020</td><td>15</td></tr><tr><td>1030</td><td>2030</td><td>10</td></tr><tr><td>1010</td><td>2040</td><td>40</td></tr></tbody></table></div></div>
+</div>
+<p>Si uno junta las cuatro tablas por sus llaves, salen otra vez las 10 filas de la Tabla No. 1 (lo comprobé en el script SQL).</p>
+</section>
+<section id="p2" class="pad prose"><div class="sec-head"><span class="num">3</span><h2>Punto 2 — Estudiantes y cursos</h2></div>
+<p>Esta tabla de estudiantes mete varios cursos y varias notas en una sola celda.</p>
+<div class="tbl-wrap"><table><thead><tr><th class="pk">Cod</th><th>Name</th><th>Email</th><th>Courses</th><th>GradePoints</th></tr></thead><tbody><tr><td>100111</td><td>John Doe</td><td>doe@usna.edu</td><td>NN204, SI204, IT221</td><td>2, 3, 3</td></tr><tr><td>092244</td><td>Matt Smith</td><td>smith@usna.edu</td><td>SM223, EE301</td><td>4, 4</td></tr><tr><td>113221</td><td>Melinda Black</td><td>black@usna.edu</td><td>SI204</td><td>3</td></tr><tr><td>090112</td><td>Tom Johnson</td><td>Johnson@usna.edu</td><td>NN204, SI204, IT221</td><td>4, 2, 3</td></tr></tbody></table></div>
+<h3>a) ¿Está en 1FN?</h3>
+<p><strong>No.</strong> Las columnas <code>Courses</code> y <code>GradePoints</code> tienen listas de valores dentro de una misma celda, o sea que los datos no son simples. Además la nota de cada curso solo se sabe por la posición en la lista (la segunda nota es del segundo curso), y eso no hay cómo controlarlo en una base de datos.</p>
+<h3>b) Rediseño en 1FN</h3>
+<p>Cada estudiante tiene un solo código, nombre y correo, pero puede estar en varios cursos. Por eso lo parto en dos tablas: una con los datos del estudiante y otra con una fila por cada pareja estudiante–curso, donde va la nota de ese curso.</p>
+<ul class="schemas">
+<li><code class="schema">ESTUDIANTE(<u>Cod</u>, Name, Email)</code></li>
+<li><code class="schema">INSCRIPCION(<u>Cod</u><sup>FK</sup>, <u>Course</u>, GradePoints)</code></li>
+</ul>
+<div class="cols">
+<div><h5>ESTUDIANTE</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">Cod</th><th>Name</th><th>Email</th></tr></thead><tbody><tr><td>100111</td><td>John Doe</td><td>doe@usna.edu</td></tr><tr><td>092244</td><td>Matt Smith</td><td>smith@usna.edu</td></tr><tr><td>113221</td><td>Melinda Black</td><td>black@usna.edu</td></tr><tr><td>090112</td><td>Tom Johnson</td><td>Johnson@usna.edu</td></tr></tbody></table></div></div>
+<div><h5>INSCRIPCION</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">Cod</th><th class="pk">Course</th><th>GradePoints</th></tr></thead><tbody><tr><td>100111</td><td>NN204</td><td>2</td></tr><tr><td>100111</td><td>SI204</td><td>3</td></tr><tr><td>100111</td><td>IT221</td><td>3</td></tr><tr><td>092244</td><td>SM223</td><td>4</td></tr><tr><td>092244</td><td>EE301</td><td>4</td></tr><tr><td>113221</td><td>SI204</td><td>3</td></tr><tr><td>090112</td><td>NN204</td><td>4</td></tr><tr><td>090112</td><td>SI204</td><td>2</td></tr><tr><td>090112</td><td>IT221</td><td>3</td></tr></tbody></table></div></div>
+</div>
+<p>No se pierde nada: quedan las 9 inscripciones del original. Las dos tablas también cumplen 2FN y 3FN, porque la nota depende de la clave completa (estudiante + curso) y no hay datos que dependan de otros que no son clave. Si el sistema necesitara guardar cosas del curso (nombre, créditos), haría una tabla <code>CURSO</code> y <code>Course</code> pasaría a ser llave foránea.</p>
+</section>
+<section id="p3" class="pad prose"><div class="sec-head"><span class="num">4</span><h2>Punto 3 — Cenas de un restaurante</h2></div>
+<p>El gerente del restaurante de una empresa quiere planear las cenas y saber quién va a cada una. Un miembro puede ir a muchas cenas, pero no a más de una el mismo día, así que la clave de la tabla es <em>número de miembro + número de cena</em>. Y cada cena puede tener uno o varios platos.</p>
+<div class="tbl-wrap"><table><thead><tr><th class="pk">member_num</th><th>member_name</th><th>member_address</th><th class="pk">dinner_num</th><th>dinner_date</th><th>venue_code</th><th>venue_description</th><th>food_code</th><th>food_description</th></tr></thead><tbody><tr><td>214</td><td>Peter Wong</td><td>325 Meadow Park</td><td>D0001</td><td>15-Mar-10</td><td>B01</td><td>Grand Ball Room</td><td>EN3</td><td>Stuffed crab</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>DE8</td><td>Chocolate mousse</td></tr><tr><td>235</td><td>Mary Lee</td><td>123 Rose Court</td><td>D0002</td><td>15-Mar-10</td><td>B02</td><td>Petit Ball Room</td><td>EN5</td><td>Marinated steak</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>DE8</td><td>Chocolate mousse</td></tr><tr><td>250</td><td>Peter Wong</td><td>9 Nine Ave</td><td>D0003</td><td>20-Mar-10</td><td>C01</td><td>Café</td><td>SO1</td><td>Pumpkin soup</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>EN5</td><td>Marinated steak</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>DE2</td><td>Apple pie</td></tr><tr><td>235</td><td>Mary Lee</td><td>123 Rose Court</td><td>D0003</td><td>20-Mar-10</td><td>C01</td><td>Café</td><td>SO1</td><td>Pumpkin soup</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>EN5</td><td>Marinated steak</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>DE2</td><td>Apple pie</td></tr><tr><td>300</td><td>Paul Lee</td><td>123 Rose Court</td><td>D0004</td><td>20-Mar-10</td><td>E10</td><td>Petit Ball Room</td><td>SA2</td><td>Apple pie</td></tr></tbody></table></div>
+<h3>a) ¿Hay valores multivaluados?</h3>
+<p><strong>Sí</strong>, los platos. Para una misma cena de un miembro aparecen varios códigos y descripciones de plato (por ejemplo, en la cena D0003 de Peter Wong salen SO1, EN5 y DE2). En la tabla se ven como filas extra con las demás celdas en blanco, y eso no es una fila completa; por eso la tabla original no cumple 1FN.</p>
+<h3>b) Esquema relacional <code>Member_Dinner</code> en 1FN</h3>
+<p>Para llegar a 1FN completo cada fila repitiendo los datos del miembro y de la cena, de modo que haya una fila por miembro, cena y plato. La clave queda como <code>member_num</code> + <code>dinner_num</code> + <code>food_code</code>.</p>
+<ul class="schemas"><li><code class="schema">Member_Dinner(<u>member_num</u>, member_name, member_address, <u>dinner_num</u>, dinner_date, venue_code, venue_description, <u>food_code</u>, food_description)</code></li></ul>
+<h3>c) Diagrama de dependencias funcionales</h3>
+<p>Estas son las dependencias que saqué del enunciado y de los datos:</p>
+<ul>
+<li><code>member_num → member_name, member_address</code> (ojo: hay dos «Peter Wong», el 214 y el 250, con direcciones distintas; el nombre no identifica a nadie, el número sí)</li>
+<li><code>dinner_num → dinner_date, venue_code</code></li>
+<li><code>venue_code → venue_description</code> (dos códigos, B02 y E10, tienen la misma descripción «Petit Ball Room», así que la descripción no sirve de llave)</li>
+<li><code>food_code → food_description</code> (DE2 y SA2 también comparten descripción: «Apple pie»)</li>
+</ul>
+<svg class="dep" viewBox="0 0 1169 184" role="img" aria-label="Diagrama de dependencias funcionales de Member_Dinner en 1FN"><title>Diagrama de dependencias funcionales de Member_Dinner en 1FN</title><rect class="abox akey" x="12" y="16" width="100" height="34"/><text class="atxt bold" x="62" y="38" text-anchor="middle">member_num</text><rect class="abox" x="126" y="16" width="107" height="34"/><text class="atxt" x="180" y="38" text-anchor="middle">member_name</text><rect class="abox" x="247" y="16" width="130" height="34"/><text class="atxt" x="312" y="38" text-anchor="middle">member_address</text><rect class="abox akey" x="391" y="16" width="100" height="34"/><text class="atxt bold" x="441" y="38" text-anchor="middle">dinner_num</text><rect class="abox" x="505" y="16" width="107" height="34"/><text class="atxt" x="559" y="38" text-anchor="middle">dinner_date</text><rect class="abox" x="626" y="16" width="100" height="34"/><text class="atxt" x="676" y="38" text-anchor="middle">venue_code</text><rect class="abox" x="740" y="16" width="152" height="34"/><text class="atxt" x="816" y="38" text-anchor="middle">venue_description</text><rect class="abox akey" x="906" y="16" width="93" height="34"/><text class="atxt bold" x="952" y="38" text-anchor="middle">food_code</text><rect class="abox" x="1013" y="16" width="144" height="34"/><text class="atxt" x="1085" y="38" text-anchor="middle">food_description</text><line class="dl l-parcial" x1="62" y1="50" x2="62" y2="68"/><line class="dl l-parcial" x1="62" y1="68" x2="312" y2="68"/><line class="dl l-parcial" x1="180" y1="68" x2="180" y2="57"/><polygon class="dh l-parcial" points="175,59 185,59 180,51"/><line class="dl l-parcial" x1="312" y1="68" x2="312" y2="57"/><polygon class="dh l-parcial" points="307,59 317,59 312,51"/><line class="dl l-parcial" x1="441" y1="50" x2="441" y2="92"/><line class="dl l-parcial" x1="441" y1="92" x2="676" y2="92"/><line class="dl l-parcial" x1="559" y1="92" x2="559" y2="57"/><polygon class="dh l-parcial" points="554,59 564,59 559,51"/><line class="dl l-parcial" x1="676" y1="92" x2="676" y2="57"/><polygon class="dh l-parcial" points="671,59 681,59 676,51"/><line class="dl l-trans" x1="676" y1="50" x2="676" y2="116"/><line class="dl l-trans" x1="676" y1="116" x2="816" y2="116"/><line class="dl l-trans" x1="816" y1="116" x2="816" y2="57"/><polygon class="dh l-trans" points="811,59 821,59 816,51"/><line class="dl l-parcial" x1="952" y1="50" x2="952" y2="140"/><line class="dl l-parcial" x1="952" y1="140" x2="1085" y2="140"/><line class="dl l-parcial" x1="1085" y1="140" x2="1085" y2="57"/><polygon class="dh l-parcial" points="1080,59 1090,59 1085,51"/></svg><p class="dep-legend"><span class="lg l-total">Dependencia total (de toda la clave)</span><span class="lg l-parcial">Dependencia parcial (de parte de la clave)</span><span class="lg l-trans">Dependencia transitiva (a través de un atributo no clave)</span></p>
+<h3>d) Paso a paso hasta la 3FN</h3>
+<ol>
+<li><strong>2FN:</strong> ningún dato depende de la clave completa; todos dependen de una parte. Los separo por determinante: <code>member_num</code> con nombre y dirección, <code>dinner_num</code> con fecha y sala, y <code>food_code</code> con su descripción.</li>
+<li><strong>3FN:</strong> en la cena pasa que <code>dinner_num → venue_code → venue_description</code>: la descripción de la sala depende del código de la sala y no de la cena. Entonces creo <code>VENUE</code> y en <code>DINNER</code> dejo solo el código como llave foránea.</li>
+<li><strong>Unir las piezas:</strong> falta guardar quién fue a qué cena y qué platos tuvo cada cena. Mirando los datos, los platos son de la cena y no del miembro (en D0003, Peter Wong y Mary Lee tienen exactamente los mismos tres platos). Por eso hago dos tablas separadas, <code>ATTENDANCE</code> (miembro–cena) y <code>MENU</code> (cena–plato). Si las uniera en una sola, tendría que repetir cada plato por cada asistente.</li>
+<li><strong>Revisión:</strong> en las seis tablas el único determinante es la llave primaria (BCNF), y las dos de relación solo tienen la clave compuesta.</li>
+</ol>
+<h4>Esquema resultante</h4>
+<ul class="schemas">
+<li><code class="schema">MEMBER(<u>member_num</u>, member_name, member_address)</code></li>
+<li><code class="schema">VENUE(<u>venue_code</u>, venue_description)</code></li>
+<li><code class="schema">DINNER(<u>dinner_num</u>, dinner_date, venue_code<sup>FK</sup>)</code></li>
+<li><code class="schema">FOOD(<u>food_code</u>, food_description)</code></li>
+<li><code class="schema">ATTENDANCE(<u>member_num</u><sup>FK</sup>, <u>dinner_num</u><sup>FK</sup>)</code></li>
+<li><code class="schema">MENU(<u>dinner_num</u><sup>FK</sup>, <u>food_code</u><sup>FK</sup>)</code></li>
+</ul>
+<div class="cols">
+<div><h5>MEMBER</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">member_num</th><th>member_name</th><th>member_address</th></tr></thead><tbody><tr><td>214</td><td>Peter Wong</td><td>325 Meadow Park</td></tr><tr><td>235</td><td>Mary Lee</td><td>123 Rose Court</td></tr><tr><td>250</td><td>Peter Wong</td><td>9 Nine Ave</td></tr><tr><td>300</td><td>Paul Lee</td><td>123 Rose Court</td></tr></tbody></table></div></div>
+<div><h5>VENUE</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">venue_code</th><th>venue_description</th></tr></thead><tbody><tr><td>B01</td><td>Grand Ball Room</td></tr><tr><td>B02</td><td>Petit Ball Room</td></tr><tr><td>C01</td><td>Café</td></tr><tr><td>E10</td><td>Petit Ball Room</td></tr></tbody></table></div></div>
+<div><h5>DINNER</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">dinner_num</th><th>dinner_date</th><th>venue_code</th></tr></thead><tbody><tr><td>D0001</td><td>15-Mar-10</td><td>B01</td></tr><tr><td>D0002</td><td>15-Mar-10</td><td>B02</td></tr><tr><td>D0003</td><td>20-Mar-10</td><td>C01</td></tr><tr><td>D0004</td><td>20-Mar-10</td><td>E10</td></tr></tbody></table></div></div>
+<div><h5>FOOD</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">food_code</th><th>food_description</th></tr></thead><tbody><tr><td>EN3</td><td>Stuffed crab</td></tr><tr><td>DE8</td><td>Chocolate mousse</td></tr><tr><td>EN5</td><td>Marinated steak</td></tr><tr><td>SO1</td><td>Pumpkin soup</td></tr><tr><td>DE2</td><td>Apple pie</td></tr><tr><td>SA2</td><td>Apple pie</td></tr></tbody></table></div></div>
+<div><h5>ATTENDANCE</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">member_num</th><th class="pk">dinner_num</th></tr></thead><tbody><tr><td>214</td><td>D0001</td></tr><tr><td>235</td><td>D0002</td></tr><tr><td>250</td><td>D0003</td></tr><tr><td>235</td><td>D0003</td></tr><tr><td>300</td><td>D0004</td></tr></tbody></table></div></div>
+<div><h5>MENU</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">dinner_num</th><th class="pk">food_code</th></tr></thead><tbody><tr><td>D0001</td><td>EN3</td></tr><tr><td>D0001</td><td>DE8</td></tr><tr><td>D0002</td><td>EN5</td></tr><tr><td>D0002</td><td>DE8</td></tr><tr><td>D0003</td><td>SO1</td></tr><tr><td>D0003</td><td>EN5</td></tr><tr><td>D0003</td><td>DE2</td></tr><tr><td>D0004</td><td>SA2</td></tr></tbody></table></div></div>
+</div>
+<p>Al juntar las seis tablas salen las 11 filas completas de <code>Member_Dinner</code> (comprobado en el script SQL).</p>
+</section>
+<section id="p4" class="pad prose"><div class="sec-head"><span class="num">5</span><h2>Punto 4 — Visitas médicas</h2></div>
+<p>La Tabla No. 2 es una muestra de visitas médicas: a cada visita la atiende uno o más proveedores y cada uno deja un diagnóstico.</p>
+<div class="tbl-wrap"><table><thead><tr><th class="pk">VisitaNo</th><th>DiaVisita</th><th>PacNo</th><th>PacEdad</th><th>PacCiudad</th><th class="pk">ProvNo</th><th>ProvEspecialidad</th><th>Diagnostico</th></tr></thead><tbody><tr><td>V10020</td><td>1/13/2019</td><td>P1</td><td>35</td><td>BOGOTA</td><td>D1</td><td>INTERNISTA</td><td>INFECCIÓN DE OÍDO</td></tr><tr><td>V10020</td><td>1/13/2019</td><td>P1</td><td>35</td><td>BOGOTA</td><td>D2</td><td>PRACTICANTE ENFERMERÍA</td><td>INFLUENZA</td></tr><tr><td>V93030</td><td>1/20/2019</td><td>P3</td><td>17</td><td>CALI</td><td>D2</td><td>PRACTICANTE ENFERMERÍA</td><td>EMBARAZO</td></tr><tr><td>V82110</td><td>1/18/2019</td><td>P2</td><td>60</td><td>CUCUTA</td><td>D3</td><td>CARDIÓLOGO</td><td>SOPLO CARDIACO</td></tr></tbody></table></div>
+<h3>a) Forma normal</h3>
+<p>La clave es <code>VisitaNo</code> + <code>ProvNo</code>, porque una visita puede tener varios proveedores (la V10020 tiene al D1 y al D2) y el diagnóstico depende de los dos. Los valores son simples, así que cumple <strong>1FN</strong>. <strong>No cumple 2FN</strong>: el día, el paciente, su edad y su ciudad dependen solo de la visita, y la especialidad depende solo del proveedor.</p>
+<h3>b) Esquema relacional de la Tabla No. 2</h3>
+<ul class="schemas"><li><code class="schema">Visitas(<u>VisitaNo</u>, DiaVisita, PacNo, PacEdad, PacCiudad, <u>ProvNo</u>, ProvEspecialidad, Diagnostico)</code></li></ul>
+<h3>c) Diagrama de dependencias funcionales</h3>
+<p>Con las dependencias que da el enunciado (<code>PacNo → PacEdad, PacCiudad</code>; <code>ProvNo → ProvEspecialidad</code>; <code>VisitaNo → PacNo, DiaVisita, PacEdad, PacCiudad</code>; <code>VisitaNo, ProvNo → Diagnostico</code>) el diagrama queda así. Fíjate que la visita determina al paciente y el paciente determina su edad y su ciudad: eso es una dependencia transitiva.</p>
+<svg class="dep" viewBox="0 0 862 184" role="img" aria-label="Diagrama de dependencias funcionales de la Tabla No. 2"><title>Diagrama de dependencias funcionales de la Tabla No. 2</title><rect class="abox akey" x="12" y="16" width="85" height="34"/><text class="atxt bold" x="55" y="38" text-anchor="middle">VisitaNo</text><rect class="abox" x="111" y="16" width="93" height="34"/><text class="atxt" x="158" y="38" text-anchor="middle">DiaVisita</text><rect class="abox" x="218" y="16" width="70" height="34"/><text class="atxt" x="253" y="38" text-anchor="middle">PacNo</text><rect class="abox" x="302" y="16" width="78" height="34"/><text class="atxt" x="341" y="38" text-anchor="middle">PacEdad</text><rect class="abox" x="394" y="16" width="93" height="34"/><text class="atxt" x="440" y="38" text-anchor="middle">PacCiudad</text><rect class="abox akey" x="500" y="16" width="70" height="34"/><text class="atxt bold" x="535" y="38" text-anchor="middle">ProvNo</text><rect class="abox" x="585" y="16" width="144" height="34"/><text class="atxt" x="657" y="38" text-anchor="middle">ProvEspecialidad</text><rect class="abox" x="743" y="16" width="107" height="34"/><text class="atxt" x="797" y="38" text-anchor="middle">Diagnostico</text><line class="dl l-total" x1="55" y1="50" x2="55" y2="68"/><line class="dl l-total" x1="535" y1="50" x2="535" y2="68"/><line class="dl l-total" x1="55" y1="68" x2="797" y2="68"/><line class="dl l-total" x1="797" y1="68" x2="797" y2="57"/><polygon class="dh l-total" points="792,59 802,59 797,51"/><line class="dl l-parcial" x1="55" y1="50" x2="55" y2="92"/><line class="dl l-parcial" x1="55" y1="92" x2="253" y2="92"/><line class="dl l-parcial" x1="158" y1="92" x2="158" y2="57"/><polygon class="dh l-parcial" points="152,59 162,59 158,51"/><line class="dl l-parcial" x1="253" y1="92" x2="253" y2="57"/><polygon class="dh l-parcial" points="248,59 258,59 253,51"/><line class="dl l-trans" x1="253" y1="50" x2="253" y2="116"/><line class="dl l-trans" x1="253" y1="116" x2="440" y2="116"/><line class="dl l-trans" x1="341" y1="116" x2="341" y2="57"/><polygon class="dh l-trans" points="336,59 346,59 341,51"/><line class="dl l-trans" x1="440" y1="116" x2="440" y2="57"/><polygon class="dh l-trans" points="435,59 445,59 440,51"/><line class="dl l-parcial" x1="535" y1="50" x2="535" y2="140"/><line class="dl l-parcial" x1="535" y1="140" x2="657" y2="140"/><line class="dl l-parcial" x1="657" y1="140" x2="657" y2="57"/><polygon class="dh l-parcial" points="652,59 662,59 657,51"/></svg><p class="dep-legend"><span class="lg l-total">Dependencia total (de toda la clave)</span><span class="lg l-parcial">Dependencia parcial (de parte de la clave)</span><span class="lg l-trans">Dependencia transitiva (a través de un atributo no clave)</span></p>
+<h3>d) Paso a paso hasta la 3FN</h3>
+<ol>
+<li><strong>1FN:</strong> ya se cumple.</li>
+<li><strong>2FN:</strong> separo lo que depende de una parte de la clave: lo de la visita y el paciente se va con <code>VisitaNo</code> y la especialidad se va con <code>ProvNo</code>. El diagnóstico, que sí depende de la clave completa, se queda en su propia tabla (<code>ATENCION</code>).</li>
+<li><strong>3FN:</strong> en la tabla de visitas, <code>VisitaNo → PacNo → PacEdad, PacCiudad</code> es transitiva. Creo <code>PACIENTE</code> con edad y ciudad, y <code>VISITA</code> se queda solo con <code>PacNo</code> como llave foránea.</li>
+<li><strong>Revisión:</strong> todos los determinantes son llaves de su tabla, o sea que también hay BCNF.</li>
+</ol>
+<h4>Esquema resultante</h4>
+<ul class="schemas">
+<li><code class="schema">PACIENTE(<u>PacNo</u>, PacEdad, PacCiudad)</code></li>
+<li><code class="schema">PROVEEDOR(<u>ProvNo</u>, ProvEspecialidad)</code></li>
+<li><code class="schema">VISITA(<u>VisitaNo</u>, DiaVisita, PacNo<sup>FK</sup>)</code></li>
+<li><code class="schema">ATENCION(<u>VisitaNo</u><sup>FK</sup>, <u>ProvNo</u><sup>FK</sup>, Diagnostico)</code></li>
+</ul>
+<div class="cols">
+<div><h5>PACIENTE</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">PacNo</th><th>PacEdad</th><th>PacCiudad</th></tr></thead><tbody><tr><td>P1</td><td>35</td><td>BOGOTA</td></tr><tr><td>P2</td><td>60</td><td>CUCUTA</td></tr><tr><td>P3</td><td>17</td><td>CALI</td></tr></tbody></table></div></div>
+<div><h5>PROVEEDOR</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">ProvNo</th><th>ProvEspecialidad</th></tr></thead><tbody><tr><td>D1</td><td>INTERNISTA</td></tr><tr><td>D2</td><td>PRACTICANTE ENFERMERÍA</td></tr><tr><td>D3</td><td>CARDIÓLOGO</td></tr></tbody></table></div></div>
+<div><h5>VISITA</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">VisitaNo</th><th>DiaVisita</th><th>PacNo</th></tr></thead><tbody><tr><td>V10020</td><td>1/13/2019</td><td>P1</td></tr><tr><td>V93030</td><td>1/20/2019</td><td>P3</td></tr><tr><td>V82110</td><td>1/18/2019</td><td>P2</td></tr></tbody></table></div></div>
+<div><h5>ATENCION</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">VisitaNo</th><th class="pk">ProvNo</th><th>Diagnostico</th></tr></thead><tbody><tr><td>V10020</td><td>D1</td><td>INFECCIÓN DE OÍDO</td></tr><tr><td>V10020</td><td>D2</td><td>INFLUENZA</td></tr><tr><td>V93030</td><td>D2</td><td>EMBARAZO</td></tr><tr><td>V82110</td><td>D3</td><td>SOPLO CARDIACO</td></tr></tbody></table></div></div>
+</div>
+<p>Una cosa que cambiaría en un sistema real: la edad del paciente cambia con el tiempo, así que ahí guardaría la fecha de nacimiento y calcularía la edad. Acá dejé lo que pide el enunciado.</p>
+</section>
+<section id="p5" class="pad prose"><div class="sec-head"><span class="num">6</span><h2>Punto 5 — Alquiler de DVD por correo</h2></div>
+<p>Esta es la tabla de alquileres de la división de DVD por correo de Netflix (Tabla No. 4). La llave de <code>Rentals</code> es <code>RentalID</code> + <code>Title</code>. Recordatorio: una tabla está en BCNF cuando está en 1FN y el determinante de cada dependencia funcional es una llave candidata.</p>
+<div class="tbl-wrap"><table><thead><tr><th class="pk">RentalID</th><th class="pk">Title</th><th>CustomerID</th><th>MailedOutDate</th><th>Director</th><th>MovieCategory</th><th>Price</th></tr></thead><tbody><tr><td>1</td><td>Die Hard</td><td>1001</td><td>3/3/2010</td><td>John McTiernan</td><td>Old</td><td>$4.25</td></tr><tr><td>1</td><td>The last man standing</td><td>1001</td><td>3/3/2010</td><td>Walter Hill</td><td>Old</td><td>$4.25</td></tr><tr><td>1</td><td>Wedding Crashers</td><td>1001</td><td>3/3/2010</td><td>David Dobkin</td><td>New</td><td>$5.50</td></tr><tr><td>2</td><td>Dodgeball</td><td>1002</td><td>3/4/2010</td><td>Rawson Marshall Thurber</td><td>New</td><td>$5.50</td></tr><tr><td>2</td><td>Die Hard</td><td>1002</td><td>3/4/2010</td><td>John McTiernan</td><td>Old</td><td>$4.25</td></tr><tr><td>3</td><td>As good as it gets</td><td>1003</td><td>1/7/2011</td><td>James Brooks</td><td>Old</td><td>$4.25</td></tr><tr><td>4</td><td>Forest Gump</td><td>1001</td><td>1/7/2011</td><td>Robert Zemeckis</td><td>Old</td><td>$4.25</td></tr></tbody></table></div>
+<h3>a) ¿Son verdaderas estas dependencias?</h3>
+<p>Una muestra de datos solo puede <em>desmentir</em> una dependencia (con dos filas que tengan el mismo valor a la izquierda y distinto a la derecha), nunca demostrarla. Por eso en cada una miro los datos y también lo que tiene sentido en el negocio.</p>
+<ol>
+<li><strong><code>RentalID → CustomerID</code>: verdadera.</strong> Cada alquiler tiene un solo cliente (el 1 es del 1001, el 2 del 1002, el 3 del 1003 y el 4 del 1001), y además es lógico: el envío va a un cliente.</li>
+<li><strong>El segundo literal del enunciado repite el primero</strong> (<code>RentalID → CustomerID</code>), así que la respuesta es la misma. Si la intención era la inversa, <code>CustomerID → RentalID</code>, sería <strong>falsa</strong>: el cliente 1001 aparece en los alquileres 1 y 4.</li>
+<li><strong><code>Director → Title</code>: en la muestra se cumple, pero no la adoptaría.</strong> Cada director aparece con un solo título (John McTiernan solo con «Die Hard», aunque en dos filas). Pero en la vida real un director hace muchas películas, y un solo registro nuevo la desmentiría. La que sí tiene sentido es al revés: <code>Title → Director</code>.</li>
+</ol>
+<h3>b) Esquema <code>Rentals</code></h3>
+<ul class="schemas"><li><code class="schema">Rentals(<u>RentalID</u>, <u>Title</u>, CustomerID, MailedOutDate, Director, MovieCategory, Price)</code></li></ul>
+<h3>c) Dependencias funcionales que me parecen pertinentes</h3>
+<ul>
+<li><code>RentalID → CustomerID, MailedOutDate</code> (un alquiler se envía a un cliente en una fecha)</li>
+<li><code>Title → Director, MovieCategory</code> (cada título tiene un director y una categoría)</li>
+<li><code>MovieCategory → Price</code> (Old cuesta $4.25 y New $5.50 en toda la muestra)</li>
+</ul>
+<h3>d) Diagrama de dependencias para la 1FN</h3>
+<svg class="dep" viewBox="0 0 763 160" role="img" aria-label="Diagrama de dependencias funcionales de Rentals en 1FN"><title>Diagrama de dependencias funcionales de Rentals en 1FN</title><rect class="abox akey" x="12" y="16" width="85" height="34"/><text class="atxt bold" x="55" y="38" text-anchor="middle">RentalID</text><rect class="abox" x="111" y="16" width="100" height="34"/><text class="atxt" x="161" y="38" text-anchor="middle">CustomerID</text><rect class="abox" x="225" y="16" width="122" height="34"/><text class="atxt" x="286" y="38" text-anchor="middle">MailedOutDate</text><rect class="abox akey" x="361" y="16" width="70" height="34"/><text class="atxt bold" x="396" y="38" text-anchor="middle">Title</text><rect class="abox" x="445" y="16" width="85" height="34"/><text class="atxt" x="488" y="38" text-anchor="middle">Director</text><rect class="abox" x="545" y="16" width="122" height="34"/><text class="atxt" x="606" y="38" text-anchor="middle">MovieCategory</text><rect class="abox" x="681" y="16" width="70" height="34"/><text class="atxt" x="716" y="38" text-anchor="middle">Price</text><line class="dl l-parcial" x1="55" y1="50" x2="55" y2="68"/><line class="dl l-parcial" x1="55" y1="68" x2="286" y2="68"/><line class="dl l-parcial" x1="161" y1="68" x2="161" y2="57"/><polygon class="dh l-parcial" points="156,59 166,59 161,51"/><line class="dl l-parcial" x1="286" y1="68" x2="286" y2="57"/><polygon class="dh l-parcial" points="281,59 291,59 286,51"/><line class="dl l-parcial" x1="396" y1="50" x2="396" y2="92"/><line class="dl l-parcial" x1="396" y1="92" x2="606" y2="92"/><line class="dl l-parcial" x1="488" y1="92" x2="488" y2="57"/><polygon class="dh l-parcial" points="483,59 493,59 488,51"/><line class="dl l-parcial" x1="606" y1="92" x2="606" y2="57"/><polygon class="dh l-parcial" points="601,59 611,59 606,51"/><line class="dl l-trans" x1="606" y1="50" x2="606" y2="116"/><line class="dl l-trans" x1="606" y1="116" x2="716" y2="116"/><line class="dl l-trans" x1="716" y1="116" x2="716" y2="57"/><polygon class="dh l-trans" points="711,59 721,59 716,51"/></svg><p class="dep-legend"><span class="lg l-total">Dependencia total (de toda la clave)</span><span class="lg l-parcial">Dependencia parcial (de parte de la clave)</span><span class="lg l-trans">Dependencia transitiva (a través de un atributo no clave)</span></p>
+<h3>e) Descomposición en 3FN</h3>
+<ol>
+<li><strong>2FN:</strong> los datos del alquiler (<code>CustomerID</code>, <code>MailedOutDate</code>) dependen solo de <code>RentalID</code>, y los de la película (<code>Director</code>, <code>MovieCategory</code>, <code>Price</code>) solo de <code>Title</code>. Separo <code>RENTAL</code> y <code>MOVIE</code> y dejo una tabla de unión entre las dos, porque un alquiler tiene varias películas y una película sale en varios alquileres.</li>
+<li><strong>3FN:</strong> en <code>MOVIE</code>, <code>Title → MovieCategory → Price</code> es transitiva: el precio depende de la categoría. Creo <code>CATEGORY</code> y <code>MOVIE</code> guarda solo la categoría.</li>
+</ol>
+<ul class="schemas">
+<li><code class="schema">RENTAL(<u>RentalID</u>, CustomerID, MailedOutDate)</code></li>
+<li><code class="schema">MOVIE(<u>Title</u>, Director, MovieCategory<sup>FK</sup>)</code></li>
+<li><code class="schema">CATEGORY(<u>MovieCategory</u>, Price)</code></li>
+<li><code class="schema">RENTAL_MOVIE(<u>RentalID</u><sup>FK</sup>, <u>Title</u><sup>FK</sup>)</code></li>
+</ul>
+<div class="cols">
+<div><h5>RENTAL</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">RentalID</th><th>CustomerID</th><th>MailedOutDate</th></tr></thead><tbody><tr><td>1</td><td>1001</td><td>3/3/2010</td></tr><tr><td>2</td><td>1002</td><td>3/4/2010</td></tr><tr><td>3</td><td>1003</td><td>1/7/2011</td></tr><tr><td>4</td><td>1001</td><td>1/7/2011</td></tr></tbody></table></div></div>
+<div><h5>CATEGORY</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">MovieCategory</th><th>Price</th></tr></thead><tbody><tr><td>Old</td><td>$4.25</td></tr><tr><td>New</td><td>$5.50</td></tr></tbody></table></div></div>
+<div><h5>MOVIE</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">Title</th><th>Director</th><th>MovieCategory</th></tr></thead><tbody><tr><td>Die Hard</td><td>John McTiernan</td><td>Old</td></tr><tr><td>The last man standing</td><td>Walter Hill</td><td>Old</td></tr><tr><td>Wedding Crashers</td><td>David Dobkin</td><td>New</td></tr><tr><td>Dodgeball</td><td>Rawson Marshall Thurber</td><td>New</td></tr><tr><td>As good as it gets</td><td>James Brooks</td><td>Old</td></tr><tr><td>Forest Gump</td><td>Robert Zemeckis</td><td>Old</td></tr></tbody></table></div></div>
+<div><h5>RENTAL_MOVIE</h5><div class="tbl-wrap"><table><thead><tr><th class="pk">RentalID</th><th class="pk">Title</th></tr></thead><tbody><tr><td>1</td><td>Die Hard</td></tr><tr><td>1</td><td>The last man standing</td></tr><tr><td>1</td><td>Wedding Crashers</td></tr><tr><td>2</td><td>Dodgeball</td></tr><tr><td>2</td><td>Die Hard</td></tr><tr><td>3</td><td>As good as it gets</td></tr><tr><td>4</td><td>Forest Gump</td></tr></tbody></table></div></div>
+</div>
+<p>Si el sistema guardara datos de los clientes, <code>CustomerID</code> sería llave foránea de una tabla <code>CUSTOMER</code>; el enunciado no los trae. Al juntar las cuatro tablas salen las 7 filas de la Tabla No. 4.</p>
+<h3>f) ¿Qué cambia con BCNF?</h3>
+<p>Nada: la descomposición de arriba <strong>ya está en BCNF</strong>. Lo revisé tabla por tabla: en <code>RENTAL</code> el único determinante es <code>RentalID</code> (llave); en <code>MOVIE</code>, <code>Title</code> (llave); en <code>CATEGORY</code>, <code>MovieCategory</code> (llave); y <code>RENTAL_MOVIE</code> solo tiene la clave compuesta.</p>
+<p>La diferencia entre 3FN y BCNF aparece cuando un dato que no es clave determina una parte de la clave. Eso pasaría en la tabla original si aceptáramos <code>Director → Title</code>: en <code>Rentals</code>, <code>Title</code> es parte de la llave, así que 3FN lo deja pasar, pero <code>Director</code> no es llave candidata y BCNF no. Habría que separar <code>(Director, Title)</code> en su propia tabla. Como esa dependencia no la acepto, el resultado correcto es el de la parte e).</p>
+</section>
+<section id="p6" class="pad prose"><div class="sec-head"><span class="num">7</span><h2>Punto 6 — Reflexión: diseño E-R y normalización</h2></div>
+<p>Mi idea es que un buen diseño E-R y la normalización responden la misma pregunta: <em>¿en qué tabla va cada dato y cuántas veces lo guardo?</em> El E-R lo responde pensando en el negocio; la normalización lo comprueba con reglas. Si el E-R está bien hecho, las tablas que salen ya vienen casi normalizadas; y si no, la normalización es la que atrapa lo que se coló.</p>
+<h3>Qué hace cada una</h3>
+<p>El modelo E-R (Chen, 1976) describe el mundo con entidades, atributos y relaciones, y es fácil de leer para quien conoce el negocio, por eso se usa al principio. Las dependencias funcionales (Codd, 1970) son más formales: dicen que si conoces un dato, ya conoces otro. La normalización usa esas dependencias para partir las tablas sin perder información y sin repetirla.</p>
+<h3>Cómo se corresponden</h3>
+<p>Casi cada decisión del E-R tiene su equivalente en una forma normal:</p>
+<div class="tbl-wrap"><table><thead><tr><th>Decisión de diseño E-R</th><th>Efecto en la normalización</th><th>Ejemplo de este taller</th></tr></thead><tbody><tr><td>Cada entidad tiene un identificador propio</td><td>La clave determina el resto de sus datos: evita dependencias parciales y transitivas</td><td>PACIENTE (PacNo), PROYECTO (cod_proyecto)</td></tr><tr><td>Un atributo multivaluado se vuelve entidad aparte</td><td>Resuelve la 1FN: una fila por valor</td><td>Cursos y notas → INSCRIPCION (punto 2); platos → MENU (punto 3)</td></tr><tr><td>Una relación N:M se vuelve tabla asociativa</td><td>Los datos de la relación dependen de toda la clave compuesta (2FN)</td><td>ATENCION con su diagnóstico (punto 4); RENTAL_MOVIE (punto 5)</td></tr><tr><td>Un dato que describe a otra entidad se separa</td><td>Elimina la dependencia transitiva (3FN)</td><td>Price depende de la categoría → CATEGORY; vlr_hora de la profesión → PROFESION</td></tr><tr><td>Una relación 1:N se implementa con llave foránea del lado N</td><td>El dato del lado 1 se guarda una vez y se referencia</td><td>VISITA referencia a PACIENTE; EMPLEADO a PROFESION</td></tr></tbody></table></div>
+<p>Por eso, cuando se pasa un E-R a tablas siguiendo los pasos clásicos (Teorey, Yang y Fry, 1986), casi siempre salen relaciones en 3FN o BCNF: la llave de cada tabla viene de un identificador del diagrama y cada dato queda en la entidad que de verdad describe.</p>
+<h3>Lo que vi en los puntos del taller</h3>
+<ul>
+<li><strong>Punto 2:</strong> una celda con varios cursos es, en E-R, un atributo multivaluado mal puesto. Al volverlo una entidad (la inscripción) queda la 1FN sin aplicar ninguna regla aparte.</li>
+<li><strong>Punto 4:</strong> el E-R dice que un paciente tiene muchas visitas y que una visita la pueden atender varios proveedores (una relación N:M con el diagnóstico como atributo). Con eso salen de una vez las cuatro tablas finales; la normalización llega al mismo lugar, pero a través de las dependencias.</li>
+<li><strong>Punto 5:</strong> en el E-R el precio es de la categoría de la película y no del alquiler; la normalización lo confirma al encontrar <code>MovieCategory → Price</code> como dependencia transitiva. Es el mismo error visto desde dos lados.</li>
+</ul>
+<h3>Dónde se complementan</h3>
+<ul>
+<li><strong>El E-R puede esconder dependencias entre datos que no son clave.</strong> En el punto 1 un diagrama descuidado pondría el valor por hora dentro de EMPLEADO; solo cuando uno pregunta «¿qué determina a qué?» aparece <code>profesion → vlr_hora</code>.</li>
+<li><strong>Las dependencias salen del negocio, no de los datos de ejemplo.</strong> En el punto 5, <code>Director → Title</code> se cumplía en la muestra pero no en la realidad. Lo que sabemos del negocio es lo que dice si una dependencia es real o no.</li>
+<li><strong>No toda repetición es una dependencia funcional.</strong> En el punto 3 los platos dependen de la cena y no del miembro; por eso separé <code>ATTENDANCE</code> y <code>MENU</code>. Eso es una dependencia multivaluada (Kent, 1983): el E-R la muestra fácil (dos relaciones independientes de la cena), pero las formas normales hasta BCNF no la cubren.</li>
+</ul>
+<h3>Límites</h3>
+<p>Normalizar al máximo no siempre es lo mejor: más tablas significan más JOIN en las consultas. En sistemas donde casi todo es lectura a veces se desnormaliza a propósito, pero después de haber normalizado, para saber qué repetición se acepta y por qué. Y ninguna de las dos técnicas reemplaza entender de verdad cómo funciona el negocio.</p>
+<h3>Conclusión</h3>
+<p>El E-R define la estructura y la normalización la comprueba. Un diseño que pasa por las dos tiene entidades con identificadores claros, datos en la tabla correcta y cada dato guardado una sola vez, y eso se traduce en menos errores al insertar, actualizar y borrar.</p>
+<h3>Referencias</h3>
+<ol class="refs">
+<li>Codd, E. F. (1970). A relational model of data for large shared data banks. <em>Communications of the ACM</em>, 13(6), 377–387.</li>
+<li>Chen, P. P. (1976). The entity-relationship model: toward a unified view of data. <em>ACM Transactions on Database Systems</em>, 1(1), 9–36.</li>
+<li>Kent, W. (1983). A simple guide to five normal forms in relational database theory. <em>Communications of the ACM</em>, 26(2), 120–125.</li>
+<li>Teorey, T. J., Yang, D. y Fry, J. P. (1986). A logical design methodology for relational databases using the extended entity-relationship model. <em>ACM Computing Surveys</em>, 18(2), 197–222.</li>
+<li>Elmasri, R. y Navathe, S. B. <em>Fundamentals of Database Systems</em>. Pearson.</li>
+<li>Silberschatz, A., Korth, H. F. y Sudarshan, S. <em>Database System Concepts</em>. McGraw-Hill.</li>
+<li>Date, C. J. <em>An Introduction to Database Systems</em>. Pearson.</li>
+<li>Ramakrishnan, R. y Gehrke, J. <em>Database Management Systems</em>. McGraw-Hill.</li>
+</ol>
+<p class="ev-credit">Entrega elaborada por mí en el curso Bases de Datos 1.</p></section>
+
+    <nav class="pager pad"><a href="laboratorio-futbol.html">← Laboratorio — Fútbol: LIGA, EQUIPO y JUGADOR</a><a href="practica-sql-hr.html">Práctica SQL sobre HR — 4 ejercicios →</a></nav>
+  </main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="kicker">E-portafolio · Bases de Datos 1</p>
+      <p class="foot-claim">Construyo sistemas, negocios digitales y software con enfoque en impacto real.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Pie de página">
+      <a href="../index.html">Inicio</a>
+      <a href="../proyecto.html">SIGEVET</a>
+      <a href="../evidencias.html">Evidencias</a>
+      <a href="../temas.html">Temas del curso</a>
+      <a href="../perfil.html">Perfil</a>
+      <a href="https://github.com/Estarlan/proyecto-bd1-sigevet" target="_blank" rel="noopener">Repositorio ↗</a>
+    </nav>
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> Juan David Polo Herrera</span>
+      <span>Ingeniería de Sistemas · Universidad El Bosque</span>
+      <span>Bases de Datos 1 · Ing. Christian Felipe Duarte</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
